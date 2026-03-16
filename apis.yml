@@ -1,4 +1,4 @@
-name: Azure Pipelines API
+name: Azure Pipelines
 description: Azure Pipelines is a cloud service that you can use to automatically build and test your code project and make it available to other users. It works with just about any language or project type.
 image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
 tags:
