@@ -29,22 +29,22 @@ security:
   - bearerAuth: []
   - basicAuth: []
 tags:
-  - name: Builds
-    description: >-
-      Operations for queuing, listing, retrieving, and updating builds
-      including filtering by status, result, branch, and definition.
-  - name: Build Definitions
-    description: >-
-      Operations for creating, listing, retrieving, and updating build
-      pipeline definitions that specify how builds are executed.
   - name: Build Artifacts
     description: >-
       Operations for listing and retrieving build artifacts including
       compiled binaries, test results, and other published output files.
+  - name: Build Definitions
+    description: >-
+      Operations for creating, listing, retrieving, and updating build
+      pipeline definitions that specify how builds are executed.
   - name: Build Tags
     description: >-
       Operations for managing tags on builds for categorization,
       filtering, and retention policy purposes.
+  - name: Builds
+    description: >-
+      Operations for queuing, listing, retrieving, and updating builds
+      including filtering by status, result, branch, and definition.
 paths:
   /build/builds:
     get:

@@ -29,6 +29,14 @@ security:
   - bearerAuth: []
   - basicAuth: []
 tags:
+  - name: Artifacts
+    description: >-
+      Operations for listing and retrieving artifacts produced by pipeline
+      runs including compiled outputs, test results, and published files.
+  - name: Logs
+    description: >-
+      Operations for retrieving pipeline run execution logs for debugging,
+      auditing, and monitoring purposes.
   - name: Pipelines
     description: >-
       Operations for managing YAML-based pipeline definitions including
@@ -37,14 +45,6 @@ tags:
     description: >-
       Operations for triggering, monitoring, and retrieving pipeline run
       executions including run state, result, and parameters.
-  - name: Logs
-    description: >-
-      Operations for retrieving pipeline run execution logs for debugging,
-      auditing, and monitoring purposes.
-  - name: Artifacts
-    description: >-
-      Operations for listing and retrieving artifacts produced by pipeline
-      runs including compiled outputs, test results, and published files.
 paths:
   /pipelines:
     get:
