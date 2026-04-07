@@ -49,7 +49,7 @@ paths:
   /build/builds:
     get:
       operationId: listBuilds
-      summary: List builds
+      summary: Azure Pipelines List builds
       description: >-
         Returns a list of builds matching the specified filter criteria.
         Supports filtering by definition, status, result, branch, repository,
@@ -240,7 +240,7 @@ paths:
   /build/builds/{buildId}:
     get:
       operationId: getBuild
-      summary: Get a build
+      summary: Azure Pipelines Get a build
       description: >-
         Returns detailed information about a specific build including its
         status, result, definition, source branch, timing, and the identity
@@ -263,7 +263,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateBuild
-      summary: Update a build
+      summary: Azure Pipelines Update a build
       description: >-
         Updates properties of a completed or in-progress build such as
         the keep-forever flag, build number, or retention status.
@@ -294,7 +294,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteBuild
-      summary: Delete a build
+      summary: Azure Pipelines Delete a build
       description: >-
         Deletes a build by moving it to the recycle bin. Deleted builds can
         be restored within the retention period.
@@ -313,7 +313,7 @@ paths:
   /build/builds/{buildId}/artifacts:
     get:
       operationId: listBuildArtifacts
-      summary: List build artifacts
+      summary: Azure Pipelines List build artifacts
       description: >-
         Returns all artifacts published by a build. Artifacts can include
         compiled binaries, test results, packages, or any files published
@@ -345,7 +345,7 @@ paths:
   /build/builds/{buildId}/artifacts/{artifactName}:
     get:
       operationId: getBuildArtifact
-      summary: Get a specific build artifact
+      summary: Azure Pipelines Get a specific build artifact
       description: >-
         Returns a specific named artifact from a build including its download
         URL and file container reference.
@@ -374,7 +374,7 @@ paths:
   /build/builds/{buildId}/tags:
     get:
       operationId: listBuildTags
-      summary: List build tags
+      summary: Azure Pipelines List build tags
       description: >-
         Returns the list of tags associated with a build.
       tags:
@@ -404,7 +404,7 @@ paths:
   /build/builds/{buildId}/tags/{tag}:
     put:
       operationId: addBuildTag
-      summary: Add a tag to a build
+      summary: Azure Pipelines Add a tag to a build
       description: >-
         Adds a tag to a build. Tags are used for categorization, filtering,
         and retention policy purposes.
@@ -439,7 +439,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteBuildTag
-      summary: Remove a tag from a build
+      summary: Azure Pipelines Remove a tag from a build
       description: >-
         Removes a tag from a build.
       tags:
@@ -474,7 +474,7 @@ paths:
   /build/definitions:
     get:
       operationId: listBuildDefinitions
-      summary: List build definitions
+      summary: Azure Pipelines List build definitions
       description: >-
         Returns a list of build definitions in the project. Build definitions
         define how builds are executed including source repository, triggers,
@@ -579,7 +579,7 @@ paths:
   /build/definitions/{definitionId}:
     get:
       operationId: getBuildDefinition
-      summary: Get a build definition
+      summary: Azure Pipelines Get a build definition
       description: >-
         Returns detailed information about a specific build definition
         including its triggers, variables, repository configuration,

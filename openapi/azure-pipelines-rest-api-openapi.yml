@@ -49,7 +49,7 @@ paths:
   /pipelines:
     get:
       operationId: listPipelines
-      summary: List pipelines
+      summary: Azure Pipelines List pipelines
       description: >-
         Returns a list of pipeline definitions in the project. Pipelines are
         YAML-based CI/CD definitions stored in source repositories. Supports
@@ -103,7 +103,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: createPipeline
-      summary: Create a pipeline
+      summary: Azure Pipelines Create a pipeline
       description: >-
         Creates a new pipeline definition in the project. The pipeline
         references a YAML file in a source repository. After creation the
@@ -136,7 +136,7 @@ paths:
   /pipelines/{pipelineId}:
     get:
       operationId: getPipeline
-      summary: Get a pipeline
+      summary: Azure Pipelines Get a pipeline
       description: >-
         Returns detailed information about a specific pipeline definition
         including its configuration, repository source, folder path, and
@@ -169,7 +169,7 @@ paths:
   /pipelines/{pipelineId}/runs:
     get:
       operationId: listRuns
-      summary: List pipeline runs
+      summary: Azure Pipelines List pipeline runs
       description: >-
         Returns a list of runs (executions) for a specific pipeline. Each run
         represents a single execution of the pipeline with its state, result,
@@ -203,7 +203,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: runPipeline
-      summary: Run a pipeline
+      summary: Azure Pipelines Run a pipeline
       description: >-
         Triggers a new execution of a pipeline. Allows overriding template
         parameters, variables, the repository branch, and specifying which
@@ -245,7 +245,7 @@ paths:
   /pipelines/{pipelineId}/runs/{runId}:
     get:
       operationId: getRun
-      summary: Get a pipeline run
+      summary: Azure Pipelines Get a pipeline run
       description: >-
         Returns detailed information about a specific pipeline run including
         its current state, result, template parameters, variables used, and
@@ -273,7 +273,7 @@ paths:
   /pipelines/{pipelineId}/runs/{runId}/logs:
     get:
       operationId: listLogs
-      summary: List pipeline run logs
+      summary: Azure Pipelines List pipeline run logs
       description: >-
         Returns a list of log entries for a specific pipeline run. Each log
         entry represents output from a stage, job, or task in the pipeline
@@ -316,7 +316,7 @@ paths:
   /pipelines/{pipelineId}/runs/{runId}/logs/{logId}:
     get:
       operationId: getLog
-      summary: Get a pipeline run log
+      summary: Azure Pipelines Get a pipeline run log
       description: >-
         Returns the content of a specific log from a pipeline run. The log
         content includes timestamped output from pipeline tasks, stages, and
@@ -357,7 +357,7 @@ paths:
   /pipelines/{pipelineId}/runs/{runId}/artifacts:
     get:
       operationId: listRunArtifacts
-      summary: List run artifacts
+      summary: Azure Pipelines List run artifacts
       description: >-
         Returns a list of artifacts published by a specific pipeline run.
         Artifacts include compiled binaries, test results, container images,
