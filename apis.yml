@@ -9,7 +9,7 @@ tags:
   - DevOps
   - Pipelines
 created: '2024'
-modified: '2026-03-16'
+modified: '2026-04-28'
 specificationVersion: '0.18'
 apis:
   - name: Azure Pipelines REST API
