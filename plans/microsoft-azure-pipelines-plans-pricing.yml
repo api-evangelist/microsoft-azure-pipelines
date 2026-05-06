@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Azure Pipelines
 providerId: microsoft-azure-pipelines
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Automation
   - Build
@@ -12,168 +13,199 @@ tags:
   - Deployment
   - DevOps
   - Pipelines
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Azure Pipelines is priced by parallel job (concurrency), not by user. Each pipeline
+  run consumes one parallel job at a time. Two flavors are sold separately — Microsoft-hosted
+  parallel jobs (Microsoft manages agent VMs) at $40/job/month and self-hosted parallel jobs
+  (you provide infrastructure) at $15/job/month. The platform offers a free tier that depends
+  on whether the project is public or private and is currently disabled by default for new
+  organizations (must be requested). Visual Studio Enterprise subscribers get one free
+  self-hosted job each. Pipelines is also bundled in Azure DevOps Services alongside Repos,
+  Boards, and Artifacts.
+sources:
+  - https://azure.microsoft.com/pricing/details/devops/azure-devops-services/
+  - https://learn.microsoft.com/en-us/azure/devops/pipelines/licensing/concurrent-jobs
 plans:
-  - id: microsoft-azure-pipelines-free
-    name: Free
+  - id: microsoft-azure-pipelines-free-public
+    name: Free — Public Project
     type: freemium
-    description: Free entry tier for the Azure Pipelines API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Up to 10 free Microsoft-hosted parallel jobs (360-min per run, no monthly cap)
+      and unlimited self-hosted jobs for public projects. Free grant must be requested for new
+      orgs.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Microsoft-hosted parallel jobs
+        name: hosted_parallel_jobs_public
         type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://dev.azure.com/{organization}/{project}/_apis
-          - https://dev.azure.com/{organization}/{project}/_apis/build
-          - https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-          - https://dev.azure.com/{organization}/{project}/_apis/pipelines
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
+        metric: parallel-job
         limit: 10
-        timeFrame: minute
+        timeFrame: month
         geo: global
-        domains:
-          - https://dev.azure.com/{organization}/{project}/_apis
-          - https://dev.azure.com/{organization}/{project}/_apis/build
-          - https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-          - https://dev.azure.com/{organization}/{project}/_apis/pipelines
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Per-run duration cap
+        name: job_duration_public
+        type: quota
+        metric: minute
+        limit: 360
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Self-hosted parallel jobs
+        name: selfhosted_jobs_public
+        type: quota
+        metric: parallel-job
+        limit: -1
+        timeFrame: month
+        geo: global
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Azure Pipelines REST API
-      - name: Azure Pipelines Build REST API
-      - name: Azure Pipelines Release REST API
-      - name: Azure Pipelines Approvals and Checks REST API
-  - id: microsoft-azure-pipelines-pro
-    name: Professional
-    type: paid
-    description: Production tier for Azure Pipelines. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: GitHub-integrated CI for OSS
+      - name: No monthly minutes cap
+      - name: 360-min per-run limit
+  - id: microsoft-azure-pipelines-free-private
+    name: Free — Private Project
+    type: freemium
+    description: One free Microsoft-hosted parallel job, capped at 1,800 minutes/month and
+      60-minute per run. One free self-hosted job plus one per VS Enterprise subscriber.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
+      - label: Microsoft-hosted parallel job
+        name: hosted_parallel_jobs_private
         type: quota
-        metric: requests
-        limit: 100000
+        metric: parallel-job
+        limit: 1
         timeFrame: month
         geo: global
-        domains:
-          - https://dev.azure.com/{organization}/{project}/_apis
-          - https://dev.azure.com/{organization}/{project}/_apis/build
-          - https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-          - https://dev.azure.com/{organization}/{project}/_apis/pipelines
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://dev.azure.com/{organization}/{project}/_apis
-          - https://dev.azure.com/{organization}/{project}/_apis/build
-          - https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-          - https://dev.azure.com/{organization}/{project}/_apis/pipelines
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+      - label: Monthly Microsoft-hosted minutes cap
+        name: hosted_minutes_cap
+        type: quota
+        metric: minute
+        limit: 1800
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Self-hosted parallel job (base)
+        name: selfhosted_base
+        type: quota
+        metric: parallel-job
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Per-VS-Enterprise bonus self-hosted job
+        name: selfhosted_vs_bonus
+        type: quota
+        metric: parallel-job
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+    elements:
+      - name: 60-minute per-run cap
+      - name: VS Enterprise bonus jobs auto-detected
+  - id: microsoft-azure-pipelines-microsoft-hosted
+    name: Microsoft-hosted Parallel Jobs (Paid)
+    type: subscription
+    description: Buy concurrency on Microsoft-managed agents. $40 per parallel job per month.
+      Removes monthly minutes cap; up to 360-minute runs. New organizations capped at 25 jobs
+      until support increase.
+    entries:
+      - label: Per parallel job per month
+        name: hosted_paid
+        type: subscription
+        metric: parallel-job-month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$40 per parallel job per month'
+        userMultiplied: false
+    elements:
+      - name: Linux / Windows / macOS agents
+      - name: Microsoft manages OS / runtime images
+      - name: 360-min per-run cap
+  - id: microsoft-azure-pipelines-self-hosted
+    name: Self-hosted Parallel Jobs (Paid)
+    type: subscription
+    description: Buy concurrency for your own runner infrastructure. $15 per parallel job per
+      month. No per-run timeout.
+    entries:
+      - label: Per parallel job per month
+        name: selfhosted_paid
+        type: subscription
+        metric: parallel-job-month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$15 per parallel job per month'
+        userMultiplied: false
+    elements:
+      - name: No per-run timeout
+      - name: Run on any platform you control
+      - name: Unlimited registered agents per parallel job
+  - id: microsoft-azure-pipelines-legacy-perminute
+    name: Legacy Per-Minute Plan (Grandfathered)
+    type: usage-based
+    description: Closed to new orgs. $0.05/min for the first 20 paid hours per month, $0.01/min
+      thereafter. Single-job concurrency.
+    entries:
+      - label: Per minute (first 20 paid hours)
+        name: legacy_min_first_20h
         type: metered
-        metric: requests
+        metric: minute
+        limit: 1200
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$0.05 per minute'
+        userMultiplied: false
+      - label: Per minute (after 20 paid hours)
+        name: legacy_min_after_20h
+        type: metered
+        metric: minute
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://dev.azure.com/{organization}/{project}/_apis
-          - https://dev.azure.com/{organization}/{project}/_apis/build
-          - https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-          - https://dev.azure.com/{organization}/{project}/_apis/pipelines
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '$0.01 per minute'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Azure Pipelines REST API
-      - name: Azure Pipelines Build REST API
-      - name: Azure Pipelines Release REST API
-      - name: Azure Pipelines Approvals and Checks REST API
+      - name: Single concurrent job
+      - name: Grandfathered customers only
   - id: microsoft-azure-pipelines-enterprise
-    name: Enterprise
+    name: Enterprise / Volume Licensing
     type: enterprise
-    description: Custom-negotiated tier for Azure Pipelines. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
+    description: Volume Licensing, Enterprise Agreement, or Microsoft Customer Agreement
+      negotiated terms; bundled with Visual Studio subscriptions.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Negotiated rate
+        name: ea_negotiated
+        type: subscription
+        metric: contract
         limit: -1
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://dev.azure.com/{organization}/{project}/_apis
-          - https://dev.azure.com/{organization}/{project}/_apis/build
-          - https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-          - https://dev.azure.com/{organization}/{project}/_apis/pipelines
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://dev.azure.com/{organization}/{project}/_apis
-          - https://dev.azure.com/{organization}/{project}/_apis/build
-          - https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-          - https://dev.azure.com/{organization}/{project}/_apis/pipelines
+        geo: global
         unit: 1
         price: custom
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Azure Pipelines REST API
-      - name: Azure Pipelines Build REST API
-      - name: Azure Pipelines Release REST API
-      - name: Azure Pipelines Approvals and Checks REST API
+      - name: Volume discounts
+      - name: VS Enterprise / VS Professional bundling
+      - name: Dedicated technical account management
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://azure.microsoft.com/services/devops/pipelines/

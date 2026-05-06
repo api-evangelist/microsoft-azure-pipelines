@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Azure Pipelines
 providerId: microsoft-azure-pipelines
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Automation
   - Build
@@ -13,93 +14,72 @@ tags:
   - DevOps
   - Pipelines
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Azure Pipelines API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: Azure DevOps Services (which hosts Azure Pipelines) applies a per-user / per-identity
+  Throughput Service Threshold (TSTU / RCU) sliding-window rate limit. Each REST API call
+  consumes a number of TSTUs based on cost; each user has 200 TSTUs per 5-minute sliding window.
+  Throttled requests return HTTP 429 with Retry-After. Concurrency is capped not by API rate
+  but by purchased parallel jobs (default 25 for Microsoft-hosted on new orgs, raise via support).
+  Per-user TSTU limits cannot be raised — clients must throttle.
+sources:
+  - https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits
+  - https://learn.microsoft.com/en-us/azure/devops/pipelines/licensing/concurrent-jobs
 headers:
+  retryAfter: Retry-After
+  delay: X-RateLimit-Delay
   limit: X-RateLimit-Limit
   remaining: X-RateLimit-Remaining
   reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  resource: X-RateLimit-Resource
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  delayedNotBlocked: 200
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
+  - name: Per-user TSTU sliding window
+    scope: user
+    metric: tstu_per_5_minutes
+    limit: 200
     timeFrame: minute
-    applies:
-      - Azure Pipelines REST API
-      - Azure Pipelines Build REST API
-      - Azure Pipelines Release REST API
-      - Azure Pipelines Approvals and Checks REST API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Azure Pipelines REST API
-      - Azure Pipelines Build REST API
-      - Azure Pipelines Release REST API
-      - Azure Pipelines Approvals and Checks REST API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
+    notes: Throughput measured in Throughput Units (TSTUs). 200 per 5-minute sliding window
+      per user. Heavy queries cost more TSTUs; light reads can cost <1.
+  - name: Microsoft-hosted parallel job concurrency
+    scope: organization
+    metric: concurrent_jobs
+    limit: 25
+    notes: New organizations are capped at 25 Microsoft-hosted parallel jobs until a support
+      ticket raises the limit; subject to regional capacity.
+  - name: Microsoft-hosted job duration (paid)
+    scope: pipeline-run
+    metric: minutes_per_run
+    limit: 360
     timeFrame: minute
-    applies:
-      - Azure Pipelines REST API
-      - Azure Pipelines Build REST API
-      - Azure Pipelines Release REST API
-      - Azure Pipelines Approvals and Checks REST API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Azure Pipelines REST API
-      - Azure Pipelines Build REST API
-      - Azure Pipelines Release REST API
-      - Azure Pipelines Approvals and Checks REST API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
+    notes: Each paid Microsoft-hosted job has a 6-hour per-run timeout.
+  - name: Microsoft-hosted job duration (free private)
+    scope: pipeline-run
+    metric: minutes_per_run
+    limit: 60
     timeFrame: minute
-    applies:
-      - Azure Pipelines REST API
-      - Azure Pipelines Build REST API
-      - Azure Pipelines Release REST API
-      - Azure Pipelines Approvals and Checks REST API
+    notes: Free private projects cap individual runs at 60 minutes.
+  - name: Self-hosted job duration
+    scope: pipeline-run
+    metric: minutes_per_run
+    limit: -1
+    notes: No per-run timeout on self-hosted parallel jobs.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: TSTU cost weighting
+    description: API calls cost differing TSTU values based on database/CPU expense. Inexpensive
+      reads may cost <1 TSTU; expensive list/query operations may cost 5+.
+  - name: Delay before block
+    description: Before returning 429, the service may inject a delay (X-RateLimit-Delay) header
+      to slow the client without blocking. Persistent abuse upgrades to 429.
+  - name: Spread automation across identities
+    description: Build agents under PAT or service principal share the same per-identity quota;
+      use multiple service principals to fan out automation.
+  - name: Exponential backoff
+    description: Honor Retry-After. Implement exponential backoff with jitter for 429 responses.
+  - name: No support increase for TSTU
+    description: Per-user TSTU limits cannot be raised by support. Design clients to respect
+      headers and stay under limit.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://azure.microsoft.com/services/devops/pipelines/
