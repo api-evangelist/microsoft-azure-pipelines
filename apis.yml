@@ -36,7 +36,7 @@ apis:
         url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
       - type: Client Libraries
         url: https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
-      - type: Change Log
+      - type: ChangeLog
         url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
       - type: YAML Schema
         url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
@@ -105,41 +105,41 @@ apis:
       - type: Authentication
         url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
 common:
-  - type: Getting Started
+  - type: GettingStarted
     url: https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines
   - type: Portal
     url: https://dev.azure.com/
   - type: Pricing
     url: https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/
-  - type: Status
+  - type: StatusPage
     url: https://status.dev.azure.com/
   - type: Blog
     url: https://devblogs.microsoft.com/devops/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://azure.microsoft.com/en-us/support/legal/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://privacy.microsoft.com/en-us/privacystatement
   - type: Documentation
     url: https://learn.microsoft.com/en-us/azure/devops/pipelines/
   - type: Website
     url: https://azure.microsoft.com/en-us/products/devops
-  - type: Sign Up
+  - type: SignUp
     url: https://azure.microsoft.com/en-us/products/devops
   - type: Login
     url: https://dev.azure.com/
   - type: Support
     url: https://azure.microsoft.com/en-us/support/devops/
-  - type: Change Log
+  - type: ChangeLog
     url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
   - type: Client Libraries
     url: https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
   - type: Community
     url: https://developercommunity.visualstudio.com/AzureDevOps
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/MicrosoftDocs
   - type: GitHubRepository
     url: https://github.com/MicrosoftDocs/azure-devops-docs
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/azure-devops
   - type: Marketplace
     url: https://marketplace.visualstudio.com/azuredevops
