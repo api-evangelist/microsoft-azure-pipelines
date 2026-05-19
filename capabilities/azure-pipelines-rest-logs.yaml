@@ -1,0 +1,127 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Azure Pipelines REST API — Logs
+  description: 'Azure Pipelines REST API — Logs. 2 operations. Lead operation: Azure Pipelines List pipeline run logs. Self-contained
+    Naftiko capability covering one Microsoft Azure Pipelines business surface.'
+  tags:
+  - Microsoft Azure Pipelines
+  - Logs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_AZURE_PIPELINES_API_KEY: MICROSOFT_AZURE_PIPELINES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: azure-pipelines-rest-logs
+    baseUri: https://dev.azure.com/{organization}/{project}/_apis
+    description: Azure Pipelines REST API — Logs business capability. Self-contained, no shared references.
+    resources:
+    - name: pipelines-pipelineId-runs-runId-logs
+      path: /pipelines/{pipelineId}/runs/{runId}/logs
+      operations:
+      - name: listlogs
+        method: GET
+        description: Azure Pipelines List pipeline run logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $expand
+          in: query
+          type: string
+          description: Expand additional log details
+    - name: pipelines-pipelineId-runs-runId-logs-logId
+      path: /pipelines/{pipelineId}/runs/{runId}/logs/{logId}
+      operations:
+      - name: getlog
+        method: GET
+        description: Azure Pipelines Get a pipeline run log
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: logId
+          in: path
+          type: integer
+          description: Numeric ID of the log entry to retrieve
+          required: true
+        - name: $expand
+          in: query
+          type: string
+          description: Expand additional log details
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_AZURE_PIPELINES_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: azure-pipelines-rest-logs-rest
+    port: 8080
+    description: REST adapter for Azure Pipelines REST API — Logs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/pipelines/{pipelineid}/runs/{runid}/logs
+      name: pipelines-pipelineid-runs-runid-logs
+      description: REST surface for pipelines-pipelineId-runs-runId-logs.
+      operations:
+      - method: GET
+        name: listlogs
+        description: Azure Pipelines List pipeline run logs
+        call: azure-pipelines-rest-logs.listlogs
+        with:
+          $expand: rest.$expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pipelines/{pipelineid}/runs/{runid}/logs/{logid}
+      name: pipelines-pipelineid-runs-runid-logs-logid
+      description: REST surface for pipelines-pipelineId-runs-runId-logs-logId.
+      operations:
+      - method: GET
+        name: getlog
+        description: Azure Pipelines Get a pipeline run log
+        call: azure-pipelines-rest-logs.getlog
+        with:
+          logId: rest.logId
+          $expand: rest.$expand
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: azure-pipelines-rest-logs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Azure Pipelines REST API — Logs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: azure-pipelines-list-pipeline-run
+      description: Azure Pipelines List pipeline run logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: azure-pipelines-rest-logs.listlogs
+      with:
+        $expand: tools.$expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-pipelines-get-pipeline-run
+      description: Azure Pipelines Get a pipeline run log
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: azure-pipelines-rest-logs.getlog
+      with:
+        logId: tools.logId
+        $expand: tools.$expand
+      outputParameters:
+      - type: object
+        mapping: $.

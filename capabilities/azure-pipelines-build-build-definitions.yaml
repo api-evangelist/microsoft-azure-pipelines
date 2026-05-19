@@ -1,0 +1,193 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Azure Pipelines Build REST API — Build Definitions
+  description: 'Azure Pipelines Build REST API — Build Definitions. 2 operations. Lead operation: Azure Pipelines List build
+    definitions. Self-contained Naftiko capability covering one Microsoft Azure Pipelines business surface.'
+  tags:
+  - Microsoft Azure Pipelines
+  - Build Definitions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_AZURE_PIPELINES_API_KEY: MICROSOFT_AZURE_PIPELINES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: azure-pipelines-build-build-definitions
+    baseUri: https://dev.azure.com/{organization}/{project}/_apis
+    description: Azure Pipelines Build REST API — Build Definitions business capability. Self-contained, no shared references.
+    resources:
+    - name: build-definitions
+      path: /build/definitions
+      operations:
+      - name: listbuilddefinitions
+        method: GET
+        description: Azure Pipelines List build definitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Filter by definition name (supports prefix match with asterisk)
+        - name: repositoryId
+          in: query
+          type: string
+          description: Filter to definitions using this repository
+        - name: repositoryType
+          in: query
+          type: string
+          description: Filter by repository type
+        - name: queryOrder
+          in: query
+          type: string
+          description: Sort order for results
+        - name: $top
+          in: query
+          type: integer
+          description: Maximum number of definitions to return
+        - name: continuationToken
+          in: query
+          type: string
+          description: Continuation token for paginated results
+        - name: path
+          in: query
+          type: string
+          description: Filter by folder path
+        - name: builtAfter
+          in: query
+          type: string
+          description: Filter to definitions with builds after this date
+        - name: notBuiltAfter
+          in: query
+          type: string
+          description: Filter to definitions without builds after this date
+        - name: includeAllProperties
+          in: query
+          type: boolean
+          description: Include all properties of the definition
+        - name: includeLatestBuilds
+          in: query
+          type: boolean
+          description: Include the latest build for each definition
+    - name: build-definitions-definitionId
+      path: /build/definitions/{definitionId}
+      operations:
+      - name: getbuilddefinition
+        method: GET
+        description: Azure Pipelines Get a build definition
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: definitionId
+          in: path
+          type: integer
+          description: Numeric ID of the build definition
+          required: true
+        - name: revision
+          in: query
+          type: integer
+          description: Specific revision of the definition to retrieve
+        - name: includeLatestBuilds
+          in: query
+          type: boolean
+          description: Include the latest build for the definition
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_AZURE_PIPELINES_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: azure-pipelines-build-build-definitions-rest
+    port: 8080
+    description: REST adapter for Azure Pipelines Build REST API — Build Definitions. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/build/definitions
+      name: build-definitions
+      description: REST surface for build-definitions.
+      operations:
+      - method: GET
+        name: listbuilddefinitions
+        description: Azure Pipelines List build definitions
+        call: azure-pipelines-build-build-definitions.listbuilddefinitions
+        with:
+          name: rest.name
+          repositoryId: rest.repositoryId
+          repositoryType: rest.repositoryType
+          queryOrder: rest.queryOrder
+          $top: rest.$top
+          continuationToken: rest.continuationToken
+          path: rest.path
+          builtAfter: rest.builtAfter
+          notBuiltAfter: rest.notBuiltAfter
+          includeAllProperties: rest.includeAllProperties
+          includeLatestBuilds: rest.includeLatestBuilds
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/build/definitions/{definitionid}
+      name: build-definitions-definitionid
+      description: REST surface for build-definitions-definitionId.
+      operations:
+      - method: GET
+        name: getbuilddefinition
+        description: Azure Pipelines Get a build definition
+        call: azure-pipelines-build-build-definitions.getbuilddefinition
+        with:
+          definitionId: rest.definitionId
+          revision: rest.revision
+          includeLatestBuilds: rest.includeLatestBuilds
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: azure-pipelines-build-build-definitions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Azure Pipelines Build REST API — Build Definitions. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: azure-pipelines-list-build-definitions
+      description: Azure Pipelines List build definitions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: azure-pipelines-build-build-definitions.listbuilddefinitions
+      with:
+        name: tools.name
+        repositoryId: tools.repositoryId
+        repositoryType: tools.repositoryType
+        queryOrder: tools.queryOrder
+        $top: tools.$top
+        continuationToken: tools.continuationToken
+        path: tools.path
+        builtAfter: tools.builtAfter
+        notBuiltAfter: tools.notBuiltAfter
+        includeAllProperties: tools.includeAllProperties
+        includeLatestBuilds: tools.includeLatestBuilds
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-pipelines-get-build-definition
+      description: Azure Pipelines Get a build definition
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: azure-pipelines-build-build-definitions.getbuilddefinition
+      with:
+        definitionId: tools.definitionId
+        revision: tools.revision
+        includeLatestBuilds: tools.includeLatestBuilds
+      outputParameters:
+      - type: object
+        mapping: $.
