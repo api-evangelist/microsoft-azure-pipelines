@@ -1,0 +1,353 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Pipelines REST API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for pipelines (e.g., name asc, createdDate desc)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of pipelines to return"
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginated results returned by a previous call"
+              }
+            ]
+          },
+          "docs": "Returns a list of pipeline definitions in the project. Pipelines are YAML-based CI/CD definitions stored in source repositories. Supports ordering and pagination through query parameters."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Create a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new pipeline definition in the project. The pipeline references a YAML file in a source repository. After creation the pipeline can be triggered manually or automatically by code changes, schedules, or other pipeline completions."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "pipelineVersion",
+                "value": "",
+                "type": "query",
+                "description": "Specific version of the pipeline definition to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific pipeline definition including its configuration, repository source, folder path, and revision number. Optionally retrieves a specific version of the pipeline definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List pipeline runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              }
+            ]
+          },
+          "docs": "Returns a list of runs (executions) for a specific pipeline. Each run represents a single execution of the pipeline with its state, result, timing, and the resources and template parameters used. Returns up to 10000 runs and supports pagination."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Run a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "pipelineVersion",
+                "value": "",
+                "type": "query",
+                "description": "Specific version of the pipeline to run"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a new execution of a pipeline. Allows overriding template parameters, variables, the repository branch, and specifying which stages to skip or include. The run is queued and begins execution when an agent becomes available."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a pipeline run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific pipeline run including its current state, result, template parameters, variables used, and timing information. Use this endpoint to poll for run progress or retrieve final results."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List pipeline run logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId/logs",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand additional log details"
+              }
+            ]
+          },
+          "docs": "Returns a list of log entries for a specific pipeline run. Each log entry represents output from a stage, job, or task in the pipeline execution. Use log IDs to retrieve detailed log content."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a pipeline run log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId/logs/:logId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              },
+              {
+                "name": "logId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the log entry to retrieve"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand additional log details"
+              }
+            ]
+          },
+          "docs": "Returns the content of a specific log from a pipeline run. The log content includes timestamped output from pipeline tasks, stages, and jobs. Useful for debugging failed runs and auditing pipeline execution."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List run artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId/artifacts",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              },
+              {
+                "name": "artifactName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a specific artifact name"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand additional artifact details such as signed content"
+              }
+            ]
+          },
+          "docs": "Returns a list of artifacts published by a specific pipeline run. Artifacts include compiled binaries, test results, container images, or any files published using the PublishPipelineArtifact task during pipeline execution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

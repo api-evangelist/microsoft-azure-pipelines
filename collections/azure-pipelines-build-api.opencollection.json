@@ -1,0 +1,525 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Pipelines Build REST API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Builds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List builds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "definitions",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of definition IDs to filter by"
+              },
+              {
+                "name": "queues",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of queue IDs to filter by"
+              },
+              {
+                "name": "buildNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by build number. Append asterisk for prefix matching."
+              },
+              {
+                "name": "minTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter to builds after this date based on the query order"
+              },
+              {
+                "name": "maxTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter to builds before this date based on the query order"
+              },
+              {
+                "name": "requestedFor",
+                "value": "",
+                "type": "query",
+                "description": "Filter to builds requested by this user"
+              },
+              {
+                "name": "reasonFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the reason the build was created"
+              },
+              {
+                "name": "statusFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by current build status"
+              },
+              {
+                "name": "resultFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by build result"
+              },
+              {
+                "name": "tagFilters",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of tags to filter by"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of builds to return"
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginated results"
+              },
+              {
+                "name": "maxBuildsPerDefinition",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of builds to return per definition"
+              },
+              {
+                "name": "deletedFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filter for deleted builds"
+              },
+              {
+                "name": "queryOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results"
+              },
+              {
+                "name": "branchName",
+                "value": "",
+                "type": "query",
+                "description": "Filter to builds from this branch"
+              },
+              {
+                "name": "buildIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of build IDs to retrieve"
+              },
+              {
+                "name": "repositoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to builds from this repository"
+              },
+              {
+                "name": "repositoryType",
+                "value": "",
+                "type": "query",
+                "description": "Filter to builds from repositories of this type"
+              }
+            ]
+          },
+          "docs": "Returns a list of builds matching the specified filter criteria. Supports filtering by definition, status, result, branch, repository, time range, and tags. Results are paginated and can be ordered by queue time, start time, or finish time."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a build",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific build including its status, result, definition, source branch, timing, and the identity that queued it."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Update a build",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates properties of a completed or in-progress build such as the keep-forever flag, build number, or retention status."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Delete a build",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              }
+            ]
+          },
+          "docs": "Deletes a build by moving it to the recycle bin. Deleted builds can be restored within the retention period."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Build Artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List build artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/artifacts",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              }
+            ]
+          },
+          "docs": "Returns all artifacts published by a build. Artifacts can include compiled binaries, test results, packages, or any files published using the PublishBuildArtifacts or PublishPipelineArtifact task."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a specific build artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/artifacts/:artifactName",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              },
+              {
+                "name": "artifactName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the artifact to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns a specific named artifact from a build including its download URL and file container reference."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Build Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List build tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/tags",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              }
+            ]
+          },
+          "docs": "Returns the list of tags associated with a build."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Add a tag to a build",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/tags/:tag",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "path",
+                "description": "Tag to add to the build"
+              }
+            ]
+          },
+          "docs": "Adds a tag to a build. Tags are used for categorization, filtering, and retention policy purposes."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Remove a tag from a build",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/tags/:tag",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "path",
+                "description": "Tag to remove from the build"
+              }
+            ]
+          },
+          "docs": "Removes a tag from a build."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Build Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List build definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/definitions",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by definition name (supports prefix match with asterisk)"
+              },
+              {
+                "name": "repositoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to definitions using this repository"
+              },
+              {
+                "name": "repositoryType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by repository type"
+              },
+              {
+                "name": "queryOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of definitions to return"
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginated results"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Filter by folder path"
+              },
+              {
+                "name": "builtAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter to definitions with builds after this date"
+              },
+              {
+                "name": "notBuiltAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter to definitions without builds after this date"
+              },
+              {
+                "name": "includeAllProperties",
+                "value": "",
+                "type": "query",
+                "description": "Include all properties of the definition"
+              },
+              {
+                "name": "includeLatestBuilds",
+                "value": "",
+                "type": "query",
+                "description": "Include the latest build for each definition"
+              }
+            ]
+          },
+          "docs": "Returns a list of build definitions in the project. Build definitions define how builds are executed including source repository, triggers, variables, and agent pool configuration."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a build definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/definitions/:definitionId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "definitionId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build definition"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "Specific revision of the definition to retrieve"
+              },
+              {
+                "name": "includeLatestBuilds",
+                "value": "",
+                "type": "query",
+                "description": "Include the latest build for the definition"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific build definition including its triggers, variables, repository configuration, process steps, and agent pool settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
