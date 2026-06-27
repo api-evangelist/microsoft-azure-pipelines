@@ -33,7 +33,7 @@ apis:
         url: https://dev.azure.com/{organization}/_apis/public/api
       - type: Authentication
         url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
-      - type: Quickstart
+      - type: GettingStarted
         url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
       - type: Client Libraries
         url: https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
@@ -119,7 +119,7 @@ common:
     url: https://learn.microsoft.com/en-us/azure/devops/pipelines/
   - type: Website
     url: https://azure.microsoft.com/en-us/products/devops
-  - type: SignUp
+  - type: Signup
     url: https://azure.microsoft.com/en-us/products/devops
   - type: Login
     url: https://dev.azure.com/
