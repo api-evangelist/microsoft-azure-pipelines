@@ -101,6 +101,10 @@ apis:
       - type: Authentication
         url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
 common:
+  - type: DomainSecurity
+    url: security/microsoft-azure-pipelines-domain-security.yml
+  - type: Authentication
+    url: authentication/microsoft-azure-pipelines-authentication.yml
   - type: GettingStarted
     url: https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines
   - type: Portal

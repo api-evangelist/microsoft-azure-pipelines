@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/azure-pipelines-build-api-openapi.yml, openapi/azure-pipelines-rest-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Azure AD OAuth 2.0 bearer token with vso.build scope
+  sources:
+  - openapi/azure-pipelines-build-api-openapi.yml
+  - openapi/azure-pipelines-rest-api-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: Basic authentication using a Personal Access Token (PAT)
+  sources:
+  - openapi/azure-pipelines-build-api-openapi.yml
+  - openapi/azure-pipelines-rest-api-openapi.yml
