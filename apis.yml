@@ -101,6 +101,8 @@ apis:
       - type: Authentication
         url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
 common:
+  - type: AgenticAccess
+    url: agentic-access/microsoft-azure-pipelines-agentic-access.yml
   - type: DomainSecurity
     url: security/microsoft-azure-pipelines-domain-security.yml
   - type: Authentication
