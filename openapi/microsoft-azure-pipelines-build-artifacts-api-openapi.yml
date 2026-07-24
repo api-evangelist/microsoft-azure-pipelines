@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: Azure Pipelines Build REST Artifacts Build Artifacts API
+  description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
+  version: '7.1'
+  contact:
+    name: Microsoft Azure DevOps
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://dev.azure.com/{organization}/{project}/_apis
+  description: Azure DevOps Services
+  variables:
+    organization:
+      description: Azure DevOps organization name or ID
+      default: myorganization
+    project:
+      description: Azure DevOps project name or ID
+      default: myproject
+security:
+- bearerAuth: []
+- basicAuth: []
+tags:
+- name: Build Artifacts
+  description: Operations for listing and retrieving build artifacts including compiled binaries, test results, and other published output files.
+paths:
+  /build/builds/{buildId}/artifacts:
+    get:
+      operationId: listBuildArtifacts
+      summary: Azure Pipelines List build artifacts
+      description: Returns all artifacts published by a build. Artifacts can include compiled binaries, test results, packages, or any files published using the PublishBuildArtifacts or PublishPipelineArtifact task.
+      tags:
+      - Build Artifacts
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - $ref: '#/components/parameters/BuildId'
+      responses:
+        '200':
+          description: List of build artifacts returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of artifacts
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BuildArtifact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /build/builds/{buildId}/artifacts/{artifactName}:
+    get:
+      operationId: getBuildArtifact
+      summary: Azure Pipelines Get a specific build artifact
+      description: Returns a specific named artifact from a build including its download URL and file container reference.
+      tags:
+      - Build Artifacts
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - $ref: '#/components/parameters/BuildId'
+      - name: artifactName
+        in: path
+        required: true
+        description: Name of the artifact to retrieve
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Build artifact returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildArtifact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
+    BuildId:
+      name: buildId
+      in: path
+      required: true
+      description: Numeric ID of the build
+      schema:
+        type: integer
+  schemas:
+    BuildArtifact:
+      type: object
+      description: An artifact published by a build
+      properties:
+        id:
+          type: integer
+          description: Artifact ID
+        name:
+          type: string
+          description: Name of the artifact
+        resource:
+          type: object
+          description: Artifact resource details
+          properties:
+            type:
+              type: string
+              description: Artifact resource type
+            data:
+              type: string
+              description: Container path or resource data
+            url:
+              type: string
+              format: uri
+              description: Download URL for the artifact
+            downloadUrl:
+              type: string
+              format: uri
+              description: Direct download URL
+            properties:
+              type: object
+              description: Additional artifact properties
+              additionalProperties:
+                type: string
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Azure AD OAuth 2.0 bearer token with vso.build scope
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication using a Personal Access Token (PAT)
+externalDocs:
+  description: Azure DevOps Build REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/

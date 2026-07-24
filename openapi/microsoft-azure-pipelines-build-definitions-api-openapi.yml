@@ -1,0 +1,312 @@
+openapi: 3.1.0
+info:
+  title: Azure Pipelines Build REST Artifacts Build Definitions API
+  description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
+  version: '7.1'
+  contact:
+    name: Microsoft Azure DevOps
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://dev.azure.com/{organization}/{project}/_apis
+  description: Azure DevOps Services
+  variables:
+    organization:
+      description: Azure DevOps organization name or ID
+      default: myorganization
+    project:
+      description: Azure DevOps project name or ID
+      default: myproject
+security:
+- bearerAuth: []
+- basicAuth: []
+tags:
+- name: Build Definitions
+  description: Operations for creating, listing, retrieving, and updating build pipeline definitions that specify how builds are executed.
+paths:
+  /build/definitions:
+    get:
+      operationId: listBuildDefinitions
+      summary: Azure Pipelines List build definitions
+      description: Returns a list of build definitions in the project. Build definitions define how builds are executed including source repository, triggers, variables, and agent pool configuration.
+      tags:
+      - Build Definitions
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: name
+        in: query
+        required: false
+        description: Filter by definition name (supports prefix match with asterisk)
+        schema:
+          type: string
+      - name: repositoryId
+        in: query
+        required: false
+        description: Filter to definitions using this repository
+        schema:
+          type: string
+      - name: repositoryType
+        in: query
+        required: false
+        description: Filter by repository type
+        schema:
+          type: string
+      - name: queryOrder
+        in: query
+        required: false
+        description: Sort order for results
+        schema:
+          type: string
+          enum:
+          - none
+          - lastModifiedAscending
+          - lastModifiedDescending
+          - definitionNameAscending
+          - definitionNameDescending
+      - name: $top
+        in: query
+        required: false
+        description: Maximum number of definitions to return
+        schema:
+          type: integer
+      - name: continuationToken
+        in: query
+        required: false
+        description: Continuation token for paginated results
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        description: Filter by folder path
+        schema:
+          type: string
+      - name: builtAfter
+        in: query
+        required: false
+        description: Filter to definitions with builds after this date
+        schema:
+          type: string
+          format: date-time
+      - name: notBuiltAfter
+        in: query
+        required: false
+        description: Filter to definitions without builds after this date
+        schema:
+          type: string
+          format: date-time
+      - name: includeAllProperties
+        in: query
+        required: false
+        description: Include all properties of the definition
+        schema:
+          type: boolean
+      - name: includeLatestBuilds
+        in: query
+        required: false
+        description: Include the latest build for each definition
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of build definitions returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of definitions
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BuildDefinitionReference'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /build/definitions/{definitionId}:
+    get:
+      operationId: getBuildDefinition
+      summary: Azure Pipelines Get a build definition
+      description: Returns detailed information about a specific build definition including its triggers, variables, repository configuration, process steps, and agent pool settings.
+      tags:
+      - Build Definitions
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: definitionId
+        in: path
+        required: true
+        description: Numeric ID of the build definition
+        schema:
+          type: integer
+      - name: revision
+        in: query
+        required: false
+        description: Specific revision of the definition to retrieve
+        schema:
+          type: integer
+      - name: includeLatestBuilds
+        in: query
+        required: false
+        description: Include the latest build for the definition
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Build definition returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildDefinitionReference'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  schemas:
+    TeamProjectReference:
+      type: object
+      description: Shallow reference to a team project
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Project GUID identifier
+        name:
+          type: string
+          description: Project name
+        description:
+          type: string
+          description: Project description
+        url:
+          type: string
+          format: uri
+          description: REST API URL for the project
+        state:
+          type: string
+          description: Project state
+          enum:
+          - deleting
+          - new
+          - wellFormed
+          - createPending
+          - all
+          - unchanged
+          - deleted
+        visibility:
+          type: string
+          description: Project visibility
+          enum:
+          - private
+          - public
+    BuildDefinitionReference:
+      type: object
+      description: Reference to a build definition containing its identification, folder path, queue status, and type.
+      properties:
+        id:
+          type: integer
+          description: Build definition ID
+        name:
+          type: string
+          description: Build definition name
+        path:
+          type: string
+          description: Folder path of the definition
+        revision:
+          type: integer
+          description: Current revision number
+        type:
+          type: string
+          description: Definition type
+          enum:
+          - xaml
+          - build
+        queueStatus:
+          type: string
+          description: Whether builds can be queued against this definition
+          enum:
+          - enabled
+          - paused
+          - disabled
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the definition was created
+        project:
+          $ref: '#/components/schemas/TeamProjectReference'
+        uri:
+          type: string
+          description: Definition URI
+        url:
+          type: string
+          format: uri
+          description: REST API URL for this definition
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Azure AD OAuth 2.0 bearer token with vso.build scope
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication using a Personal Access Token (PAT)
+externalDocs:
+  description: Azure DevOps Build REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/

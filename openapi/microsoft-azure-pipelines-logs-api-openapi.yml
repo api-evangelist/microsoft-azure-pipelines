@@ -1,0 +1,221 @@
+openapi: 3.1.0
+info:
+  title: Azure Pipelines Build REST Artifacts Logs API
+  description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
+  version: '7.1'
+  contact:
+    name: Microsoft Azure DevOps
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://dev.azure.com/{organization}/{project}/_apis
+  description: Azure DevOps Services
+  variables:
+    organization:
+      description: Azure DevOps organization name or ID
+      default: myorganization
+    project:
+      description: Azure DevOps project name or ID
+      default: myproject
+security:
+- bearerAuth: []
+- basicAuth: []
+tags:
+- name: Logs
+  description: Operations for retrieving pipeline run execution logs for debugging, auditing, and monitoring purposes.
+paths:
+  /pipelines/{pipelineId}/runs/{runId}/logs:
+    get:
+      operationId: listLogs
+      summary: Azure Pipelines List pipeline run logs
+      description: Returns a list of log entries for a specific pipeline run. Each log entry represents output from a stage, job, or task in the pipeline execution. Use log IDs to retrieve detailed log content.
+      tags:
+      - Logs
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - $ref: '#/components/parameters/PipelineId'
+      - $ref: '#/components/parameters/RunId'
+      - name: $expand
+        in: query
+        required: false
+        description: Expand additional log details
+        schema:
+          type: string
+          enum:
+          - signedContent
+      responses:
+        '200':
+          description: List of log entries returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of log entries
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Log'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /pipelines/{pipelineId}/runs/{runId}/logs/{logId}:
+    get:
+      operationId: getLog
+      summary: Azure Pipelines Get a pipeline run log
+      description: Returns the content of a specific log from a pipeline run. The log content includes timestamped output from pipeline tasks, stages, and jobs. Useful for debugging failed runs and auditing pipeline execution.
+      tags:
+      - Logs
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - $ref: '#/components/parameters/PipelineId'
+      - $ref: '#/components/parameters/RunId'
+      - name: logId
+        in: path
+        required: true
+        description: Numeric ID of the log entry to retrieve
+        schema:
+          type: integer
+      - name: $expand
+        in: query
+        required: false
+        description: Expand additional log details
+        schema:
+          type: string
+          enum:
+          - signedContent
+      responses:
+        '200':
+          description: Log content returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Log'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
+    RunId:
+      name: runId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline run
+      schema:
+        type: integer
+    PipelineId:
+      name: pipelineId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline definition
+      schema:
+        type: integer
+  schemas:
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
+    Log:
+      type: object
+      description: A log entry from a pipeline run containing execution output from stages, jobs, or tasks.
+      properties:
+        id:
+          type: integer
+          description: Unique numeric identifier of the log entry
+        createdOn:
+          type: string
+          format: date-time
+          description: Timestamp when the log was created
+        lastChangedOn:
+          type: string
+          format: date-time
+          description: Timestamp when the log was last updated
+        lineCount:
+          type: integer
+          description: Number of lines in the log
+        url:
+          type: string
+          format: uri
+          description: REST API URL to retrieve the log content
+        signedContent:
+          type: object
+          description: Signed URL for secure log download
+          properties:
+            url:
+              type: string
+              format: uri
+              description: Signed download URL
+            signatureExpires:
+              type: string
+              format: date-time
+              description: Expiration time of the signed URL
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Azure AD OAuth 2.0 bearer token with vso.build scope
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication using a Personal Access Token (PAT)
+externalDocs:
+  description: Azure DevOps Build REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/

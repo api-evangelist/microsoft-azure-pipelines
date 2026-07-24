@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Azure Pipelines Build REST Artifacts Build Tags API
+  description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
+  version: '7.1'
+  contact:
+    name: Microsoft Azure DevOps
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://dev.azure.com/{organization}/{project}/_apis
+  description: Azure DevOps Services
+  variables:
+    organization:
+      description: Azure DevOps organization name or ID
+      default: myorganization
+    project:
+      description: Azure DevOps project name or ID
+      default: myproject
+security:
+- bearerAuth: []
+- basicAuth: []
+tags:
+- name: Build Tags
+  description: Operations for managing tags on builds for categorization, filtering, and retention policy purposes.
+paths:
+  /build/builds/{buildId}/tags:
+    get:
+      operationId: listBuildTags
+      summary: Azure Pipelines List build tags
+      description: Returns the list of tags associated with a build.
+      tags:
+      - Build Tags
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - $ref: '#/components/parameters/BuildId'
+      responses:
+        '200':
+          description: Build tags returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of tags
+                  value:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /build/builds/{buildId}/tags/{tag}:
+    put:
+      operationId: addBuildTag
+      summary: Azure Pipelines Add a tag to a build
+      description: Adds a tag to a build. Tags are used for categorization, filtering, and retention policy purposes.
+      tags:
+      - Build Tags
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - $ref: '#/components/parameters/BuildId'
+      - name: tag
+        in: path
+        required: true
+        description: Tag to add to the build
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Tag added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  value:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteBuildTag
+      summary: Azure Pipelines Remove a tag from a build
+      description: Removes a tag from a build.
+      tags:
+      - Build Tags
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      - $ref: '#/components/parameters/BuildId'
+      - name: tag
+        in: path
+        required: true
+        description: Tag to remove from the build
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Tag removed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  value:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
+    BuildId:
+      name: buildId
+      in: path
+      required: true
+      description: Numeric ID of the build
+      schema:
+        type: integer
+  schemas:
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Azure AD OAuth 2.0 bearer token with vso.build scope
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication using a Personal Access Token (PAT)
+externalDocs:
+  description: Azure DevOps Build REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
