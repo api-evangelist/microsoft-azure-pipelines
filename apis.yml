@@ -2,6 +2,19 @@ name: Azure Pipelines
 description: >-
   Azure Pipelines is a cloud service that you can use to automatically build and test your code project and make it
   available to other users. It works with just about any language or project type.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
 tags:
   - Automation
@@ -14,93 +27,274 @@ created: '2024'
 modified: '2026-05-19'
 specificationVersion: '0.18'
 apis:
-  - name: Azure Pipelines REST API
-    description: >-
-      REST API for managing and interacting with Azure Pipelines including creating, listing, and getting pipelines,
-      triggering and monitoring pipeline runs, and retrieving pipeline run logs. Provides programmatic access to the
-      core CI/CD pipeline orchestration capabilities in Azure DevOps.
-    image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
-    humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
-    baseURL: https://dev.azure.com/{organization}/{project}/_apis
-    tags:
-      - CI/CD
-      - Pipelines
-      - REST
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
-      - type: OpenAPI
-        url: https://dev.azure.com/{organization}/_apis/public/api
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
-      - type: Client Libraries
-        url: https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
-      - type: ChangeLog
-        url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
-      - type: YAML Schema
-        url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
-    contact:
-      - type: Support
-        url: https://azure.microsoft.com/en-us/support/devops/
-      - type: Twitter
-        url: https://twitter.com/AzureDevOps
-  - name: Azure Pipelines Build REST API
-    description: >-
-      REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs.
-      Supports the full lifecycle of continuous integration builds in Azure DevOps, including creating and updating
-      build definitions from templates, listing and tagging builds, and downloading build artifacts.
-    image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
-    humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
-    baseURL: https://dev.azure.com/{organization}/{project}/_apis/build
-    tags:
-      - Artifacts
-      - Build
-      - Continuous Integration
-      - Definitions
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
-  - name: Azure Pipelines Release REST API
-    description: >-
-      REST API for managing release definitions, creating and tracking releases, and configuring deployment approvals.
-      Enables programmatic control of the continuous delivery process including defining release pipelines with multiple
-      environments, triggering deployments, and managing approval workflows.
-    image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
-    humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/release/
-    baseURL: https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
-    tags:
-      - Approvals
-      - Continuous Delivery
-      - Deployment
-      - Release
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/rest/api/azure/devops/release/
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
-  - name: Azure Pipelines Approvals and Checks REST API
-    description: >-
-      REST API for managing pipeline approvals and checks on resources such as environments, service connections, agent
-      pools, variable groups, and secure files. Provides the ability to create and modify check configurations, manage
-      approval workflows, query check evaluation details, and control pipeline permissions for protected resources.
-    image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
-    humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/approvalsandchecks/
-    baseURL: https://dev.azure.com/{organization}/{project}/_apis/pipelines
-    tags:
-      - Approvals
-      - Checks
-      - Governance
-      - Security
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/rest/api/azure/devops/approvalsandchecks/
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+- name: Azure Pipelines Build REST API
+  description: >-
+    REST API for managing build definitions, queuing builds, and retrieving build results, artifacts,
+    tags, and logs. Supports the full lifecycle of continuous integration builds in Azure DevOps, including
+    creating and updating build definitions from templates, listing and tagging builds, and downloading
+    build artifacts.
+  image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis/build
+  tags:
+  - Artifacts
+  - Build
+  - Continuous Integration
+  - Definitions
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+- name: Azure Pipelines Release REST API
+  description: >-
+    REST API for managing release definitions, creating and tracking releases, and configuring deployment
+    approvals. Enables programmatic control of the continuous delivery process including defining release
+    pipelines with multiple environments, triggering deployments, and managing approval workflows.
+  image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/release/
+  baseURL: https://vsrm.dev.azure.com/{organization}/{project}/_apis/release
+  tags:
+  - Approvals
+  - Continuous Delivery
+  - Deployment
+  - Release
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/release/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+- name: Azure Pipelines Approvals and Checks REST API
+  description: >-
+    REST API for managing pipeline approvals and checks on resources such as environments, service connections,
+    agent pools, variable groups, and secure files. Provides the ability to create and modify check configurations,
+    manage approval workflows, query check evaluation details, and control pipeline permissions for protected
+    resources.
+  image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/approvalsandchecks/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis/pipelines
+  tags:
+  - Approvals
+  - Checks
+  - Governance
+  - Security
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/approvalsandchecks/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-artifacts-api
+  name: Azure Pipelines Artifacts API
+  description: >-
+    Operations for listing and retrieving artifacts produced by pipeline runs including compiled outputs,
+    test results, and published files.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Artifacts
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-artifacts-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-build-artifacts-api
+  name: Azure Pipelines Build Artifacts API
+  description: >-
+    Operations for listing and retrieving build artifacts including compiled binaries, test results, and
+    other published output files.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Build Artifacts
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-build-artifacts-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-build-definitions-api
+  name: Azure Pipelines Build Definitions API
+  description: >-
+    Operations for creating, listing, retrieving, and updating build pipeline definitions that specify
+    how builds are executed.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Build Definitions
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-build-definitions-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-build-tags-api
+  name: Azure Pipelines Build Tags API
+  description: >-
+    Operations for managing tags on builds for categorization, filtering, and retention policy purposes.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Build Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-build-tags-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-builds-api
+  name: Azure Pipelines Builds API
+  description: >-
+    Operations for queuing, listing, retrieving, and updating builds including filtering by status, result,
+    branch, and definition.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Builds
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-builds-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-logs-api
+  name: Azure Pipelines Logs API
+  description: >-
+    Operations for retrieving pipeline run execution logs for debugging, auditing, and monitoring purposes.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-logs-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-pipelines-api
+  name: Azure Pipelines Pipelines API
+  description: >-
+    Operations for managing YAML-based pipeline definitions including creating, listing, and retrieving
+    pipeline configurations.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Pipelines
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-pipelines-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
+- aid: microsoft-azure-pipelines:microsoft-azure-pipelines-runs-api
+  name: Azure Pipelines Runs API
+  description: >-
+    Operations for triggering, monitoring, and retrieving pipeline run executions including run state,
+    result, and parameters.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  baseURL: https://dev.azure.com/{organization}/{project}/_apis
+  tags:
+  - Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-pipelines-runs-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline
+  - type: Client Libraries
+    url: >-
+      https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released
+  - type: YAML Schema
+    url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/azure-pipelines/overview
   - type: AgenticAccess
     url: agentic-access/microsoft-azure-pipelines-agentic-access.yml
   - type: DomainSecurity
