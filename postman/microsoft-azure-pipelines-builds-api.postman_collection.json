@@ -1,0 +1,1399 @@
+{
+  "info": {
+    "_postman_id": "2b8c87b2-19a6-4994-8d23-47db2ece9df6",
+    "name": "Azure Pipelines Build REST Artifacts Builds API",
+    "description": "REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.\n\nContact Support:\n Name: Microsoft Azure DevOps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:25.000Z",
+    "updatedAt": "2026-07-28T02:10:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2b8c87b2-19a6-4994-8d23-47db2ece9df6"
+  },
+  "item": [
+    {
+      "name": "build",
+      "item": [
+        {
+          "name": "builds",
+          "item": [
+            {
+              "name": "{buildId}",
+              "item": [
+                {
+                  "name": "Azure Pipelines Get a build",
+                  "id": "0e56c427-b42d-421e-8097-d2870b8c104a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "builds",
+                        ":buildId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "f793f114-2a95-4f95-80c0-cc7de2201848",
+                          "key": "buildId",
+                          "value": "<integer>",
+                          "description": "(Required) Numeric ID of the build"
+                        }
+                      ]
+                    },
+                    "description": "Returns detailed information about a specific build including its status, result, definition, source branch, timing, and the identity that queued it."
+                  },
+                  "response": [
+                    {
+                      "id": "740ae1aa-8de8-43de-af22-16eb80893098",
+                      "name": "Build returned successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"buildNumber\": \"<string>\",\n  \"buildNumberRevision\": \"<integer>\",\n  \"status\": \"cancelling\",\n  \"result\": \"partiallySucceeded\",\n  \"queueTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"finishTime\": \"<dateTime>\",\n  \"definition\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"type\": \"xaml\",\n    \"queueStatus\": \"enabled\",\n    \"createdDate\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"state\": \"wellFormed\",\n      \"visibility\": \"public\"\n    },\n    \"uri\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"deleted\",\n    \"visibility\": \"private\"\n  },\n  \"sourceBranch\": \"<string>\",\n  \"sourceVersion\": \"<string>\",\n  \"reason\": \"all\",\n  \"priority\": \"belowNormal\",\n  \"requestedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"requestedFor\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedDate\": \"<dateTime>\",\n  \"repository\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"defaultBranch\": \"<string>\",\n    \"clean\": \"<string>\",\n    \"checkoutSubmodules\": \"<boolean>\"\n  },\n  \"parameters\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"templateParameters\": {\n    \"dolore_44\": \"<string>\",\n    \"voluptate_e\": \"<string>\"\n  },\n  \"deleted\": \"<boolean>\",\n  \"retainedByRelease\": \"<boolean>\",\n  \"url\": \"<uri>\",\n  \"uri\": \"<string>\",\n  \"logs\": {\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"_links\": {\n    \"culpa_a1\": {\n      \"href\": \"<uri>\"\n    },\n    \"nisi_53\": {\n      \"href\": \"<uri>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-740ae1aa-8de8-43de-af22-16eb80893098"
+                    },
+                    {
+                      "id": "45a702ba-0d56-4c18-b27b-e973b160b104",
+                      "name": "Unauthorized - missing or invalid authentication credentials",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-45a702ba-0d56-4c18-b27b-e973b160b104"
+                    },
+                    {
+                      "id": "6e7d39c4-f926-4b7b-9e4c-e9ad37c743ba",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-6e7d39c4-f926-4b7b-9e4c-e9ad37c743ba"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:10:26.000Z",
+                  "updatedAt": "2026-07-28T02:10:26.000Z",
+                  "uid": "35240-0e56c427-b42d-421e-8097-d2870b8c104a"
+                },
+                {
+                  "name": "Azure Pipelines Update a build",
+                  "id": "1bdb65fb-2842-498f-adaa-884f55e72cec",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"buildNumber\": \"<string>\",\n  \"buildNumberRevision\": \"<integer>\",\n  \"status\": \"cancelling\",\n  \"result\": \"partiallySucceeded\",\n  \"queueTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"finishTime\": \"<dateTime>\",\n  \"definition\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"type\": \"xaml\",\n    \"queueStatus\": \"enabled\",\n    \"createdDate\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"state\": \"wellFormed\",\n      \"visibility\": \"public\"\n    },\n    \"uri\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"deleted\",\n    \"visibility\": \"private\"\n  },\n  \"sourceBranch\": \"<string>\",\n  \"sourceVersion\": \"<string>\",\n  \"reason\": \"all\",\n  \"priority\": \"belowNormal\",\n  \"requestedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"requestedFor\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedDate\": \"<dateTime>\",\n  \"repository\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"defaultBranch\": \"<string>\",\n    \"clean\": \"<string>\",\n    \"checkoutSubmodules\": \"<boolean>\"\n  },\n  \"parameters\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"templateParameters\": {\n    \"dolore_44\": \"<string>\",\n    \"voluptate_e\": \"<string>\"\n  },\n  \"deleted\": \"<boolean>\",\n  \"retainedByRelease\": \"<boolean>\",\n  \"url\": \"<uri>\",\n  \"uri\": \"<string>\",\n  \"logs\": {\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"_links\": {\n    \"culpa_a1\": {\n      \"href\": \"<uri>\"\n    },\n    \"nisi_53\": {\n      \"href\": \"<uri>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "builds",
+                        ":buildId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "7a57bae1-7731-4cdb-8796-441a3d0cee1e",
+                          "key": "buildId",
+                          "value": "<integer>",
+                          "description": "(Required) Numeric ID of the build"
+                        }
+                      ]
+                    },
+                    "description": "Updates properties of a completed or in-progress build such as the keep-forever flag, build number, or retention status."
+                  },
+                  "response": [
+                    {
+                      "id": "659502ee-b8bf-4a1c-9e61-9d67b82f3504",
+                      "name": "Build updated successfully",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"buildNumber\": \"<string>\",\n  \"buildNumberRevision\": \"<integer>\",\n  \"status\": \"cancelling\",\n  \"result\": \"partiallySucceeded\",\n  \"queueTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"finishTime\": \"<dateTime>\",\n  \"definition\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"type\": \"xaml\",\n    \"queueStatus\": \"enabled\",\n    \"createdDate\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"state\": \"wellFormed\",\n      \"visibility\": \"public\"\n    },\n    \"uri\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"deleted\",\n    \"visibility\": \"private\"\n  },\n  \"sourceBranch\": \"<string>\",\n  \"sourceVersion\": \"<string>\",\n  \"reason\": \"all\",\n  \"priority\": \"belowNormal\",\n  \"requestedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"requestedFor\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedDate\": \"<dateTime>\",\n  \"repository\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"defaultBranch\": \"<string>\",\n    \"clean\": \"<string>\",\n    \"checkoutSubmodules\": \"<boolean>\"\n  },\n  \"parameters\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"templateParameters\": {\n    \"dolore_44\": \"<string>\",\n    \"voluptate_e\": \"<string>\"\n  },\n  \"deleted\": \"<boolean>\",\n  \"retainedByRelease\": \"<boolean>\",\n  \"url\": \"<uri>\",\n  \"uri\": \"<string>\",\n  \"logs\": {\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"_links\": {\n    \"culpa_a1\": {\n      \"href\": \"<uri>\"\n    },\n    \"nisi_53\": {\n      \"href\": \"<uri>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"buildNumber\": \"<string>\",\n  \"buildNumberRevision\": \"<integer>\",\n  \"status\": \"cancelling\",\n  \"result\": \"partiallySucceeded\",\n  \"queueTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"finishTime\": \"<dateTime>\",\n  \"definition\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"type\": \"xaml\",\n    \"queueStatus\": \"enabled\",\n    \"createdDate\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"state\": \"wellFormed\",\n      \"visibility\": \"public\"\n    },\n    \"uri\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"deleted\",\n    \"visibility\": \"private\"\n  },\n  \"sourceBranch\": \"<string>\",\n  \"sourceVersion\": \"<string>\",\n  \"reason\": \"all\",\n  \"priority\": \"belowNormal\",\n  \"requestedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"requestedFor\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedDate\": \"<dateTime>\",\n  \"repository\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"defaultBranch\": \"<string>\",\n    \"clean\": \"<string>\",\n    \"checkoutSubmodules\": \"<boolean>\"\n  },\n  \"parameters\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"templateParameters\": {\n    \"dolore_44\": \"<string>\",\n    \"voluptate_e\": \"<string>\"\n  },\n  \"deleted\": \"<boolean>\",\n  \"retainedByRelease\": \"<boolean>\",\n  \"url\": \"<uri>\",\n  \"uri\": \"<string>\",\n  \"logs\": {\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"_links\": {\n    \"culpa_a1\": {\n      \"href\": \"<uri>\"\n    },\n    \"nisi_53\": {\n      \"href\": \"<uri>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-659502ee-b8bf-4a1c-9e61-9d67b82f3504"
+                    },
+                    {
+                      "id": "66aa1550-c2bf-4e12-b41b-a18b1dd0a208",
+                      "name": "Bad request - invalid parameters or request body",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"buildNumber\": \"<string>\",\n  \"buildNumberRevision\": \"<integer>\",\n  \"status\": \"cancelling\",\n  \"result\": \"partiallySucceeded\",\n  \"queueTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"finishTime\": \"<dateTime>\",\n  \"definition\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"type\": \"xaml\",\n    \"queueStatus\": \"enabled\",\n    \"createdDate\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"state\": \"wellFormed\",\n      \"visibility\": \"public\"\n    },\n    \"uri\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"deleted\",\n    \"visibility\": \"private\"\n  },\n  \"sourceBranch\": \"<string>\",\n  \"sourceVersion\": \"<string>\",\n  \"reason\": \"all\",\n  \"priority\": \"belowNormal\",\n  \"requestedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"requestedFor\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedDate\": \"<dateTime>\",\n  \"repository\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"defaultBranch\": \"<string>\",\n    \"clean\": \"<string>\",\n    \"checkoutSubmodules\": \"<boolean>\"\n  },\n  \"parameters\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"templateParameters\": {\n    \"dolore_44\": \"<string>\",\n    \"voluptate_e\": \"<string>\"\n  },\n  \"deleted\": \"<boolean>\",\n  \"retainedByRelease\": \"<boolean>\",\n  \"url\": \"<uri>\",\n  \"uri\": \"<string>\",\n  \"logs\": {\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"_links\": {\n    \"culpa_a1\": {\n      \"href\": \"<uri>\"\n    },\n    \"nisi_53\": {\n      \"href\": \"<uri>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-66aa1550-c2bf-4e12-b41b-a18b1dd0a208"
+                    },
+                    {
+                      "id": "288d04e6-dbf9-4305-8400-8a34a5698f58",
+                      "name": "Unauthorized - missing or invalid authentication credentials",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"buildNumber\": \"<string>\",\n  \"buildNumberRevision\": \"<integer>\",\n  \"status\": \"cancelling\",\n  \"result\": \"partiallySucceeded\",\n  \"queueTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"finishTime\": \"<dateTime>\",\n  \"definition\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"type\": \"xaml\",\n    \"queueStatus\": \"enabled\",\n    \"createdDate\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"state\": \"wellFormed\",\n      \"visibility\": \"public\"\n    },\n    \"uri\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"deleted\",\n    \"visibility\": \"private\"\n  },\n  \"sourceBranch\": \"<string>\",\n  \"sourceVersion\": \"<string>\",\n  \"reason\": \"all\",\n  \"priority\": \"belowNormal\",\n  \"requestedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"requestedFor\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedDate\": \"<dateTime>\",\n  \"repository\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"defaultBranch\": \"<string>\",\n    \"clean\": \"<string>\",\n    \"checkoutSubmodules\": \"<boolean>\"\n  },\n  \"parameters\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"templateParameters\": {\n    \"dolore_44\": \"<string>\",\n    \"voluptate_e\": \"<string>\"\n  },\n  \"deleted\": \"<boolean>\",\n  \"retainedByRelease\": \"<boolean>\",\n  \"url\": \"<uri>\",\n  \"uri\": \"<string>\",\n  \"logs\": {\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"_links\": {\n    \"culpa_a1\": {\n      \"href\": \"<uri>\"\n    },\n    \"nisi_53\": {\n      \"href\": \"<uri>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-288d04e6-dbf9-4305-8400-8a34a5698f58"
+                    },
+                    {
+                      "id": "a294dbe9-a9c4-4a3d-944b-50516a063736",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"buildNumber\": \"<string>\",\n  \"buildNumberRevision\": \"<integer>\",\n  \"status\": \"cancelling\",\n  \"result\": \"partiallySucceeded\",\n  \"queueTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"finishTime\": \"<dateTime>\",\n  \"definition\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"type\": \"xaml\",\n    \"queueStatus\": \"enabled\",\n    \"createdDate\": \"<dateTime>\",\n    \"project\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"state\": \"wellFormed\",\n      \"visibility\": \"public\"\n    },\n    \"uri\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"deleted\",\n    \"visibility\": \"private\"\n  },\n  \"sourceBranch\": \"<string>\",\n  \"sourceVersion\": \"<string>\",\n  \"reason\": \"all\",\n  \"priority\": \"belowNormal\",\n  \"requestedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"requestedFor\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedBy\": {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"uniqueName\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"imageUrl\": \"<uri>\"\n  },\n  \"lastChangedDate\": \"<dateTime>\",\n  \"repository\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"defaultBranch\": \"<string>\",\n    \"clean\": \"<string>\",\n    \"checkoutSubmodules\": \"<boolean>\"\n  },\n  \"parameters\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"templateParameters\": {\n    \"dolore_44\": \"<string>\",\n    \"voluptate_e\": \"<string>\"\n  },\n  \"deleted\": \"<boolean>\",\n  \"retainedByRelease\": \"<boolean>\",\n  \"url\": \"<uri>\",\n  \"uri\": \"<string>\",\n  \"logs\": {\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"url\": \"<uri>\"\n  },\n  \"_links\": {\n    \"culpa_a1\": {\n      \"href\": \"<uri>\"\n    },\n    \"nisi_53\": {\n      \"href\": \"<uri>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-a294dbe9-a9c4-4a3d-944b-50516a063736"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:10:26.000Z",
+                  "updatedAt": "2026-07-28T02:10:26.000Z",
+                  "uid": "35240-1bdb65fb-2842-498f-adaa-884f55e72cec"
+                },
+                {
+                  "name": "Azure Pipelines Delete a build",
+                  "id": "5e612b35-f911-47a2-bba2-6d80450019fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "builds",
+                        ":buildId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e8d1efe9-278d-4e3d-83b8-9fc7bf2915e4",
+                          "key": "buildId",
+                          "value": "<integer>",
+                          "description": "(Required) Numeric ID of the build"
+                        }
+                      ]
+                    },
+                    "description": "Deletes a build by moving it to the recycle bin. Deleted builds can be restored within the retention period."
+                  },
+                  "response": [
+                    {
+                      "id": "73417647-0681-4226-b52a-53ecfa182dc6",
+                      "name": "Build deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-73417647-0681-4226-b52a-53ecfa182dc6"
+                    },
+                    {
+                      "id": "d04c2b2a-c8a9-418d-a972-0a6171e8414b",
+                      "name": "Unauthorized - missing or invalid authentication credentials",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-d04c2b2a-c8a9-418d-a972-0a6171e8414b"
+                    },
+                    {
+                      "id": "a08a94c4-6cb3-43b7-848a-30cb77473739",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "buildId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:26.000Z",
+                      "updatedAt": "2026-07-28T02:10:26.000Z",
+                      "uid": "35240-a08a94c4-6cb3-43b7-848a-30cb77473739"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:10:26.000Z",
+                  "updatedAt": "2026-07-28T02:10:26.000Z",
+                  "uid": "35240-5e612b35-f911-47a2-bba2-6d80450019fe"
+                }
+              ],
+              "id": "ff98affc-5c8a-4668-8ba4-40c8214bf260",
+              "createdAt": "2026-07-28T02:10:26.000Z",
+              "updatedAt": "2026-07-28T02:10:26.000Z",
+              "uid": "35240-ff98affc-5c8a-4668-8ba4-40c8214bf260"
+            },
+            {
+              "name": "Azure Pipelines List builds",
+              "id": "7aa1e42e-20b2-40dd-a3a3-4bcc4c58d4b5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/build/builds?api-version=7.1&definitions=<string>&queues=<string>&buildNumber=<string>&minTime=<dateTime>&maxTime=<dateTime>&requestedFor=<string>&reasonFilter=buildCompletion&statusFilter=none&resultFilter=partiallySucceeded&tagFilters=<string>&$top=<integer>&continuationToken=<string>&maxBuildsPerDefinition=<integer>&deletedFilter=onlyDeleted&queryOrder=startTimeDescending&branchName=<string>&buildIds=<string>&repositoryId=<string>&repositoryType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "build",
+                    "builds"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "description": "Comma-delimited list of definition IDs to filter by",
+                      "key": "definitions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-delimited list of queue IDs to filter by",
+                      "key": "queues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by build number. Append asterisk for prefix matching.",
+                      "key": "buildNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter to builds after this date based on the query order",
+                      "key": "minTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter to builds before this date based on the query order",
+                      "key": "maxTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter to builds requested by this user",
+                      "key": "requestedFor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the reason the build was created",
+                      "key": "reasonFilter",
+                      "value": "buildCompletion"
+                    },
+                    {
+                      "description": "Filter by current build status",
+                      "key": "statusFilter",
+                      "value": "none"
+                    },
+                    {
+                      "description": "Filter by build result",
+                      "key": "resultFilter",
+                      "value": "partiallySucceeded"
+                    },
+                    {
+                      "description": "Comma-delimited list of tags to filter by",
+                      "key": "tagFilters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of builds to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Continuation token for paginated results",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of builds to return per definition",
+                      "key": "maxBuildsPerDefinition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter for deleted builds",
+                      "key": "deletedFilter",
+                      "value": "onlyDeleted"
+                    },
+                    {
+                      "description": "Sort order for the results",
+                      "key": "queryOrder",
+                      "value": "startTimeDescending"
+                    },
+                    {
+                      "description": "Filter to builds from this branch",
+                      "key": "branchName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-delimited list of build IDs to retrieve",
+                      "key": "buildIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter to builds from this repository",
+                      "key": "repositoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter to builds from repositories of this type",
+                      "key": "repositoryType",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Returns a list of builds matching the specified filter criteria. Supports filtering by definition, status, result, branch, repository, time range, and tags. Results are paginated and can be ordered by queue time, start time, or finish time."
+              },
+              "response": [
+                {
+                  "id": "db04e4c9-a302-44c8-963b-b2b7cc14a5b7",
+                  "name": "List of builds returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/builds?api-version=7.1&definitions=<string>&queues=<string>&buildNumber=<string>&minTime=<dateTime>&maxTime=<dateTime>&requestedFor=<string>&reasonFilter=buildCompletion&statusFilter=none&resultFilter=partiallySucceeded&tagFilters=<string>&$top=<integer>&continuationToken=<string>&maxBuildsPerDefinition=<integer>&deletedFilter=onlyDeleted&queryOrder=startTimeDescending&branchName=<string>&buildIds=<string>&repositoryId=<string>&repositoryType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "builds"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Comma-delimited list of definition IDs to filter by",
+                          "key": "definitions",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-delimited list of queue IDs to filter by",
+                          "key": "queues",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by build number. Append asterisk for prefix matching.",
+                          "key": "buildNumber",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds after this date based on the query order",
+                          "key": "minTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to builds before this date based on the query order",
+                          "key": "maxTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to builds requested by this user",
+                          "key": "requestedFor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the reason the build was created",
+                          "key": "reasonFilter",
+                          "value": "buildCompletion"
+                        },
+                        {
+                          "description": "Filter by current build status",
+                          "key": "statusFilter",
+                          "value": "none"
+                        },
+                        {
+                          "description": "Filter by build result",
+                          "key": "resultFilter",
+                          "value": "partiallySucceeded"
+                        },
+                        {
+                          "description": "Comma-delimited list of tags to filter by",
+                          "key": "tagFilters",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of builds to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Continuation token for paginated results",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of builds to return per definition",
+                          "key": "maxBuildsPerDefinition",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Filter for deleted builds",
+                          "key": "deletedFilter",
+                          "value": "onlyDeleted"
+                        },
+                        {
+                          "description": "Sort order for the results",
+                          "key": "queryOrder",
+                          "value": "startTimeDescending"
+                        },
+                        {
+                          "description": "Filter to builds from this branch",
+                          "key": "branchName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-delimited list of build IDs to retrieve",
+                          "key": "buildIds",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds from this repository",
+                          "key": "repositoryId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds from repositories of this type",
+                          "key": "repositoryType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    {\n      \"id\": \"<integer>\",\n      \"buildNumber\": \"<string>\",\n      \"buildNumberRevision\": \"<integer>\",\n      \"status\": \"notStarted\",\n      \"result\": \"failed\",\n      \"queueTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"finishTime\": \"<dateTime>\",\n      \"definition\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"path\": \"<string>\",\n        \"revision\": \"<integer>\",\n        \"type\": \"build\",\n        \"queueStatus\": \"disabled\",\n        \"createdDate\": \"<dateTime>\",\n        \"project\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"state\": \"deleting\",\n          \"visibility\": \"private\"\n        },\n        \"uri\": \"<string>\",\n        \"url\": \"<uri>\"\n      },\n      \"project\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"state\": \"unchanged\",\n        \"visibility\": \"public\"\n      },\n      \"sourceBranch\": \"<string>\",\n      \"sourceVersion\": \"<string>\",\n      \"reason\": \"pullRequest\",\n      \"priority\": \"high\",\n      \"requestedBy\": {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"uniqueName\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"imageUrl\": \"<uri>\"\n      },\n      \"requestedFor\": {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"uniqueName\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"imageUrl\": \"<uri>\"\n      },\n      \"lastChangedBy\": {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"uniqueName\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"imageUrl\": \"<uri>\"\n      },\n      \"lastChangedDate\": \"<dateTime>\",\n      \"repository\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"defaultBranch\": \"<string>\",\n        \"clean\": \"<string>\",\n        \"checkoutSubmodules\": \"<boolean>\"\n      },\n      \"parameters\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"templateParameters\": {\n        \"deserunt_4\": \"<string>\",\n        \"elit_5\": \"<string>\"\n      },\n      \"deleted\": \"<boolean>\",\n      \"retainedByRelease\": \"<boolean>\",\n      \"url\": \"<uri>\",\n      \"uri\": \"<string>\",\n      \"logs\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"url\": \"<uri>\"\n      },\n      \"_links\": {\n        \"adipisicing_90\": {\n          \"href\": \"<uri>\"\n        },\n        \"incididunt_2be\": {\n          \"href\": \"<uri>\"\n        }\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"buildNumber\": \"<string>\",\n      \"buildNumberRevision\": \"<integer>\",\n      \"status\": \"all\",\n      \"result\": \"failed\",\n      \"queueTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"finishTime\": \"<dateTime>\",\n      \"definition\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"path\": \"<string>\",\n        \"revision\": \"<integer>\",\n        \"type\": \"xaml\",\n        \"queueStatus\": \"enabled\",\n        \"createdDate\": \"<dateTime>\",\n        \"project\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"state\": \"unchanged\",\n          \"visibility\": \"public\"\n        },\n        \"uri\": \"<string>\",\n        \"url\": \"<uri>\"\n      },\n      \"project\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"state\": \"deleted\",\n        \"visibility\": \"public\"\n      },\n      \"sourceBranch\": \"<string>\",\n      \"sourceVersion\": \"<string>\",\n      \"reason\": \"individualCI\",\n      \"priority\": \"high\",\n      \"requestedBy\": {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"uniqueName\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"imageUrl\": \"<uri>\"\n      },\n      \"requestedFor\": {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"uniqueName\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"imageUrl\": \"<uri>\"\n      },\n      \"lastChangedBy\": {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"uniqueName\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"imageUrl\": \"<uri>\"\n      },\n      \"lastChangedDate\": \"<dateTime>\",\n      \"repository\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"defaultBranch\": \"<string>\",\n        \"clean\": \"<string>\",\n        \"checkoutSubmodules\": \"<boolean>\"\n      },\n      \"parameters\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"templateParameters\": {\n        \"labore9\": \"<string>\",\n        \"Duis_f\": \"<string>\",\n        \"tempor_c\": \"<string>\",\n        \"aliqua73\": \"<string>\"\n      },\n      \"deleted\": \"<boolean>\",\n      \"retainedByRelease\": \"<boolean>\",\n      \"url\": \"<uri>\",\n      \"uri\": \"<string>\",\n      \"logs\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"url\": \"<uri>\"\n      },\n      \"_links\": {\n        \"laborum_0e4\": {\n          \"href\": \"<uri>\"\n        },\n        \"nisib3\": {\n          \"href\": \"<uri>\"\n        }\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:10:26.000Z",
+                  "updatedAt": "2026-07-28T02:10:26.000Z",
+                  "uid": "35240-db04e4c9-a302-44c8-963b-b2b7cc14a5b7"
+                },
+                {
+                  "id": "b62a4584-c0ec-48cf-bb4d-b1375c118b24",
+                  "name": "Unauthorized - missing or invalid authentication credentials",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/builds?api-version=7.1&definitions=<string>&queues=<string>&buildNumber=<string>&minTime=<dateTime>&maxTime=<dateTime>&requestedFor=<string>&reasonFilter=buildCompletion&statusFilter=none&resultFilter=partiallySucceeded&tagFilters=<string>&$top=<integer>&continuationToken=<string>&maxBuildsPerDefinition=<integer>&deletedFilter=onlyDeleted&queryOrder=startTimeDescending&branchName=<string>&buildIds=<string>&repositoryId=<string>&repositoryType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "builds"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Comma-delimited list of definition IDs to filter by",
+                          "key": "definitions",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-delimited list of queue IDs to filter by",
+                          "key": "queues",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by build number. Append asterisk for prefix matching.",
+                          "key": "buildNumber",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds after this date based on the query order",
+                          "key": "minTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to builds before this date based on the query order",
+                          "key": "maxTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to builds requested by this user",
+                          "key": "requestedFor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the reason the build was created",
+                          "key": "reasonFilter",
+                          "value": "buildCompletion"
+                        },
+                        {
+                          "description": "Filter by current build status",
+                          "key": "statusFilter",
+                          "value": "none"
+                        },
+                        {
+                          "description": "Filter by build result",
+                          "key": "resultFilter",
+                          "value": "partiallySucceeded"
+                        },
+                        {
+                          "description": "Comma-delimited list of tags to filter by",
+                          "key": "tagFilters",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of builds to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Continuation token for paginated results",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of builds to return per definition",
+                          "key": "maxBuildsPerDefinition",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Filter for deleted builds",
+                          "key": "deletedFilter",
+                          "value": "onlyDeleted"
+                        },
+                        {
+                          "description": "Sort order for the results",
+                          "key": "queryOrder",
+                          "value": "startTimeDescending"
+                        },
+                        {
+                          "description": "Filter to builds from this branch",
+                          "key": "branchName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-delimited list of build IDs to retrieve",
+                          "key": "buildIds",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds from this repository",
+                          "key": "repositoryId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds from repositories of this type",
+                          "key": "repositoryType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:10:26.000Z",
+                  "updatedAt": "2026-07-28T02:10:26.000Z",
+                  "uid": "35240-b62a4584-c0ec-48cf-bb4d-b1375c118b24"
+                },
+                {
+                  "id": "22f56028-b4fa-4768-8802-fe3e293d35d0",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/builds?api-version=7.1&definitions=<string>&queues=<string>&buildNumber=<string>&minTime=<dateTime>&maxTime=<dateTime>&requestedFor=<string>&reasonFilter=buildCompletion&statusFilter=none&resultFilter=partiallySucceeded&tagFilters=<string>&$top=<integer>&continuationToken=<string>&maxBuildsPerDefinition=<integer>&deletedFilter=onlyDeleted&queryOrder=startTimeDescending&branchName=<string>&buildIds=<string>&repositoryId=<string>&repositoryType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "builds"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Comma-delimited list of definition IDs to filter by",
+                          "key": "definitions",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-delimited list of queue IDs to filter by",
+                          "key": "queues",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by build number. Append asterisk for prefix matching.",
+                          "key": "buildNumber",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds after this date based on the query order",
+                          "key": "minTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to builds before this date based on the query order",
+                          "key": "maxTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to builds requested by this user",
+                          "key": "requestedFor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the reason the build was created",
+                          "key": "reasonFilter",
+                          "value": "buildCompletion"
+                        },
+                        {
+                          "description": "Filter by current build status",
+                          "key": "statusFilter",
+                          "value": "none"
+                        },
+                        {
+                          "description": "Filter by build result",
+                          "key": "resultFilter",
+                          "value": "partiallySucceeded"
+                        },
+                        {
+                          "description": "Comma-delimited list of tags to filter by",
+                          "key": "tagFilters",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of builds to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Continuation token for paginated results",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of builds to return per definition",
+                          "key": "maxBuildsPerDefinition",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Filter for deleted builds",
+                          "key": "deletedFilter",
+                          "value": "onlyDeleted"
+                        },
+                        {
+                          "description": "Sort order for the results",
+                          "key": "queryOrder",
+                          "value": "startTimeDescending"
+                        },
+                        {
+                          "description": "Filter to builds from this branch",
+                          "key": "branchName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-delimited list of build IDs to retrieve",
+                          "key": "buildIds",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds from this repository",
+                          "key": "repositoryId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to builds from repositories of this type",
+                          "key": "repositoryType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:10:26.000Z",
+                  "updatedAt": "2026-07-28T02:10:26.000Z",
+                  "uid": "35240-22f56028-b4fa-4768-8802-fe3e293d35d0"
+                }
+              ],
+              "createdAt": "2026-07-28T02:10:26.000Z",
+              "updatedAt": "2026-07-28T02:10:26.000Z",
+              "uid": "35240-7aa1e42e-20b2-40dd-a3a3-4bcc4c58d4b5"
+            }
+          ],
+          "id": "0572a615-f86f-432c-b75a-911cd0855970",
+          "createdAt": "2026-07-28T02:10:26.000Z",
+          "updatedAt": "2026-07-28T02:10:26.000Z",
+          "uid": "35240-0572a615-f86f-432c-b75a-911cd0855970"
+        }
+      ],
+      "id": "a8fe0af4-2b86-45ae-8c7d-8c75390a605b",
+      "createdAt": "2026-07-28T02:10:26.000Z",
+      "updatedAt": "2026-07-28T02:10:26.000Z",
+      "uid": "35240-a8fe0af4-2b86-45ae-8c7d-8c75390a605b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "organization",
+      "value": "myorganization"
+    },
+    {
+      "key": "project",
+      "value": "myproject"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://dev.azure.com/{{organization}}/{{project}}/_apis"
+    }
+  ]
+}

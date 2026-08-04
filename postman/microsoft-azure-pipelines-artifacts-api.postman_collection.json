@@ -1,0 +1,433 @@
+{
+  "info": {
+    "_postman_id": "10a69c7a-cac7-4fe4-ada3-1420f51bae0c",
+    "name": "Azure Pipelines Build REST Artifacts API",
+    "description": "REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.\n\nContact Support:\n Name: Microsoft Azure DevOps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:59.000Z",
+    "updatedAt": "2026-07-28T02:09:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-10a69c7a-cac7-4fe4-ada3-1420f51bae0c"
+  },
+  "item": [
+    {
+      "name": "pipelines",
+      "item": [
+        {
+          "name": "{pipelineId}",
+          "item": [
+            {
+              "name": "runs",
+              "item": [
+                {
+                  "name": "{runId}",
+                  "item": [
+                    {
+                      "name": "artifacts",
+                      "item": [
+                        {
+                          "name": "Azure Pipelines List run artifacts",
+                          "id": "2a6498b2-a74b-4660-90aa-097c9d6c3c60",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/artifacts?api-version=7.1&artifactName=<string>&$expand=signedContent",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pipelines",
+                                ":pipelineId",
+                                "runs",
+                                ":runId",
+                                "artifacts"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                  "key": "api-version",
+                                  "value": "7.1"
+                                },
+                                {
+                                  "description": "Filter by a specific artifact name",
+                                  "key": "artifactName",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Expand additional artifact details such as signed content",
+                                  "key": "$expand",
+                                  "value": "signedContent"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c0377d95-6dcd-4bac-87bf-af01efa920b8",
+                                  "key": "pipelineId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Numeric ID of the pipeline definition"
+                                },
+                                {
+                                  "id": "320765d0-424b-4699-8a8c-86c73ff18b96",
+                                  "key": "runId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Numeric ID of the pipeline run"
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of artifacts published by a specific pipeline run. Artifacts include compiled binaries, test results, container images, or any files published using the PublishPipelineArtifact task during pipeline execution."
+                          },
+                          "response": [
+                            {
+                              "id": "7e743beb-4782-4de9-a6a1-37458383162c",
+                              "name": "List of run artifacts returned successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/artifacts?api-version=7.1&artifactName=<string>&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "artifacts"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Filter by a specific artifact name",
+                                      "key": "artifactName",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Expand additional artifact details such as signed content",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    {\n      \"name\": \"<string>\",\n      \"signedContent\": {\n        \"url\": \"<uri>\",\n        \"signatureExpires\": \"<dateTime>\"\n      },\n      \"url\": \"<uri>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"signedContent\": {\n        \"url\": \"<uri>\",\n        \"signatureExpires\": \"<dateTime>\"\n      },\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:10:00.000Z",
+                              "updatedAt": "2026-07-28T02:10:00.000Z",
+                              "uid": "35240-7e743beb-4782-4de9-a6a1-37458383162c"
+                            },
+                            {
+                              "id": "0e5f4bea-0dbd-421b-9018-1804880a6bd0",
+                              "name": "Unauthorized - missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/artifacts?api-version=7.1&artifactName=<string>&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "artifacts"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Filter by a specific artifact name",
+                                      "key": "artifactName",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Expand additional artifact details such as signed content",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:00.000Z",
+                              "updatedAt": "2026-07-28T02:10:00.000Z",
+                              "uid": "35240-0e5f4bea-0dbd-421b-9018-1804880a6bd0"
+                            },
+                            {
+                              "id": "1487d43e-df7f-49f2-b4cc-a2b847b76634",
+                              "name": "Forbidden - insufficient permissions to perform this operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/artifacts?api-version=7.1&artifactName=<string>&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "artifacts"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Filter by a specific artifact name",
+                                      "key": "artifactName",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Expand additional artifact details such as signed content",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:00.000Z",
+                              "updatedAt": "2026-07-28T02:10:00.000Z",
+                              "uid": "35240-1487d43e-df7f-49f2-b4cc-a2b847b76634"
+                            },
+                            {
+                              "id": "e935e176-0f22-4ec1-be4e-217f742a3d5e",
+                              "name": "Not found - the requested resource does not exist",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/artifacts?api-version=7.1&artifactName=<string>&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "artifacts"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Filter by a specific artifact name",
+                                      "key": "artifactName",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Expand additional artifact details such as signed content",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:00.000Z",
+                              "updatedAt": "2026-07-28T02:10:00.000Z",
+                              "uid": "35240-e935e176-0f22-4ec1-be4e-217f742a3d5e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:00.000Z",
+                          "updatedAt": "2026-07-28T02:10:00.000Z",
+                          "uid": "35240-2a6498b2-a74b-4660-90aa-097c9d6c3c60"
+                        }
+                      ],
+                      "id": "bb1d30df-b1b5-4950-a499-4bb615851528",
+                      "createdAt": "2026-07-28T02:10:00.000Z",
+                      "updatedAt": "2026-07-28T02:10:00.000Z",
+                      "uid": "35240-bb1d30df-b1b5-4950-a499-4bb615851528"
+                    }
+                  ],
+                  "id": "fe4035e5-0037-417b-9fbf-5b91f608bbbb",
+                  "createdAt": "2026-07-28T02:10:00.000Z",
+                  "updatedAt": "2026-07-28T02:10:00.000Z",
+                  "uid": "35240-fe4035e5-0037-417b-9fbf-5b91f608bbbb"
+                }
+              ],
+              "id": "6ab49cdc-1183-4df2-a784-4e4d4231f869",
+              "createdAt": "2026-07-28T02:10:00.000Z",
+              "updatedAt": "2026-07-28T02:10:00.000Z",
+              "uid": "35240-6ab49cdc-1183-4df2-a784-4e4d4231f869"
+            }
+          ],
+          "id": "7f7c42c0-e8f5-439b-8e28-7325461e33dc",
+          "createdAt": "2026-07-28T02:10:00.000Z",
+          "updatedAt": "2026-07-28T02:10:00.000Z",
+          "uid": "35240-7f7c42c0-e8f5-439b-8e28-7325461e33dc"
+        }
+      ],
+      "id": "500115b6-3543-448d-9dfc-73279c9c6a93",
+      "createdAt": "2026-07-28T02:10:00.000Z",
+      "updatedAt": "2026-07-28T02:10:00.000Z",
+      "uid": "35240-500115b6-3543-448d-9dfc-73279c9c6a93"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "organization",
+      "value": "myorganization"
+    },
+    {
+      "key": "project",
+      "value": "myproject"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://dev.azure.com/{{organization}}/{{project}}/_apis"
+    }
+  ]
+}

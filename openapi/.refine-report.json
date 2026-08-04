@@ -1,0 +1,28 @@
+{
+  "provider": "microsoft-azure-pipelines",
+  "sources": [
+    "microsoft-azure-pipelines-artifacts-api-openapi.yml",
+    "microsoft-azure-pipelines-build-artifacts-api-openapi.yml",
+    "microsoft-azure-pipelines-build-definitions-api-openapi.yml",
+    "microsoft-azure-pipelines-build-tags-api-openapi.yml",
+    "microsoft-azure-pipelines-builds-api-openapi.yml",
+    "microsoft-azure-pipelines-logs-api-openapi.yml",
+    "microsoft-azure-pipelines-pipelines-api-openapi.yml",
+    "microsoft-azure-pipelines-runs-api-openapi.yml"
+  ],
+  "outputs": [
+    "microsoft-azure-pipelines-artifacts-api-openapi.yml",
+    "microsoft-azure-pipelines-build-artifacts-api-openapi.yml",
+    "microsoft-azure-pipelines-build-definitions-api-openapi.yml",
+    "microsoft-azure-pipelines-build-tags-api-openapi.yml",
+    "microsoft-azure-pipelines-builds-api-openapi.yml",
+    "microsoft-azure-pipelines-logs-api-openapi.yml",
+    "microsoft-azure-pipelines-pipelines-api-openapi.yml",
+    "microsoft-azure-pipelines-runs-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

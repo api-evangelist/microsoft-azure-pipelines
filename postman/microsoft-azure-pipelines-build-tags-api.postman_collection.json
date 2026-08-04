@@ -1,0 +1,781 @@
+{
+  "info": {
+    "_postman_id": "6268d4ba-5106-4d53-abb6-ab070e793b39",
+    "name": "Azure Pipelines Build REST Artifacts Build Tags API",
+    "description": "REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.\n\nContact Support:\n Name: Microsoft Azure DevOps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:18.000Z",
+    "updatedAt": "2026-07-28T02:10:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6268d4ba-5106-4d53-abb6-ab070e793b39"
+  },
+  "item": [
+    {
+      "name": "build",
+      "item": [
+        {
+          "name": "builds",
+          "item": [
+            {
+              "name": "{buildId}",
+              "item": [
+                {
+                  "name": "tags",
+                  "item": [
+                    {
+                      "name": "{tag}",
+                      "item": [
+                        {
+                          "name": "Azure Pipelines Add a tag to a build",
+                          "id": "643e6634-13f2-4a05-9d8d-0bf7c001966e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "build",
+                                "builds",
+                                ":buildId",
+                                "tags",
+                                ":tag"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                  "key": "api-version",
+                                  "value": "7.1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "df5d1fd4-3ed2-4043-837f-eb94872a124d",
+                                  "key": "buildId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Numeric ID of the build"
+                                },
+                                {
+                                  "id": "ba26b03f-11ae-467b-88b5-51bbbb20be6d",
+                                  "key": "tag",
+                                  "value": "<string>",
+                                  "description": "(Required) Tag to add to the build"
+                                }
+                              ]
+                            },
+                            "description": "Adds a tag to a build. Tags are used for categorization, filtering, and retention policy purposes."
+                          },
+                          "response": [
+                            {
+                              "id": "5a76ace1-11b6-461d-bdeb-8059199f60a4",
+                              "name": "Tag added successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "build",
+                                    "builds",
+                                    ":buildId",
+                                    "tags",
+                                    ":tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "buildId"
+                                    },
+                                    {
+                                      "key": "tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T02:10:18.000Z",
+                              "updatedAt": "2026-07-28T02:10:18.000Z",
+                              "uid": "35240-5a76ace1-11b6-461d-bdeb-8059199f60a4"
+                            },
+                            {
+                              "id": "13135ab0-be3a-4b73-abde-bcf35844df15",
+                              "name": "Unauthorized - missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "build",
+                                    "builds",
+                                    ":buildId",
+                                    "tags",
+                                    ":tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "buildId"
+                                    },
+                                    {
+                                      "key": "tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:18.000Z",
+                              "updatedAt": "2026-07-28T02:10:18.000Z",
+                              "uid": "35240-13135ab0-be3a-4b73-abde-bcf35844df15"
+                            },
+                            {
+                              "id": "e692a779-a0a5-4fa6-b6dc-c186e4da042f",
+                              "name": "Not found - the requested resource does not exist",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "build",
+                                    "builds",
+                                    ":buildId",
+                                    "tags",
+                                    ":tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "buildId"
+                                    },
+                                    {
+                                      "key": "tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:18.000Z",
+                              "updatedAt": "2026-07-28T02:10:18.000Z",
+                              "uid": "35240-e692a779-a0a5-4fa6-b6dc-c186e4da042f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:18.000Z",
+                          "updatedAt": "2026-07-28T02:10:18.000Z",
+                          "uid": "35240-643e6634-13f2-4a05-9d8d-0bf7c001966e"
+                        },
+                        {
+                          "name": "Azure Pipelines Remove a tag from a build",
+                          "id": "700491e1-c3c9-4cc8-96b0-cfeb30b885e7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "build",
+                                "builds",
+                                ":buildId",
+                                "tags",
+                                ":tag"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                  "key": "api-version",
+                                  "value": "7.1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7e75567b-289c-48b5-8ca2-1086c657aae3",
+                                  "key": "buildId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Numeric ID of the build"
+                                },
+                                {
+                                  "id": "bada5472-f1ab-4cb2-8399-7f92b2b944d7",
+                                  "key": "tag",
+                                  "value": "<string>",
+                                  "description": "(Required) Tag to remove from the build"
+                                }
+                              ]
+                            },
+                            "description": "Removes a tag from a build."
+                          },
+                          "response": [
+                            {
+                              "id": "8e2a5efe-7b0b-4f76-846e-c98e7f8cc208",
+                              "name": "Tag removed successfully",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "build",
+                                    "builds",
+                                    ":buildId",
+                                    "tags",
+                                    ":tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "buildId"
+                                    },
+                                    {
+                                      "key": "tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T02:10:18.000Z",
+                              "updatedAt": "2026-07-28T02:10:18.000Z",
+                              "uid": "35240-8e2a5efe-7b0b-4f76-846e-c98e7f8cc208"
+                            },
+                            {
+                              "id": "7f0376ac-2ca7-4c57-9592-fb535f6afeb6",
+                              "name": "Unauthorized - missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "build",
+                                    "builds",
+                                    ":buildId",
+                                    "tags",
+                                    ":tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "buildId"
+                                    },
+                                    {
+                                      "key": "tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:18.000Z",
+                              "updatedAt": "2026-07-28T02:10:18.000Z",
+                              "uid": "35240-7f0376ac-2ca7-4c57-9592-fb535f6afeb6"
+                            },
+                            {
+                              "id": "92f011e0-4448-4e8f-bea3-d0f742319763",
+                              "name": "Not found - the requested resource does not exist",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/build/builds/:buildId/tags/:tag?api-version=7.1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "build",
+                                    "builds",
+                                    ":buildId",
+                                    "tags",
+                                    ":tag"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "buildId"
+                                    },
+                                    {
+                                      "key": "tag"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:18.000Z",
+                              "updatedAt": "2026-07-28T02:10:18.000Z",
+                              "uid": "35240-92f011e0-4448-4e8f-bea3-d0f742319763"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:18.000Z",
+                          "updatedAt": "2026-07-28T02:10:18.000Z",
+                          "uid": "35240-700491e1-c3c9-4cc8-96b0-cfeb30b885e7"
+                        }
+                      ],
+                      "id": "1d6dae76-e7e2-44b7-90fa-1df50dcecde0",
+                      "createdAt": "2026-07-28T02:10:18.000Z",
+                      "updatedAt": "2026-07-28T02:10:18.000Z",
+                      "uid": "35240-1d6dae76-e7e2-44b7-90fa-1df50dcecde0"
+                    },
+                    {
+                      "name": "Azure Pipelines List build tags",
+                      "id": "588a25d6-962c-440c-be52-b9c6265de22c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/builds/:buildId/tags?api-version=7.1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "builds",
+                            ":buildId",
+                            "tags"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "17b181fc-7717-48b9-84f6-60e6ca7ba1fe",
+                              "key": "buildId",
+                              "value": "<integer>",
+                              "description": "(Required) Numeric ID of the build"
+                            }
+                          ]
+                        },
+                        "description": "Returns the list of tags associated with a build."
+                      },
+                      "response": [
+                        {
+                          "id": "85ce3de3-bf40-4205-9967-b869a4efd154",
+                          "name": "Build tags returned successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/build/builds/:buildId/tags?api-version=7.1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "build",
+                                "builds",
+                                ":buildId",
+                                "tags"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                  "key": "api-version",
+                                  "value": "7.1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "buildId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T02:10:18.000Z",
+                          "updatedAt": "2026-07-28T02:10:18.000Z",
+                          "uid": "35240-85ce3de3-bf40-4205-9967-b869a4efd154"
+                        },
+                        {
+                          "id": "173a14e6-f196-4b08-a003-2dc86ae8708c",
+                          "name": "Unauthorized - missing or invalid authentication credentials",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/build/builds/:buildId/tags?api-version=7.1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "build",
+                                "builds",
+                                ":buildId",
+                                "tags"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                  "key": "api-version",
+                                  "value": "7.1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "buildId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:10:18.000Z",
+                          "updatedAt": "2026-07-28T02:10:18.000Z",
+                          "uid": "35240-173a14e6-f196-4b08-a003-2dc86ae8708c"
+                        },
+                        {
+                          "id": "4cf99320-cca9-48b3-831a-7b5638f50139",
+                          "name": "Not found - the requested resource does not exist",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/build/builds/:buildId/tags?api-version=7.1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "build",
+                                "builds",
+                                ":buildId",
+                                "tags"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                  "key": "api-version",
+                                  "value": "7.1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "buildId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:10:18.000Z",
+                          "updatedAt": "2026-07-28T02:10:18.000Z",
+                          "uid": "35240-4cf99320-cca9-48b3-831a-7b5638f50139"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:10:18.000Z",
+                      "updatedAt": "2026-07-28T02:10:18.000Z",
+                      "uid": "35240-588a25d6-962c-440c-be52-b9c6265de22c"
+                    }
+                  ],
+                  "id": "14b5845c-dbce-4800-ae51-8545ee61e4c5",
+                  "createdAt": "2026-07-28T02:10:18.000Z",
+                  "updatedAt": "2026-07-28T02:10:18.000Z",
+                  "uid": "35240-14b5845c-dbce-4800-ae51-8545ee61e4c5"
+                }
+              ],
+              "id": "eecb3d81-18f0-4f72-b242-a2290d5333db",
+              "createdAt": "2026-07-28T02:10:18.000Z",
+              "updatedAt": "2026-07-28T02:10:18.000Z",
+              "uid": "35240-eecb3d81-18f0-4f72-b242-a2290d5333db"
+            }
+          ],
+          "id": "fc0a761c-7246-493e-9aa7-61cff29b7835",
+          "createdAt": "2026-07-28T02:10:18.000Z",
+          "updatedAt": "2026-07-28T02:10:18.000Z",
+          "uid": "35240-fc0a761c-7246-493e-9aa7-61cff29b7835"
+        }
+      ],
+      "id": "9e5ad634-ee8a-4028-8fec-bfd778e4af94",
+      "createdAt": "2026-07-28T02:10:18.000Z",
+      "updatedAt": "2026-07-28T02:10:18.000Z",
+      "uid": "35240-9e5ad634-ee8a-4028-8fec-bfd778e4af94"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "organization",
+      "value": "myorganization"
+    },
+    {
+      "key": "project",
+      "value": "myproject"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://dev.azure.com/{{organization}}/{{project}}/_apis"
+    }
+  ]
+}

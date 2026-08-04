@@ -1,0 +1,765 @@
+{
+  "info": {
+    "_postman_id": "c0ef88d3-2245-4fb5-87aa-d3eee9c5205c",
+    "name": "Azure Pipelines Build REST Artifacts Logs API",
+    "description": "REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.\n\nContact Support:\n Name: Microsoft Azure DevOps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:28.000Z",
+    "updatedAt": "2026-07-28T02:10:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c0ef88d3-2245-4fb5-87aa-d3eee9c5205c"
+  },
+  "item": [
+    {
+      "name": "pipelines",
+      "item": [
+        {
+          "name": "{pipelineId}",
+          "item": [
+            {
+              "name": "runs",
+              "item": [
+                {
+                  "name": "{runId}",
+                  "item": [
+                    {
+                      "name": "logs",
+                      "item": [
+                        {
+                          "name": "{logId}",
+                          "item": [
+                            {
+                              "name": "Azure Pipelines Get a pipeline run log",
+                              "id": "91dfbaff-4114-4e14-b305-d752f3157207",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs/:logId?api-version=7.1&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "logs",
+                                    ":logId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Expand additional log details",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1ba9ca2a-e430-4555-be48-c50fd3779844",
+                                      "key": "pipelineId",
+                                      "value": "<integer>",
+                                      "description": "(Required) Numeric ID of the pipeline definition"
+                                    },
+                                    {
+                                      "id": "0601b6eb-aad8-4f63-855f-83ea14bdf4d9",
+                                      "key": "runId",
+                                      "value": "<integer>",
+                                      "description": "(Required) Numeric ID of the pipeline run"
+                                    },
+                                    {
+                                      "id": "90a7bb43-08dc-4405-9fc8-6401d8c719e6",
+                                      "key": "logId",
+                                      "value": "<integer>",
+                                      "description": "(Required) Numeric ID of the log entry to retrieve"
+                                    }
+                                  ]
+                                },
+                                "description": "Returns the content of a specific log from a pipeline run. The log content includes timestamped output from pipeline tasks, stages, and jobs. Useful for debugging failed runs and auditing pipeline execution."
+                              },
+                              "response": [
+                                {
+                                  "id": "ec47db8a-5f97-463e-b961-956d3d7c75a7",
+                                  "name": "Log content returned successfully",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs/:logId?api-version=7.1&$expand=signedContent",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "pipelines",
+                                        ":pipelineId",
+                                        "runs",
+                                        ":runId",
+                                        "logs",
+                                        ":logId"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                          "key": "api-version",
+                                          "value": "7.1"
+                                        },
+                                        {
+                                          "description": "Expand additional log details",
+                                          "key": "$expand",
+                                          "value": "signedContent"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "pipelineId"
+                                        },
+                                        {
+                                          "key": "runId"
+                                        },
+                                        {
+                                          "key": "logId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<integer>\",\n  \"createdOn\": \"<dateTime>\",\n  \"lastChangedOn\": \"<dateTime>\",\n  \"lineCount\": \"<integer>\",\n  \"url\": \"<uri>\",\n  \"signedContent\": {\n    \"url\": \"<uri>\",\n    \"signatureExpires\": \"<dateTime>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:10:29.000Z",
+                                  "updatedAt": "2026-07-28T02:10:29.000Z",
+                                  "uid": "35240-ec47db8a-5f97-463e-b961-956d3d7c75a7"
+                                },
+                                {
+                                  "id": "f4bc03da-b506-408b-ba54-ecb2da541a8a",
+                                  "name": "Unauthorized - missing or invalid authentication credentials",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs/:logId?api-version=7.1&$expand=signedContent",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "pipelines",
+                                        ":pipelineId",
+                                        "runs",
+                                        ":runId",
+                                        "logs",
+                                        ":logId"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                          "key": "api-version",
+                                          "value": "7.1"
+                                        },
+                                        {
+                                          "description": "Expand additional log details",
+                                          "key": "$expand",
+                                          "value": "signedContent"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "pipelineId"
+                                        },
+                                        {
+                                          "key": "runId"
+                                        },
+                                        {
+                                          "key": "logId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                                  "createdAt": "2026-07-28T02:10:29.000Z",
+                                  "updatedAt": "2026-07-28T02:10:29.000Z",
+                                  "uid": "35240-f4bc03da-b506-408b-ba54-ecb2da541a8a"
+                                },
+                                {
+                                  "id": "41da3c9b-013b-4956-a0ca-d27a51051b9a",
+                                  "name": "Forbidden - insufficient permissions to perform this operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs/:logId?api-version=7.1&$expand=signedContent",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "pipelines",
+                                        ":pipelineId",
+                                        "runs",
+                                        ":runId",
+                                        "logs",
+                                        ":logId"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                          "key": "api-version",
+                                          "value": "7.1"
+                                        },
+                                        {
+                                          "description": "Expand additional log details",
+                                          "key": "$expand",
+                                          "value": "signedContent"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "pipelineId"
+                                        },
+                                        {
+                                          "key": "runId"
+                                        },
+                                        {
+                                          "key": "logId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                                  "createdAt": "2026-07-28T02:10:29.000Z",
+                                  "updatedAt": "2026-07-28T02:10:29.000Z",
+                                  "uid": "35240-41da3c9b-013b-4956-a0ca-d27a51051b9a"
+                                },
+                                {
+                                  "id": "546eb9d5-a964-4979-8df7-f836769a2d78",
+                                  "name": "Not found - the requested resource does not exist",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs/:logId?api-version=7.1&$expand=signedContent",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "pipelines",
+                                        ":pipelineId",
+                                        "runs",
+                                        ":runId",
+                                        "logs",
+                                        ":logId"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                          "key": "api-version",
+                                          "value": "7.1"
+                                        },
+                                        {
+                                          "description": "Expand additional log details",
+                                          "key": "$expand",
+                                          "value": "signedContent"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "pipelineId"
+                                        },
+                                        {
+                                          "key": "runId"
+                                        },
+                                        {
+                                          "key": "logId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                                  "createdAt": "2026-07-28T02:10:29.000Z",
+                                  "updatedAt": "2026-07-28T02:10:29.000Z",
+                                  "uid": "35240-546eb9d5-a964-4979-8df7-f836769a2d78"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:10:29.000Z",
+                              "updatedAt": "2026-07-28T02:10:29.000Z",
+                              "uid": "35240-91dfbaff-4114-4e14-b305-d752f3157207"
+                            }
+                          ],
+                          "id": "285f5f2c-d917-4706-80ed-e3bf43567df2",
+                          "createdAt": "2026-07-28T02:10:29.000Z",
+                          "updatedAt": "2026-07-28T02:10:29.000Z",
+                          "uid": "35240-285f5f2c-d917-4706-80ed-e3bf43567df2"
+                        },
+                        {
+                          "name": "Azure Pipelines List pipeline run logs",
+                          "id": "0c3ae393-9afb-4cca-8ebf-918fb6c82cc5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs?api-version=7.1&$expand=signedContent",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pipelines",
+                                ":pipelineId",
+                                "runs",
+                                ":runId",
+                                "logs"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                  "key": "api-version",
+                                  "value": "7.1"
+                                },
+                                {
+                                  "description": "Expand additional log details",
+                                  "key": "$expand",
+                                  "value": "signedContent"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7c020751-b14d-44ab-9331-9ea7093a62b8",
+                                  "key": "pipelineId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Numeric ID of the pipeline definition"
+                                },
+                                {
+                                  "id": "3f198cca-3d06-4bb5-a787-450a2e7e3a17",
+                                  "key": "runId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Numeric ID of the pipeline run"
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of log entries for a specific pipeline run. Each log entry represents output from a stage, job, or task in the pipeline execution. Use log IDs to retrieve detailed log content."
+                          },
+                          "response": [
+                            {
+                              "id": "60daeef3-243a-495b-b031-19ff0fe1ada7",
+                              "name": "List of log entries returned successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs?api-version=7.1&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Expand additional log details",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    {\n      \"id\": \"<integer>\",\n      \"createdOn\": \"<dateTime>\",\n      \"lastChangedOn\": \"<dateTime>\",\n      \"lineCount\": \"<integer>\",\n      \"url\": \"<uri>\",\n      \"signedContent\": {\n        \"url\": \"<uri>\",\n        \"signatureExpires\": \"<dateTime>\"\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"createdOn\": \"<dateTime>\",\n      \"lastChangedOn\": \"<dateTime>\",\n      \"lineCount\": \"<integer>\",\n      \"url\": \"<uri>\",\n      \"signedContent\": {\n        \"url\": \"<uri>\",\n        \"signatureExpires\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:10:29.000Z",
+                              "updatedAt": "2026-07-28T02:10:29.000Z",
+                              "uid": "35240-60daeef3-243a-495b-b031-19ff0fe1ada7"
+                            },
+                            {
+                              "id": "2fbd753a-917e-45fe-89b2-84d891ba3a7c",
+                              "name": "Unauthorized - missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs?api-version=7.1&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Expand additional log details",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:29.000Z",
+                              "updatedAt": "2026-07-28T02:10:29.000Z",
+                              "uid": "35240-2fbd753a-917e-45fe-89b2-84d891ba3a7c"
+                            },
+                            {
+                              "id": "cdd2842e-1c5a-43ac-bb5b-a62a9d90ad4e",
+                              "name": "Forbidden - insufficient permissions to perform this operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs?api-version=7.1&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Expand additional log details",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:29.000Z",
+                              "updatedAt": "2026-07-28T02:10:29.000Z",
+                              "uid": "35240-cdd2842e-1c5a-43ac-bb5b-a62a9d90ad4e"
+                            },
+                            {
+                              "id": "f344b2eb-f8d9-45ac-9906-0c4fcb766846",
+                              "name": "Not found - the requested resource does not exist",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pipelines/:pipelineId/runs/:runId/logs?api-version=7.1&$expand=signedContent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pipelines",
+                                    ":pipelineId",
+                                    "runs",
+                                    ":runId",
+                                    "logs"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                                      "key": "api-version",
+                                      "value": "7.1"
+                                    },
+                                    {
+                                      "description": "Expand additional log details",
+                                      "key": "$expand",
+                                      "value": "signedContent"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pipelineId"
+                                    },
+                                    {
+                                      "key": "runId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:10:29.000Z",
+                              "updatedAt": "2026-07-28T02:10:29.000Z",
+                              "uid": "35240-f344b2eb-f8d9-45ac-9906-0c4fcb766846"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:29.000Z",
+                          "updatedAt": "2026-07-28T02:10:29.000Z",
+                          "uid": "35240-0c3ae393-9afb-4cca-8ebf-918fb6c82cc5"
+                        }
+                      ],
+                      "id": "d3f201d6-fb7d-4451-92f6-31ebfcd9f318",
+                      "createdAt": "2026-07-28T02:10:29.000Z",
+                      "updatedAt": "2026-07-28T02:10:29.000Z",
+                      "uid": "35240-d3f201d6-fb7d-4451-92f6-31ebfcd9f318"
+                    }
+                  ],
+                  "id": "56e5845e-3ceb-4de4-8e3e-5da174965514",
+                  "createdAt": "2026-07-28T02:10:29.000Z",
+                  "updatedAt": "2026-07-28T02:10:29.000Z",
+                  "uid": "35240-56e5845e-3ceb-4de4-8e3e-5da174965514"
+                }
+              ],
+              "id": "537c80ba-c6ea-49ed-bb8a-f927acea942f",
+              "createdAt": "2026-07-28T02:10:29.000Z",
+              "updatedAt": "2026-07-28T02:10:29.000Z",
+              "uid": "35240-537c80ba-c6ea-49ed-bb8a-f927acea942f"
+            }
+          ],
+          "id": "c5032d9c-b036-4e56-a787-67dbe762d320",
+          "createdAt": "2026-07-28T02:10:29.000Z",
+          "updatedAt": "2026-07-28T02:10:29.000Z",
+          "uid": "35240-c5032d9c-b036-4e56-a787-67dbe762d320"
+        }
+      ],
+      "id": "ec1a7193-4faf-470f-bb03-50ea49cc9c57",
+      "createdAt": "2026-07-28T02:10:29.000Z",
+      "updatedAt": "2026-07-28T02:10:29.000Z",
+      "uid": "35240-ec1a7193-4faf-470f-bb03-50ea49cc9c57"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "organization",
+      "value": "myorganization"
+    },
+    {
+      "key": "project",
+      "value": "myproject"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://dev.azure.com/{{organization}}/{{project}}/_apis"
+    }
+  ]
+}

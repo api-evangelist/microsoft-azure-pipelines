@@ -1,0 +1,906 @@
+{
+  "info": {
+    "_postman_id": "965904c3-0e34-4014-b18d-2f6bcddb8d21",
+    "name": "Azure Build REST Artifacts Pipelines API",
+    "description": "REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.\n\nContact Support:\n Name: Microsoft Azure DevOps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:29.000Z",
+    "updatedAt": "2026-07-28T02:10:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-965904c3-0e34-4014-b18d-2f6bcddb8d21"
+  },
+  "item": [
+    {
+      "name": "pipelines",
+      "item": [
+        {
+          "name": "{pipelineId}",
+          "item": [
+            {
+              "name": "Azure Pipelines Get a pipeline",
+              "id": "9ba66735-b7b5-4ae6-ae96-942cf8df3b34",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines/:pipelineId?api-version=7.1&pipelineVersion=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "description": "Specific version of the pipeline definition to retrieve",
+                      "key": "pipelineVersion",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "126beb9a-9fcb-4bb2-8698-ef76b07b73fa",
+                      "key": "pipelineId",
+                      "value": "<integer>",
+                      "description": "(Required) Numeric ID of the pipeline definition"
+                    }
+                  ]
+                },
+                "description": "Returns detailed information about a specific pipeline definition including its configuration, repository source, folder path, and revision number. Optionally retrieves a specific version of the pipeline definition."
+              },
+              "response": [
+                {
+                  "id": "d565b0da-6c61-41d2-80b8-42d5e1a17597",
+                  "name": "Pipeline returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pipelines/:pipelineId?api-version=7.1&pipelineVersion=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pipelines",
+                        ":pipelineId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Specific version of the pipeline definition to retrieve",
+                          "key": "pipelineVersion",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "pipelineId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"folder\": \"<string>\",\n  \"revision\": \"<integer>\",\n  \"url\": \"<uri>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<uri>\"\n    },\n    \"web\": {\n      \"href\": \"<uri>\"\n    },\n    \"pipeline\": {\n      \"href\": \"<uri>\"\n    },\n    \"pipeline.web\": {\n      \"href\": \"<uri>\"\n    }\n  },\n  \"configuration\": {\n    \"type\": \"yaml\",\n    \"path\": \"<string>\",\n    \"repository\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"TfsGit\",\n      \"url\": \"<uri>\",\n      \"defaultBranch\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:30.000Z",
+                  "updatedAt": "2026-07-28T02:10:30.000Z",
+                  "uid": "35240-d565b0da-6c61-41d2-80b8-42d5e1a17597"
+                },
+                {
+                  "id": "6faadccb-137f-473c-bc37-5145718e7f34",
+                  "name": "Unauthorized - missing or invalid authentication credentials",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pipelines/:pipelineId?api-version=7.1&pipelineVersion=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pipelines",
+                        ":pipelineId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Specific version of the pipeline definition to retrieve",
+                          "key": "pipelineVersion",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "pipelineId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:10:30.000Z",
+                  "updatedAt": "2026-07-28T02:10:30.000Z",
+                  "uid": "35240-6faadccb-137f-473c-bc37-5145718e7f34"
+                },
+                {
+                  "id": "4655448a-bd2d-447b-a32b-0e768a16d7ec",
+                  "name": "Forbidden - insufficient permissions to perform this operation",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pipelines/:pipelineId?api-version=7.1&pipelineVersion=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pipelines",
+                        ":pipelineId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Specific version of the pipeline definition to retrieve",
+                          "key": "pipelineVersion",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "pipelineId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:10:30.000Z",
+                  "updatedAt": "2026-07-28T02:10:30.000Z",
+                  "uid": "35240-4655448a-bd2d-447b-a32b-0e768a16d7ec"
+                },
+                {
+                  "id": "9fc71855-97bd-4bd6-87eb-44b39e1b0248",
+                  "name": "Not found - the requested resource does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pipelines/:pipelineId?api-version=7.1&pipelineVersion=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pipelines",
+                        ":pipelineId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Specific version of the pipeline definition to retrieve",
+                          "key": "pipelineVersion",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "pipelineId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:10:30.000Z",
+                  "updatedAt": "2026-07-28T02:10:30.000Z",
+                  "uid": "35240-9fc71855-97bd-4bd6-87eb-44b39e1b0248"
+                }
+              ],
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-9ba66735-b7b5-4ae6-ae96-942cf8df3b34"
+            }
+          ],
+          "id": "d13d732d-e3d8-4866-8c7c-4843c62368f7",
+          "createdAt": "2026-07-28T02:10:30.000Z",
+          "updatedAt": "2026-07-28T02:10:30.000Z",
+          "uid": "35240-d13d732d-e3d8-4866-8c7c-4843c62368f7"
+        },
+        {
+          "name": "Azure Pipelines List pipelines",
+          "id": "b91dc677-82d1-4633-9482-efb1c18bd749",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pipelines?api-version=7.1&orderBy=<string>&$top=<integer>&continuationToken=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pipelines"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                  "key": "api-version",
+                  "value": "7.1"
+                },
+                {
+                  "description": "Sort order for pipelines (e.g., name asc, createdDate desc)",
+                  "key": "orderBy",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of pipelines to return",
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Continuation token for paginated results returned by a previous call",
+                  "key": "continuationToken",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of pipeline definitions in the project. Pipelines are YAML-based CI/CD definitions stored in source repositories. Supports ordering and pagination through query parameters."
+          },
+          "response": [
+            {
+              "id": "c65e91fc-b3ef-4db8-b8ac-3a14eb950837",
+              "name": "List of pipelines returned successfully",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines?api-version=7.1&orderBy=<string>&$top=<integer>&continuationToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "description": "Sort order for pipelines (e.g., name asc, createdDate desc)",
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of pipelines to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Continuation token for paginated results returned by a previous call",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Token for retrieving the next page of results",
+                    "type": "text/plain"
+                  },
+                  "key": "x-ms-continuationtoken",
+                  "value": "<string>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"folder\": \"<string>\",\n      \"revision\": \"<integer>\",\n      \"url\": \"<uri>\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<uri>\"\n        },\n        \"web\": {\n          \"href\": \"<uri>\"\n        },\n        \"pipeline\": {\n          \"href\": \"<uri>\"\n        },\n        \"pipeline.web\": {\n          \"href\": \"<uri>\"\n        }\n      },\n      \"configuration\": {\n        \"type\": \"unknown\",\n        \"path\": \"<string>\",\n        \"repository\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"GitHubEnterprise\",\n          \"url\": \"<uri>\",\n          \"defaultBranch\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"folder\": \"<string>\",\n      \"revision\": \"<integer>\",\n      \"url\": \"<uri>\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<uri>\"\n        },\n        \"web\": {\n          \"href\": \"<uri>\"\n        },\n        \"pipeline\": {\n          \"href\": \"<uri>\"\n        },\n        \"pipeline.web\": {\n          \"href\": \"<uri>\"\n        }\n      },\n      \"configuration\": {\n        \"type\": \"designerHyphenJson\",\n        \"path\": \"<string>\",\n        \"repository\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"Bitbucket\",\n          \"url\": \"<uri>\",\n          \"defaultBranch\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-c65e91fc-b3ef-4db8-b8ac-3a14eb950837"
+            },
+            {
+              "id": "b14ce1e4-a4b1-42cc-8452-6323f2cf9ef7",
+              "name": "Unauthorized - missing or invalid authentication credentials",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines?api-version=7.1&orderBy=<string>&$top=<integer>&continuationToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "description": "Sort order for pipelines (e.g., name asc, createdDate desc)",
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of pipelines to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Continuation token for paginated results returned by a previous call",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-b14ce1e4-a4b1-42cc-8452-6323f2cf9ef7"
+            },
+            {
+              "id": "30246927-e180-45f8-aa30-da03c0ff581e",
+              "name": "Forbidden - insufficient permissions to perform this operation",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines?api-version=7.1&orderBy=<string>&$top=<integer>&continuationToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "description": "Sort order for pipelines (e.g., name asc, createdDate desc)",
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of pipelines to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Continuation token for paginated results returned by a previous call",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-30246927-e180-45f8-aa30-da03c0ff581e"
+            }
+          ],
+          "createdAt": "2026-07-28T02:10:30.000Z",
+          "updatedAt": "2026-07-28T02:10:30.000Z",
+          "uid": "35240-b91dc677-82d1-4633-9482-efb1c18bd749"
+        },
+        {
+          "name": "Azure Pipelines Create a pipeline",
+          "id": "419a449d-6b80-4459-8980-20afbcedd91c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"type\": \"justInTime\",\n    \"path\": \"<string>\",\n    \"repository\": {\n      \"id\": \"<string>\",\n      \"type\": \"gitHub\",\n      \"name\": \"<string>\"\n    }\n  },\n  \"folder\": \"\\\\\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/pipelines?api-version=7.1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pipelines"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                  "key": "api-version",
+                  "value": "7.1"
+                }
+              ]
+            },
+            "description": "Creates a new pipeline definition in the project. The pipeline references a YAML file in a source repository. After creation the pipeline can be triggered manually or automatically by code changes, schedules, or other pipeline completions."
+          },
+          "response": [
+            {
+              "id": "23ad6c23-6827-40ed-a112-2913bc600fcb",
+              "name": "Pipeline created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"type\": \"justInTime\",\n    \"path\": \"<string>\",\n    \"repository\": {\n      \"id\": \"<string>\",\n      \"type\": \"gitHub\",\n      \"name\": \"<string>\"\n    }\n  },\n  \"folder\": \"\\\\\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines?api-version=7.1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"folder\": \"<string>\",\n  \"revision\": \"<integer>\",\n  \"url\": \"<uri>\",\n  \"_links\": {\n    \"self\": {\n      \"href\": \"<uri>\"\n    },\n    \"web\": {\n      \"href\": \"<uri>\"\n    },\n    \"pipeline\": {\n      \"href\": \"<uri>\"\n    },\n    \"pipeline.web\": {\n      \"href\": \"<uri>\"\n    }\n  },\n  \"configuration\": {\n    \"type\": \"yaml\",\n    \"path\": \"<string>\",\n    \"repository\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"TfsGit\",\n      \"url\": \"<uri>\",\n      \"defaultBranch\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-23ad6c23-6827-40ed-a112-2913bc600fcb"
+            },
+            {
+              "id": "36a52815-daa1-4ae4-9942-020967328c53",
+              "name": "Bad request - invalid parameters or request body",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"type\": \"justInTime\",\n    \"path\": \"<string>\",\n    \"repository\": {\n      \"id\": \"<string>\",\n      \"type\": \"gitHub\",\n      \"name\": \"<string>\"\n    }\n  },\n  \"folder\": \"\\\\\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines?api-version=7.1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-36a52815-daa1-4ae4-9942-020967328c53"
+            },
+            {
+              "id": "71349e0d-039f-442f-82fe-0dc50c9e0852",
+              "name": "Unauthorized - missing or invalid authentication credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"type\": \"justInTime\",\n    \"path\": \"<string>\",\n    \"repository\": {\n      \"id\": \"<string>\",\n      \"type\": \"gitHub\",\n      \"name\": \"<string>\"\n    }\n  },\n  \"folder\": \"\\\\\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines?api-version=7.1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-71349e0d-039f-442f-82fe-0dc50c9e0852"
+            },
+            {
+              "id": "ab306805-0af7-45f4-bae9-e950489ee547",
+              "name": "Forbidden - insufficient permissions to perform this operation",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"configuration\": {\n    \"type\": \"justInTime\",\n    \"path\": \"<string>\",\n    \"repository\": {\n      \"id\": \"<string>\",\n      \"type\": \"gitHub\",\n      \"name\": \"<string>\"\n    }\n  },\n  \"folder\": \"\\\\\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pipelines?api-version=7.1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipelines"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:10:30.000Z",
+              "updatedAt": "2026-07-28T02:10:30.000Z",
+              "uid": "35240-ab306805-0af7-45f4-bae9-e950489ee547"
+            }
+          ],
+          "createdAt": "2026-07-28T02:10:30.000Z",
+          "updatedAt": "2026-07-28T02:10:30.000Z",
+          "uid": "35240-419a449d-6b80-4459-8980-20afbcedd91c"
+        }
+      ],
+      "id": "cca8fe87-1ea6-4b16-bed4-575b0a8b42b7",
+      "createdAt": "2026-07-28T02:10:30.000Z",
+      "updatedAt": "2026-07-28T02:10:30.000Z",
+      "uid": "35240-cca8fe87-1ea6-4b16-bed4-575b0a8b42b7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "organization",
+      "value": "myorganization"
+    },
+    {
+      "key": "project",
+      "value": "myproject"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://dev.azure.com/{{organization}}/{{project}}/_apis"
+    }
+  ]
+}

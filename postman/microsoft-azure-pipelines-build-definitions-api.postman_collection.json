@@ -1,0 +1,730 @@
+{
+  "info": {
+    "_postman_id": "c8e030a0-d034-4930-9739-ae259538c9be",
+    "name": "Azure Pipelines Build REST Artifacts Build Definitions API",
+    "description": "REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.\n\nContact Support:\n Name: Microsoft Azure DevOps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:17.000Z",
+    "updatedAt": "2026-07-28T02:10:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c8e030a0-d034-4930-9739-ae259538c9be"
+  },
+  "item": [
+    {
+      "name": "build",
+      "item": [
+        {
+          "name": "definitions",
+          "item": [
+            {
+              "name": "{definitionId}",
+              "item": [
+                {
+                  "name": "Azure Pipelines Get a build definition",
+                  "id": "d5d35298-27c1-4f52-9b10-024afe6c46f7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/definitions/:definitionId?api-version=7.1&revision=<integer>&includeLatestBuilds=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "definitions",
+                        ":definitionId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Specific revision of the definition to retrieve",
+                          "key": "revision",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Include the latest build for the definition",
+                          "key": "includeLatestBuilds",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "cb2ba461-9f82-4d13-a083-7baa45cbf363",
+                          "key": "definitionId",
+                          "value": "<integer>",
+                          "description": "(Required) Numeric ID of the build definition"
+                        }
+                      ]
+                    },
+                    "description": "Returns detailed information about a specific build definition including its triggers, variables, repository configuration, process steps, and agent pool settings."
+                  },
+                  "response": [
+                    {
+                      "id": "3f1e396c-3944-49eb-a2a6-31fa1fa18c5e",
+                      "name": "Build definition returned successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/definitions/:definitionId?api-version=7.1&revision=<integer>&includeLatestBuilds=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "definitions",
+                            ":definitionId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            },
+                            {
+                              "description": "Specific revision of the definition to retrieve",
+                              "key": "revision",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Include the latest build for the definition",
+                              "key": "includeLatestBuilds",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "definitionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"path\": \"<string>\",\n  \"revision\": \"<integer>\",\n  \"type\": \"build\",\n  \"queueStatus\": \"enabled\",\n  \"createdDate\": \"<dateTime>\",\n  \"project\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"state\": \"createPending\",\n    \"visibility\": \"private\"\n  },\n  \"uri\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T02:10:17.000Z",
+                      "updatedAt": "2026-07-28T02:10:17.000Z",
+                      "uid": "35240-3f1e396c-3944-49eb-a2a6-31fa1fa18c5e"
+                    },
+                    {
+                      "id": "17ec9e9f-1aac-43f7-88d8-64a72ff3e06c",
+                      "name": "Unauthorized - missing or invalid authentication credentials",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/definitions/:definitionId?api-version=7.1&revision=<integer>&includeLatestBuilds=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "definitions",
+                            ":definitionId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            },
+                            {
+                              "description": "Specific revision of the definition to retrieve",
+                              "key": "revision",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Include the latest build for the definition",
+                              "key": "includeLatestBuilds",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "definitionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:17.000Z",
+                      "updatedAt": "2026-07-28T02:10:17.000Z",
+                      "uid": "35240-17ec9e9f-1aac-43f7-88d8-64a72ff3e06c"
+                    },
+                    {
+                      "id": "bf1cc22d-4d3a-4b15-9ad2-227288b9c8b1",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/build/definitions/:definitionId?api-version=7.1&revision=<integer>&includeLatestBuilds=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "build",
+                            "definitions",
+                            ":definitionId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                              "key": "api-version",
+                              "value": "7.1"
+                            },
+                            {
+                              "description": "Specific revision of the definition to retrieve",
+                              "key": "revision",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Include the latest build for the definition",
+                              "key": "includeLatestBuilds",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "definitionId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:10:17.000Z",
+                      "updatedAt": "2026-07-28T02:10:17.000Z",
+                      "uid": "35240-bf1cc22d-4d3a-4b15-9ad2-227288b9c8b1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:10:17.000Z",
+                  "updatedAt": "2026-07-28T02:10:17.000Z",
+                  "uid": "35240-d5d35298-27c1-4f52-9b10-024afe6c46f7"
+                }
+              ],
+              "id": "1a5392bc-5216-486f-b284-e1b6a6bde0b1",
+              "createdAt": "2026-07-28T02:10:17.000Z",
+              "updatedAt": "2026-07-28T02:10:17.000Z",
+              "uid": "35240-1a5392bc-5216-486f-b284-e1b6a6bde0b1"
+            },
+            {
+              "name": "Azure Pipelines List build definitions",
+              "id": "1ecabd6d-8e1e-44d1-a60e-608fcdafbed3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/build/definitions?api-version=7.1&name=<string>&repositoryId=<string>&repositoryType=<string>&queryOrder=none&$top=<integer>&continuationToken=<string>&path=<string>&builtAfter=<dateTime>&notBuiltAfter=<dateTime>&includeAllProperties=<boolean>&includeLatestBuilds=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "build",
+                    "definitions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "description": "Filter by definition name (supports prefix match with asterisk)",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter to definitions using this repository",
+                      "key": "repositoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by repository type",
+                      "key": "repositoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort order for results",
+                      "key": "queryOrder",
+                      "value": "none"
+                    },
+                    {
+                      "description": "Maximum number of definitions to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Continuation token for paginated results",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by folder path",
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter to definitions with builds after this date",
+                      "key": "builtAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter to definitions without builds after this date",
+                      "key": "notBuiltAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Include all properties of the definition",
+                      "key": "includeAllProperties",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Include the latest build for each definition",
+                      "key": "includeLatestBuilds",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Returns a list of build definitions in the project. Build definitions define how builds are executed including source repository, triggers, variables, and agent pool configuration."
+              },
+              "response": [
+                {
+                  "id": "ca02be7d-6910-45b9-b36c-df5b4a208c9f",
+                  "name": "List of build definitions returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/definitions?api-version=7.1&name=<string>&repositoryId=<string>&repositoryType=<string>&queryOrder=none&$top=<integer>&continuationToken=<string>&path=<string>&builtAfter=<dateTime>&notBuiltAfter=<dateTime>&includeAllProperties=<boolean>&includeLatestBuilds=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "definitions"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Filter by definition name (supports prefix match with asterisk)",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to definitions using this repository",
+                          "key": "repositoryId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by repository type",
+                          "key": "repositoryType",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order for results",
+                          "key": "queryOrder",
+                          "value": "none"
+                        },
+                        {
+                          "description": "Maximum number of definitions to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Continuation token for paginated results",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by folder path",
+                          "key": "path",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to definitions with builds after this date",
+                          "key": "builtAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to definitions without builds after this date",
+                          "key": "notBuiltAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Include all properties of the definition",
+                          "key": "includeAllProperties",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Include the latest build for each definition",
+                          "key": "includeLatestBuilds",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"count\": \"<integer>\",\n  \"value\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"path\": \"<string>\",\n      \"revision\": \"<integer>\",\n      \"type\": \"build\",\n      \"queueStatus\": \"enabled\",\n      \"createdDate\": \"<dateTime>\",\n      \"project\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"state\": \"all\",\n        \"visibility\": \"private\"\n      },\n      \"uri\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"path\": \"<string>\",\n      \"revision\": \"<integer>\",\n      \"type\": \"build\",\n      \"queueStatus\": \"paused\",\n      \"createdDate\": \"<dateTime>\",\n      \"project\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"state\": \"new\",\n        \"visibility\": \"public\"\n      },\n      \"uri\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:10:17.000Z",
+                  "updatedAt": "2026-07-28T02:10:17.000Z",
+                  "uid": "35240-ca02be7d-6910-45b9-b36c-df5b4a208c9f"
+                },
+                {
+                  "id": "5733216b-4027-42bb-8c32-b1ec226ac650",
+                  "name": "Unauthorized - missing or invalid authentication credentials",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/definitions?api-version=7.1&name=<string>&repositoryId=<string>&repositoryType=<string>&queryOrder=none&$top=<integer>&continuationToken=<string>&path=<string>&builtAfter=<dateTime>&notBuiltAfter=<dateTime>&includeAllProperties=<boolean>&includeLatestBuilds=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "definitions"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Filter by definition name (supports prefix match with asterisk)",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to definitions using this repository",
+                          "key": "repositoryId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by repository type",
+                          "key": "repositoryType",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order for results",
+                          "key": "queryOrder",
+                          "value": "none"
+                        },
+                        {
+                          "description": "Maximum number of definitions to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Continuation token for paginated results",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by folder path",
+                          "key": "path",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to definitions with builds after this date",
+                          "key": "builtAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to definitions without builds after this date",
+                          "key": "notBuiltAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Include all properties of the definition",
+                          "key": "includeAllProperties",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Include the latest build for each definition",
+                          "key": "includeLatestBuilds",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:10:17.000Z",
+                  "updatedAt": "2026-07-28T02:10:17.000Z",
+                  "uid": "35240-5733216b-4027-42bb-8c32-b1ec226ac650"
+                },
+                {
+                  "id": "fff5ae02-6b5b-409b-9a8f-87fe3c6f2ade",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/build/definitions?api-version=7.1&name=<string>&repositoryId=<string>&repositoryType=<string>&queryOrder=none&$top=<integer>&continuationToken=<string>&path=<string>&builtAfter=<dateTime>&notBuiltAfter=<dateTime>&includeAllProperties=<boolean>&includeLatestBuilds=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "build",
+                        "definitions"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version.",
+                          "key": "api-version",
+                          "value": "7.1"
+                        },
+                        {
+                          "description": "Filter by definition name (supports prefix match with asterisk)",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to definitions using this repository",
+                          "key": "repositoryId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by repository type",
+                          "key": "repositoryType",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order for results",
+                          "key": "queryOrder",
+                          "value": "none"
+                        },
+                        {
+                          "description": "Maximum number of definitions to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Continuation token for paginated results",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by folder path",
+                          "key": "path",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to definitions with builds after this date",
+                          "key": "builtAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter to definitions without builds after this date",
+                          "key": "notBuiltAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Include all properties of the definition",
+                          "key": "includeAllProperties",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Include the latest build for each definition",
+                          "key": "includeLatestBuilds",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"message\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeKey\": \"<string>\",\n  \"errorCode\": \"<integer>\",\n  \"eventId\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:10:17.000Z",
+                  "updatedAt": "2026-07-28T02:10:17.000Z",
+                  "uid": "35240-fff5ae02-6b5b-409b-9a8f-87fe3c6f2ade"
+                }
+              ],
+              "createdAt": "2026-07-28T02:10:17.000Z",
+              "updatedAt": "2026-07-28T02:10:17.000Z",
+              "uid": "35240-1ecabd6d-8e1e-44d1-a60e-608fcdafbed3"
+            }
+          ],
+          "id": "d4c755d2-45fa-499e-9527-0b2b6633ac5d",
+          "createdAt": "2026-07-28T02:10:17.000Z",
+          "updatedAt": "2026-07-28T02:10:17.000Z",
+          "uid": "35240-d4c755d2-45fa-499e-9527-0b2b6633ac5d"
+        }
+      ],
+      "id": "9359b397-79a9-4dbe-ae23-2f0a0b21c4b3",
+      "createdAt": "2026-07-28T02:10:17.000Z",
+      "updatedAt": "2026-07-28T02:10:17.000Z",
+      "uid": "35240-9359b397-79a9-4dbe-ae23-2f0a0b21c4b3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "organization",
+      "value": "myorganization"
+    },
+    {
+      "key": "project",
+      "value": "myproject"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://dev.azure.com/{{organization}}/{{project}}/_apis"
+    }
+  ]
+}
