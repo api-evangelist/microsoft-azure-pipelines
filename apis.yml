@@ -293,6 +293,13 @@ apis:
   - type: YAML Schema
     url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
 common:
+  - type: SecurityPolicy
+    url: https://github.com/MicrosoftDocs/azure-devops-docs/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/MicrosoftDocs/.github/blob/main/CODE_OF_CONDUCT.md
+  - type: License
+    name: CC-BY-4.0
+    url: https://github.com/MicrosoftDocs/azure-devops-docs/blob/main/LICENSE
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/azure-pipelines/overview
   - type: AgenticAccess
