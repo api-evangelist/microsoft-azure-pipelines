@@ -25,7 +25,7 @@ tags:
   - Pipelines
 created: '2024'
 modified: '2026-05-19'
-specificationVersion: '0.18'
+specificationVersion: '0.23'
 apis:
 - name: Azure Pipelines Build REST API
   description: >-
