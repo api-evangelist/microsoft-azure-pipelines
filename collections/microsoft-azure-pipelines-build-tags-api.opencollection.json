@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Pipelines Build REST Artifacts Build Tags API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Build Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List build tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/tags",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              }
+            ]
+          },
+          "docs": "Returns the list of tags associated with a build."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Add a tag to a build",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/tags/:tag",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "path",
+                "description": "Tag to add to the build"
+              }
+            ]
+          },
+          "docs": "Adds a tag to a build. Tags are used for categorization, filtering, and retention policy purposes."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Remove a tag from a build",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/builds/:buildId/tags/:tag",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "buildId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "path",
+                "description": "Tag to remove from the build"
+              }
+            ]
+          },
+          "docs": "Removes a tag from a build."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

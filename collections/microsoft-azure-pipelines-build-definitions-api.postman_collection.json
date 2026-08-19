@@ -1,0 +1,809 @@
+{
+  "item": [
+    {
+      "id": "d3ad6390-1518-417b-bba3-e46f05df4c96",
+      "name": "Build Definitions",
+      "description": {
+        "content": "Operations for creating, listing, retrieving, and updating build pipeline definitions that specify how builds are executed.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0075037-3115-4d18-8d17-efb126fde542",
+          "name": "Azure Pipelines List build definitions",
+          "request": {
+            "name": "Azure Pipelines List build definitions",
+            "description": {
+              "content": "Returns a list of build definitions in the project. Build definitions define how builds are executed including source repository, triggers, variables, and agent pool configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "build",
+                "definitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-version",
+                  "value": "7.1",
+                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by definition name (supports prefix match with asterisk)"
+                },
+                {
+                  "disabled": false,
+                  "key": "repositoryId",
+                  "value": "<string>",
+                  "description": "Filter to definitions using this repository"
+                },
+                {
+                  "disabled": false,
+                  "key": "repositoryType",
+                  "value": "<string>",
+                  "description": "Filter by repository type"
+                },
+                {
+                  "disabled": false,
+                  "key": "queryOrder",
+                  "value": "<string>",
+                  "description": "Sort order for results"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of definitions to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuationToken",
+                  "value": "<string>",
+                  "description": "Continuation token for paginated results"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "Filter by folder path"
+                },
+                {
+                  "disabled": false,
+                  "key": "builtAfter",
+                  "value": "<dateTime>",
+                  "description": "Filter to definitions with builds after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "notBuiltAfter",
+                  "value": "<dateTime>",
+                  "description": "Filter to definitions without builds after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeAllProperties",
+                  "value": "<boolean>",
+                  "description": "Include all properties of the definition"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeLatestBuilds",
+                  "value": "<boolean>",
+                  "description": "Include the latest build for each definition"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Azure DevOps organization name or ID",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                },
+                {
+                  "description": "Azure DevOps project name or ID",
+                  "type": "any",
+                  "value": "{{project}}",
+                  "key": "project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df3f950f-4448-401c-bc13-23e91b98c3a3",
+              "name": "List of build definitions returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "build",
+                    "definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repositoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repositoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "builtAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "notBuiltAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeAllProperties",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeLatestBuilds",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Azure DevOps organization name or ID",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    },
+                    {
+                      "description": "Azure DevOps project name or ID",
+                      "type": "any",
+                      "value": "{{project}}",
+                      "key": "project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1833,\n  \"value\": [\n    {\n      \"id\": 1491,\n      \"name\": \"string\",\n      \"path\": \"string\",\n      \"revision\": 4155,\n      \"type\": \"build\",\n      \"queueStatus\": \"paused\",\n      \"createdDate\": \"2000-01-13T20:09:24.295Z\",\n      \"project\": {\n        \"id\": \"7bb6f255-6b9f-04d0-6170-a7c3c2a8f16d\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"url\": \"http://BJbDzYDwKkkhsnhycdn.oikoP,KZ6wuyt0ezIdDzTz-8z\",\n        \"state\": \"createPending\",\n        \"visibility\": \"private\"\n      },\n      \"uri\": \"string\",\n      \"url\": \"https://wNIMrBXJpsLeZyMnttgZ.spdRogC9i-JIzxqxb6Ofl8bsSqIFp+qSCikaoXXKB4UuRuLULgwdDJk+DZ51lJMvBiqFtY2OQ1i\"\n    },\n    {\n      \"id\": 876,\n      \"name\": \"string\",\n      \"path\": \"string\",\n      \"revision\": 6896,\n      \"type\": \"xaml\",\n      \"queueStatus\": \"enabled\",\n      \"createdDate\": \"1957-02-06T23:58:22.870Z\",\n      \"project\": {\n        \"id\": \"1b4ecdc7-cac3-bde3-cdc7-ceeb8ca6f7ab\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"url\": \"https://GiIORQaoeP.riohQ1o55WCIH1,oSkbfkVZnFqwqU\",\n        \"state\": \"wellFormed\",\n        \"visibility\": \"private\"\n      },\n      \"uri\": \"string\",\n      \"url\": \"http://OmLYHlTWfOxyjfVNcHYbNrkRfIEZ.pnBDuqkaCsiXXyIN67H+cpCyl403MMzZ.zdizeRZ9LyW\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "364c9646-fbeb-4af7-b6c3-85f6bfab87dd",
+              "name": "Unauthorized - missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "build",
+                    "definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repositoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repositoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "builtAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "notBuiltAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeAllProperties",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeLatestBuilds",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Azure DevOps organization name or ID",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    },
+                    {
+                      "description": "Azure DevOps project name or ID",
+                      "type": "any",
+                      "value": "{{project}}",
+                      "key": "project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e9ee8883-4018-5bd0-0d79-fa75604bf13c\",\n  \"message\": \"string\",\n  \"typeName\": \"string\",\n  \"typeKey\": \"string\",\n  \"errorCode\": 1931,\n  \"eventId\": 7223\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86c738b6-d4e2-4143-9dc6-0582d5737284",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "build",
+                    "definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repositoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repositoryType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "builtAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "notBuiltAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeAllProperties",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeLatestBuilds",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Azure DevOps organization name or ID",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    },
+                    {
+                      "description": "Azure DevOps project name or ID",
+                      "type": "any",
+                      "value": "{{project}}",
+                      "key": "project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e9ee8883-4018-5bd0-0d79-fa75604bf13c\",\n  \"message\": \"string\",\n  \"typeName\": \"string\",\n  \"typeKey\": \"string\",\n  \"errorCode\": 1931,\n  \"eventId\": 7223\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "241966e8-3ce7-4dc6-a202-f67efb57ac0c",
+          "name": "Azure Pipelines Get a build definition",
+          "request": {
+            "name": "Azure Pipelines Get a build definition",
+            "description": {
+              "content": "Returns detailed information about a specific build definition including its triggers, variables, repository configuration, process steps, and agent pool settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "build",
+                "definitions",
+                ":definitionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-version",
+                  "value": "7.1",
+                  "description": "(Required) Azure DevOps REST API version. Use 7.1 for the latest stable version."
+                },
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<integer>",
+                  "description": "Specific revision of the definition to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeLatestBuilds",
+                  "value": "<boolean>",
+                  "description": "Include the latest build for the definition"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "definitionId",
+                  "description": "(Required) Numeric ID of the build definition"
+                },
+                {
+                  "description": "Azure DevOps organization name or ID",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                },
+                {
+                  "description": "Azure DevOps project name or ID",
+                  "type": "any",
+                  "value": "{{project}}",
+                  "key": "project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38265d22-4642-47a1-ac3c-d7b85c23be67",
+              "name": "Build definition returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "build",
+                    "definitions",
+                    ":definitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLatestBuilds",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "definitionId",
+                      "description": "(Required) Numeric ID of the build definition"
+                    },
+                    {
+                      "description": "Azure DevOps organization name or ID",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    },
+                    {
+                      "description": "Azure DevOps project name or ID",
+                      "type": "any",
+                      "value": "{{project}}",
+                      "key": "project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7749,\n  \"name\": \"string\",\n  \"path\": \"string\",\n  \"revision\": 7430,\n  \"type\": \"xaml\",\n  \"queueStatus\": \"disabled\",\n  \"createdDate\": \"1967-02-02T05:25:13.757Z\",\n  \"project\": {\n    \"id\": \"9d6713a3-eba2-cda8-57ba-e093a287b7bd\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"http://xZfWznswrozEotWp.hodDWnGwvAVvWey+0by22LJbqI\",\n    \"state\": \"wellFormed\",\n    \"visibility\": \"private\"\n  },\n  \"uri\": \"string\",\n  \"url\": \"https://BLFkDMVWxkmEvNmNmU.zqfcv7L5uXnO1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d61dd6a6-d784-44ef-b931-c7407584e6e5",
+              "name": "Unauthorized - missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "build",
+                    "definitions",
+                    ":definitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLatestBuilds",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "definitionId",
+                      "description": "(Required) Numeric ID of the build definition"
+                    },
+                    {
+                      "description": "Azure DevOps organization name or ID",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    },
+                    {
+                      "description": "Azure DevOps project name or ID",
+                      "type": "any",
+                      "value": "{{project}}",
+                      "key": "project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e9ee8883-4018-5bd0-0d79-fa75604bf13c\",\n  \"message\": \"string\",\n  \"typeName\": \"string\",\n  \"typeKey\": \"string\",\n  \"errorCode\": 1931,\n  \"eventId\": 7223\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b47d0c67-4a33-42a6-ba41-f016637a96f3",
+              "name": "Not found - the requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "build",
+                    "definitions",
+                    ":definitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "7.1"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLatestBuilds",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "definitionId",
+                      "description": "(Required) Numeric ID of the build definition"
+                    },
+                    {
+                      "description": "Azure DevOps organization name or ID",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    },
+                    {
+                      "description": "Azure DevOps project name or ID",
+                      "type": "any",
+                      "value": "{{project}}",
+                      "key": "project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e9ee8883-4018-5bd0-0d79-fa75604bf13c\",\n  \"message\": \"string\",\n  \"typeName\": \"string\",\n  \"typeKey\": \"string\",\n  \"errorCode\": 1931,\n  \"eventId\": 7223\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Azure DevOps organization name or ID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myorganization",
+      "key": "organization"
+    },
+    {
+      "description": {
+        "content": "Azure DevOps project name or ID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myproject",
+      "key": "project"
+    },
+    {
+      "type": "string",
+      "value": "https://dev.azure.com/{{organization}}/{{project}}/_apis",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "07f55cda-e905-44a2-b354-e6820784ac39",
+    "name": "Azure Pipelines Build REST Artifacts Build Definitions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.\n\nContact Support:\n Name: Microsoft Azure DevOps",
+      "type": "text/plain"
+    }
+  }
+}

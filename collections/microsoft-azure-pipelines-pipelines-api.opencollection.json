@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Build REST Artifacts Pipelines API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for pipelines (e.g., name asc, createdDate desc)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of pipelines to return"
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginated results returned by a previous call"
+              }
+            ]
+          },
+          "docs": "Returns a list of pipeline definitions in the project. Pipelines are YAML-based CI/CD definitions stored in source repositories. Supports ordering and pagination through query parameters."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Create a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new pipeline definition in the project. The pipeline references a YAML file in a source repository. After creation the pipeline can be triggered manually or automatically by code changes, schedules, or other pipeline completions."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "pipelineVersion",
+                "value": "",
+                "type": "query",
+                "description": "Specific version of the pipeline definition to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific pipeline definition including its configuration, repository source, folder path, and revision number. Optionally retrieves a specific version of the pipeline definition."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

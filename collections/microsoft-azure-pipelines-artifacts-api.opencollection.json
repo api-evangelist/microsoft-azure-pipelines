@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Pipelines Build REST Artifacts API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List run artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId/artifacts",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              },
+              {
+                "name": "artifactName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a specific artifact name"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand additional artifact details such as signed content"
+              }
+            ]
+          },
+          "docs": "Returns a list of artifacts published by a specific pipeline run. Artifacts include compiled binaries, test results, container images, or any files published using the PublishPipelineArtifact task during pipeline execution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

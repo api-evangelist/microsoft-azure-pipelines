@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Pipelines Build REST Artifacts Logs API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List pipeline run logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId/logs",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand additional log details"
+              }
+            ]
+          },
+          "docs": "Returns a list of log entries for a specific pipeline run. Each log entry represents output from a stage, job, or task in the pipeline execution. Use log IDs to retrieve detailed log content."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a pipeline run log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId/logs/:logId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              },
+              {
+                "name": "logId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the log entry to retrieve"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand additional log details"
+              }
+            ]
+          },
+          "docs": "Returns the content of a specific log from a pipeline run. The log content includes timestamped output from pipeline tasks, stages, and jobs. Useful for debugging failed runs and auditing pipeline execution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

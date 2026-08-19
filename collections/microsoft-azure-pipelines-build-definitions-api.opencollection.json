@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Pipelines Build REST Artifacts Build Definitions API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Build Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List build definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/definitions",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by definition name (supports prefix match with asterisk)"
+              },
+              {
+                "name": "repositoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to definitions using this repository"
+              },
+              {
+                "name": "repositoryType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by repository type"
+              },
+              {
+                "name": "queryOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of definitions to return"
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginated results"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Filter by folder path"
+              },
+              {
+                "name": "builtAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter to definitions with builds after this date"
+              },
+              {
+                "name": "notBuiltAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter to definitions without builds after this date"
+              },
+              {
+                "name": "includeAllProperties",
+                "value": "",
+                "type": "query",
+                "description": "Include all properties of the definition"
+              },
+              {
+                "name": "includeLatestBuilds",
+                "value": "",
+                "type": "query",
+                "description": "Include the latest build for each definition"
+              }
+            ]
+          },
+          "docs": "Returns a list of build definitions in the project. Build definitions define how builds are executed including source repository, triggers, variables, and agent pool configuration."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a build definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/build/definitions/:definitionId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "definitionId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the build definition"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "Specific revision of the definition to retrieve"
+              },
+              {
+                "name": "includeLatestBuilds",
+                "value": "",
+                "type": "query",
+                "description": "Include the latest build for the definition"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific build definition including its triggers, variables, repository configuration, process steps, and agent pool settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

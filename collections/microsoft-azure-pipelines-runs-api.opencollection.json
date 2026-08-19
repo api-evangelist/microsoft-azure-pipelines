@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Pipelines Build REST Artifacts Runs API",
+    "version": "7.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Pipelines List pipeline runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              }
+            ]
+          },
+          "docs": "Returns a list of runs (executions) for a specific pipeline. Each run represents a single execution of the pipeline with its state, result, timing, and the resources and template parameters used. Returns up to 10000 runs and supports pagination."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Run a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "pipelineVersion",
+                "value": "",
+                "type": "query",
+                "description": "Specific version of the pipeline to run"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a new execution of a pipeline. Allows overriding template parameters, variables, the repository branch, and specifying which stages to skip or include. The run is queued and begins execution when an agent becomes available."
+        },
+        {
+          "info": {
+            "name": "Azure Pipelines Get a pipeline run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.azure.com/{organization}/{project}/_apis/pipelines/:pipelineId/runs/:runId",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "Azure DevOps REST API version. Use 7.1 for the latest stable version."
+              },
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline definition"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID of the pipeline run"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific pipeline run including its current state, result, template parameters, variables used, and timing information. Use this endpoint to poll for run progress or retrieve final results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
