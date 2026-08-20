@@ -18,6 +18,13 @@ accessModel:
 image: https://azure.microsoft.com/svghandler/devops/?width=600&height=315
 tags:
   - Automation
+  - Builds
+  - CI/CD
+  - Deployment
+  - DevOps
+  - Pipelines
+tags_raw:
+  - Automation
   - Build
   - CI/CD
   - Deployment
@@ -37,6 +44,11 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
   baseURL: https://dev.azure.com/{organization}/{project}/_apis/build
   tags:
+  - Artifacts
+  - Builds
+  - Continuous Integration
+  - Definitions
+  tags_raw:
   - Artifacts
   - Build
   - Continuous Integration
