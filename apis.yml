@@ -2,6 +2,20 @@ name: Azure Pipelines
 description: >-
   Azure Pipelines is a cloud service that you can use to automatically build and test your code project and make it
   available to other users. It works with just about any language or project type.
+deliveryModel:
+  model: saas
+  license: CC-BY-4.0
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
