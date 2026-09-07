@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Azure Pipelines Build REST Artifacts Runs API
   description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
@@ -117,44 +117,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    BadRequest:
-      description: Bad request - invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   parameters:
-    ApiVersion:
-      name: api-version
-      in: query
-      required: true
-      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
-      schema:
-        type: string
-        default: '7.1'
-        enum:
-        - '7.1'
-        - '7.0'
-        - '6.0'
     RunId:
       name: runId
       in: path
@@ -169,35 +132,19 @@ components:
       description: Numeric ID of the pipeline definition
       schema:
         type: integer
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
   schemas:
-    ReferenceLinks:
-      type: object
-      description: HAL links for navigating to related resources
-      properties:
-        self:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
-        web:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
-        pipeline:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
-        pipeline.web:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
     RunPipelineParameters:
       type: object
       description: Parameters for triggering a pipeline run with optional overrides for variables, template parameters, resources, and stage selections.
@@ -254,6 +201,57 @@ components:
           description: Template parameter overrides for YAML pipeline parameters
           additionalProperties:
             type: string
+    ReferenceLinks:
+      type: object
+      description: HAL links for navigating to related resources
+      properties:
+        self:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
+        web:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
+        pipeline:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
+        pipeline.web:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
     Run:
       type: object
       description: A pipeline run representing a single execution of a YAML pipeline with its state, result, timing, resources, and parameters.
@@ -358,29 +356,31 @@ components:
             type: string
         _links:
           $ref: '#/components/schemas/ReferenceLinks'
-    ApiError:
-      type: object
-      description: Error response from the Azure DevOps API
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique error instance identifier
-        message:
-          type: string
-          description: Human-readable error message
-        typeName:
-          type: string
-          description: Full type name of the error
-        typeKey:
-          type: string
-          description: Error type key
-        errorCode:
-          type: integer
-          description: Numeric error code
-        eventId:
-          type: integer
-          description: Event identifier for tracking
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   securitySchemes:
     bearerAuth:
       type: http

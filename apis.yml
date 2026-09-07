@@ -424,3 +424,5 @@ endpoints:
       method: GET
       path: /pipelines/{pipelineId}/runs/{runId}/logs
       description: Get a list of logs from a pipeline run
+x-parent: microsoft-azure
+x-relationship: product
