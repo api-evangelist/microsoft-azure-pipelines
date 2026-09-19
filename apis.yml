@@ -83,6 +83,11 @@ apis:
   - Approvals
   - Continuous Delivery
   - Deployment
+  - Releases
+  tags_raw:
+  - Approvals
+  - Continuous Delivery
+  - Deployment
   - Release
   properties:
   - type: Documentation
