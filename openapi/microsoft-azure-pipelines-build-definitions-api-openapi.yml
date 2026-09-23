@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Azure Pipelines Build REST Artifacts Build Definitions API
+  title: Azure Pipelines Build REST Build Definitions API
   description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
   version: '7.1'
   contact:
@@ -166,14 +166,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
+    Forbidden:
+      description: Forbidden - insufficient permissions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    Forbidden:
-      description: Forbidden - insufficient permissions
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
       content:
         application/json:
           schema:
@@ -184,42 +184,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
   schemas:
-    TeamProjectReference:
-      type: object
-      description: Shallow reference to a team project
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Project GUID identifier
-        name:
-          type: string
-          description: Project name
-        description:
-          type: string
-          description: Project description
-        url:
-          type: string
-          format: uri
-          description: REST API URL for the project
-        state:
-          type: string
-          description: Project state
-          enum:
-          - deleting
-          - new
-          - wellFormed
-          - createPending
-          - all
-          - unchanged
-          - deleted
-        visibility:
-          type: string
-          description: Project visibility
-          enum:
-          - private
-          - public
     BuildDefinitionReference:
       type: object
       description: Reference to a build definition containing its identification, folder path, queue status, and type.
@@ -285,19 +263,41 @@ components:
         eventId:
           type: integer
           description: Event identifier for tracking
-  parameters:
-    ApiVersion:
-      name: api-version
-      in: query
-      required: true
-      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
-      schema:
-        type: string
-        default: '7.1'
-        enum:
-        - '7.1'
-        - '7.0'
-        - '6.0'
+    TeamProjectReference:
+      type: object
+      description: Shallow reference to a team project
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Project GUID identifier
+        name:
+          type: string
+          description: Project name
+        description:
+          type: string
+          description: Project description
+        url:
+          type: string
+          format: uri
+          description: REST API URL for the project
+        state:
+          type: string
+          description: Project state
+          enum:
+          - deleting
+          - new
+          - wellFormed
+          - createPending
+          - all
+          - unchanged
+          - deleted
+        visibility:
+          type: string
+          description: Project visibility
+          enum:
+          - private
+          - public
   securitySchemes:
     bearerAuth:
       type: http

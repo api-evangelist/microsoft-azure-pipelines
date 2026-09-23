@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Azure Pipelines Build REST Artifacts Build Tags API
+  title: Azure Pipelines Build REST Build Tags API
   description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
   version: '7.1'
   contact:
@@ -121,6 +121,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
+    BuildId:
+      name: buildId
+      in: path
+      required: true
+      description: Numeric ID of the build
+      schema:
+        type: integer
   responses:
     Unauthorized:
       description: Unauthorized - missing or invalid authentication credentials
@@ -158,26 +178,6 @@ components:
         eventId:
           type: integer
           description: Event identifier for tracking
-  parameters:
-    ApiVersion:
-      name: api-version
-      in: query
-      required: true
-      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
-      schema:
-        type: string
-        default: '7.1'
-        enum:
-        - '7.1'
-        - '7.0'
-        - '6.0'
-    BuildId:
-      name: buildId
-      in: path
-      required: true
-      description: Numeric ID of the build
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http

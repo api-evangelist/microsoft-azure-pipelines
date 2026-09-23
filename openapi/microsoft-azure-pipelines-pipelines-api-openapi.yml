@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Azure Build REST Artifacts Pipelines API
-  description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
+  title: Azure REST Pipelines API
+  description: REST API for managing pipelines and pipeline runs in Azure DevOps. Provides programmatic access to create, list, and retrieve YAML-based CI/CD pipeline definitions, trigger and monitor pipeline runs with custom variables and parameters, access pipeline run logs for debugging and auditing, and retrieve artifacts produced by pipeline runs.
   version: '7.1'
   contact:
     name: Microsoft Azure DevOps
-    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
   termsOfService: https://azure.microsoft.com/en-us/support/legal/
 servers:
 - url: https://dev.azure.com/{organization}/{project}/_apis
@@ -133,33 +133,32 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   schemas:
-    BuildRepository:
-      type: object
-      description: Repository configuration for a pipeline
-      properties:
-        id:
-          type: string
-          description: Repository identifier
-        name:
-          type: string
-          description: Repository name
-        type:
-          type: string
-          description: Repository type
-          enum:
-          - TfsGit
-          - TfsVersionControl
-          - GitHub
-          - Bitbucket
-          - GitHubEnterprise
-        url:
-          type: string
-          format: uri
-          description: Repository URL
-        defaultBranch:
-          type: string
-          description: Default branch for the repository
     PipelineConfiguration:
       type: object
       description: Configuration details specifying how a pipeline is defined including the type, YAML file path, and source repository.
@@ -230,6 +229,32 @@ components:
           $ref: '#/components/schemas/ReferenceLinks'
         configuration:
           $ref: '#/components/schemas/PipelineConfiguration'
+    BuildRepository:
+      type: object
+      description: Repository configuration for a pipeline
+      properties:
+        id:
+          type: string
+          description: Repository identifier
+        name:
+          type: string
+          description: Repository name
+        type:
+          type: string
+          description: Repository type
+          enum:
+          - TfsGit
+          - TfsVersionControl
+          - GitHub
+          - Bitbucket
+          - GitHubEnterprise
+        url:
+          type: string
+          format: uri
+          description: Repository URL
+        defaultBranch:
+          type: string
+          description: Default branch for the repository
     ApiError:
       type: object
       description: Error response from the Azure DevOps API
@@ -308,39 +333,7 @@ components:
                 name:
                   type: string
                   description: Repository name (required for GitHub repositories)
-  responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    BadRequest:
-      description: Bad request - invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Forbidden:
-      description: Forbidden - insufficient permissions to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   parameters:
-    PipelineId:
-      name: pipelineId
-      in: path
-      required: true
-      description: Numeric ID of the pipeline definition
-      schema:
-        type: integer
     ApiVersion:
       name: api-version
       in: query
@@ -353,15 +346,22 @@ components:
         - '7.1'
         - '7.0'
         - '6.0'
+    PipelineId:
+      name: pipelineId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline definition
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Azure AD OAuth 2.0 bearer token with vso.build scope
+      description: Azure AD OAuth 2.0 bearer token obtained through the authorization code flow with scope vso.build
     basicAuth:
       type: http
       scheme: basic
-      description: Basic authentication using a Personal Access Token (PAT)
+      description: Basic authentication using a Personal Access Token (PAT). Use any string as the username and the PAT as the password, then base64-encode the result.
 externalDocs:
-  description: Azure DevOps Build REST API Documentation
-  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  description: Azure Pipelines REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/

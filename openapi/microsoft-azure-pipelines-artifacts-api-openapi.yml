@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Azure Pipelines Build REST Artifacts API
-  description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
+  title: Azure Pipelines REST Artifacts API
+  description: REST API for managing pipelines and pipeline runs in Azure DevOps. Provides programmatic access to create, list, and retrieve YAML-based CI/CD pipeline definitions, trigger and monitor pipeline runs with custom variables and parameters, access pipeline run logs for debugging and auditing, and retrieve artifacts produced by pipeline runs.
   version: '7.1'
   contact:
     name: Microsoft Azure DevOps
-    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+    url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/
   termsOfService: https://azure.microsoft.com/en-us/support/legal/
 servers:
 - url: https://dev.azure.com/{organization}/{project}/_apis
@@ -72,7 +72,38 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   parameters:
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
     RunId:
       name: runId
       in: path
@@ -87,61 +118,7 @@ components:
       description: Numeric ID of the pipeline definition
       schema:
         type: integer
-    ApiVersion:
-      name: api-version
-      in: query
-      required: true
-      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
-      schema:
-        type: string
-        default: '7.1'
-        enum:
-        - '7.1'
-        - '7.0'
-        - '6.0'
-  responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Forbidden:
-      description: Forbidden - insufficient permissions to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   schemas:
-    PipelineArtifact:
-      type: object
-      description: An artifact produced by a pipeline run
-      properties:
-        name:
-          type: string
-          description: Name of the artifact
-        signedContent:
-          type: object
-          description: Signed content reference for secure artifact download
-          properties:
-            url:
-              type: string
-              format: uri
-              description: Signed download URL for the artifact
-            signatureExpires:
-              type: string
-              format: date-time
-              description: Expiration time of the signed URL
-        url:
-          type: string
-          format: uri
-          description: REST API URL for the artifact
     ApiError:
       type: object
       description: Error response from the Azure DevOps API
@@ -165,15 +142,38 @@ components:
         eventId:
           type: integer
           description: Event identifier for tracking
+    PipelineArtifact:
+      type: object
+      description: An artifact produced by a pipeline run
+      properties:
+        name:
+          type: string
+          description: Name of the artifact
+        signedContent:
+          type: object
+          description: Signed content reference for secure artifact download
+          properties:
+            url:
+              type: string
+              format: uri
+              description: Signed download URL for the artifact
+            signatureExpires:
+              type: string
+              format: date-time
+              description: Expiration time of the signed URL
+        url:
+          type: string
+          format: uri
+          description: REST API URL for the artifact
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Azure AD OAuth 2.0 bearer token with vso.build scope
+      description: Azure AD OAuth 2.0 bearer token obtained through the authorization code flow with scope vso.build
     basicAuth:
       type: http
       scheme: basic
-      description: Basic authentication using a Personal Access Token (PAT)
+      description: Basic authentication using a Personal Access Token (PAT). Use any string as the username and the PAT as the password, then base64-encode the result.
 externalDocs:
-  description: Azure DevOps Build REST API Documentation
-  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/build/
+  description: Azure Pipelines REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/

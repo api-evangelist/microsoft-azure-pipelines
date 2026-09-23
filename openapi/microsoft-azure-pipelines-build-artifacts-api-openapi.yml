@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Azure Pipelines Build REST Artifacts Build Artifacts API
+  title: Azure Pipelines Build REST Build Artifacts API
   description: REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs in Azure DevOps. Supports the full lifecycle of continuous integration builds including creating and updating build definitions, listing and filtering builds by status and result, tagging builds for identification, and downloading build artifacts.
   version: '7.1'
   contact:
@@ -138,19 +138,6 @@ components:
         eventId:
           type: integer
           description: Event identifier for tracking
-  responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   parameters:
     ApiVersion:
       name: api-version
@@ -171,6 +158,19 @@ components:
       description: Numeric ID of the build
       schema:
         type: integer
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   securitySchemes:
     bearerAuth:
       type: http

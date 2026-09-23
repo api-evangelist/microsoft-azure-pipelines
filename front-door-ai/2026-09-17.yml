@@ -1,0 +1,65 @@
+# Front Door AI Index — microsoft-azure-pipelines — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: microsoft-azure-pipelines
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: azure.microsoft.com
+  final_host: azure.microsoft.com
+  ownership: unresolved
+  owner: null
+  shares_host_with:
+  - azure-ai-foundry
+  - azure-container-instances
+  - azure-container-registry
+  - azure-cosmos-db
+  - azure-document-intelligence
+  - azure-event-grid
+  - azure-file-storage
+  - azure-health
+  - azure-logic-apps
+  - microsoft-azure
+  - microsoft-azure-api-management
+  - microsoft-azure-blob-storage
+  - microsoft-azure-event-hubs
+  - microsoft-azure-integration-services
+  - microsoft-azure-maps
+  - microsoft-azure-migrate
+  - microsoft-azure-monitor
+  - microsoft-azure-mysql
+  - microsoft-azure-notification-hubs
+  - microsoft-azure-openai
+  - microsoft-azure-policy
+  - microsoft-azure-postgresql
+  - microsoft-azure-repo
+  - microsoft-azure-synapse-analytics
+  - microsoft-azure-traffic-manager
+  - microsoft-azure-virtual-machines
+  - microsoft-azure-web-pubsub
+  - microsoft-defender-for-cloud
+  - microsoft-sentinel
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 102
+  density: null
+  words: 2193
+  tiers:
+    agentic: 18
+    core: 78
+    model: 6
+  ambiguous: 14
+  top_terms:
+    AI: 65
+    agent: 14
+    copilot: 6
+    machine learning: 6
+    Azure OpenAI: 3
+    OpenAI: 3
+    agentic: 3
+    deep learning: 3
+    generative ai: 3
+    AI agent: 2
+    RAG: 2
+    chatbot: 2

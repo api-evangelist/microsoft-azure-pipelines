@@ -1,21 +1,15 @@
 {
   "provider": "microsoft-azure-pipelines",
   "sources": [
-    "microsoft-azure-pipelines-artifacts-api-openapi.yml",
-    "microsoft-azure-pipelines-build-artifacts-api-openapi.yml",
-    "microsoft-azure-pipelines-build-definitions-api-openapi.yml",
-    "microsoft-azure-pipelines-build-tags-api-openapi.yml",
-    "microsoft-azure-pipelines-builds-api-openapi.yml",
-    "microsoft-azure-pipelines-logs-api-openapi.yml",
-    "microsoft-azure-pipelines-pipelines-api-openapi.yml",
-    "microsoft-azure-pipelines-runs-api-openapi.yml"
+    "_original/azure-pipelines-build-api-openapi.yml",
+    "_original/azure-pipelines-rest-api-openapi.yml"
   ],
   "outputs": [
-    "microsoft-azure-pipelines-artifacts-api-openapi.yml",
     "microsoft-azure-pipelines-build-artifacts-api-openapi.yml",
     "microsoft-azure-pipelines-build-definitions-api-openapi.yml",
     "microsoft-azure-pipelines-build-tags-api-openapi.yml",
     "microsoft-azure-pipelines-builds-api-openapi.yml",
+    "microsoft-azure-pipelines-artifacts-api-openapi.yml",
     "microsoft-azure-pipelines-logs-api-openapi.yml",
     "microsoft-azure-pipelines-pipelines-api-openapi.yml",
     "microsoft-azure-pipelines-runs-api-openapi.yml"
@@ -24,15 +18,19 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "microsoft-azure-pipelines-artifacts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-pipelines-build-artifacts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-pipelines-build-definitions-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-pipelines-build-tags-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-pipelines-builds-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-pipelines-logs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-pipelines-pipelines-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-azure-pipelines-runs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "azure-pipelines-build-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "azure-pipelines-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "microsoft-azure-pipelines-artifacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-pipelines-build-artifacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-pipelines-build-definitions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-pipelines-build-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-pipelines-builds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-pipelines-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-pipelines-pipelines-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-azure-pipelines-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
