@@ -134,20 +134,8 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
     BadRequest:
       description: Bad request - invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
       content:
         application/json:
           schema:
@@ -158,25 +146,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   schemas:
-    PipelineConfiguration:
-      type: object
-      description: Configuration details specifying how a pipeline is defined including the type, YAML file path, and source repository.
-      properties:
-        type:
-          type: string
-          description: Pipeline configuration type
-          enum:
-          - unknown
-          - yaml
-          - designerJson
-          - justInTime
-          - designerHyphenJson
-        path:
-          type: string
-          description: Path to the YAML pipeline file in the repository
-        repository:
-          $ref: '#/components/schemas/BuildRepository'
     ReferenceLinks:
       type: object
       description: HAL links for navigating to related resources
@@ -205,30 +187,29 @@ components:
             href:
               type: string
               format: uri
-    Pipeline:
+    ApiError:
       type: object
-      description: An Azure DevOps pipeline definition representing a YAML-based CI/CD workflow stored in a source repository.
+      description: Error response from the Azure DevOps API
       properties:
         id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
           type: integer
-          description: Unique numeric identifier of the pipeline
-        name:
-          type: string
-          description: Display name of the pipeline
-        folder:
-          type: string
-          description: Folder path for organizing pipelines in the project
-        revision:
+          description: Numeric error code
+        eventId:
           type: integer
-          description: Current revision number of the pipeline definition
-        url:
-          type: string
-          format: uri
-          description: REST API URL to access this pipeline
-        _links:
-          $ref: '#/components/schemas/ReferenceLinks'
-        configuration:
-          $ref: '#/components/schemas/PipelineConfiguration'
+          description: Event identifier for tracking
     BuildRepository:
       type: object
       description: Repository configuration for a pipeline
@@ -255,29 +236,48 @@ components:
         defaultBranch:
           type: string
           description: Default branch for the repository
-    ApiError:
+    Pipeline:
       type: object
-      description: Error response from the Azure DevOps API
+      description: An Azure DevOps pipeline definition representing a YAML-based CI/CD workflow stored in a source repository.
       properties:
         id:
-          type: string
-          format: uuid
-          description: Unique error instance identifier
-        message:
-          type: string
-          description: Human-readable error message
-        typeName:
-          type: string
-          description: Full type name of the error
-        typeKey:
-          type: string
-          description: Error type key
-        errorCode:
           type: integer
-          description: Numeric error code
-        eventId:
+          description: Unique numeric identifier of the pipeline
+        name:
+          type: string
+          description: Display name of the pipeline
+        folder:
+          type: string
+          description: Folder path for organizing pipelines in the project
+        revision:
           type: integer
-          description: Event identifier for tracking
+          description: Current revision number of the pipeline definition
+        url:
+          type: string
+          format: uri
+          description: REST API URL to access this pipeline
+        _links:
+          $ref: '#/components/schemas/ReferenceLinks'
+        configuration:
+          $ref: '#/components/schemas/PipelineConfiguration'
+    PipelineConfiguration:
+      type: object
+      description: Configuration details specifying how a pipeline is defined including the type, YAML file path, and source repository.
+      properties:
+        type:
+          type: string
+          description: Pipeline configuration type
+          enum:
+          - unknown
+          - yaml
+          - designerJson
+          - justInTime
+          - designerHyphenJson
+        path:
+          type: string
+          description: Path to the YAML pipeline file in the repository
+        repository:
+          $ref: '#/components/schemas/BuildRepository'
     CreatePipelineParameters:
       type: object
       description: Parameters for creating a new pipeline definition
@@ -334,6 +334,13 @@ components:
                   type: string
                   description: Repository name (required for GitHub repositories)
   parameters:
+    PipelineId:
+      name: pipelineId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline definition
+      schema:
+        type: integer
     ApiVersion:
       name: api-version
       in: query
@@ -346,13 +353,6 @@ components:
         - '7.1'
         - '7.0'
         - '6.0'
-    PipelineId:
-      name: pipelineId
-      in: path
-      required: true
-      description: Numeric ID of the pipeline definition
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http
