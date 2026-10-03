@@ -117,6 +117,33 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    RunId:
+      name: runId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline run
+      schema:
+        type: integer
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
+    PipelineId:
+      name: pipelineId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline definition
+      schema:
+        type: integer
   responses:
     BadRequest:
       description: Bad request - invalid parameters or request body
@@ -124,8 +151,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Not found - the requested resource does not exist
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
       content:
         application/json:
           schema:
@@ -136,8 +163,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    Forbidden:
-      description: Forbidden - insufficient permissions to perform this operation
+    NotFound:
+      description: Not found - the requested resource does not exist
       content:
         application/json:
           schema:
@@ -199,6 +226,29 @@ components:
           description: Template parameter overrides for YAML pipeline parameters
           additionalProperties:
             type: string
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
     ReferenceLinks:
       type: object
       description: HAL links for navigating to related resources
@@ -227,29 +277,6 @@ components:
             href:
               type: string
               format: uri
-    ApiError:
-      type: object
-      description: Error response from the Azure DevOps API
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique error instance identifier
-        message:
-          type: string
-          description: Human-readable error message
-        typeName:
-          type: string
-          description: Full type name of the error
-        typeKey:
-          type: string
-          description: Error type key
-        errorCode:
-          type: integer
-          description: Numeric error code
-        eventId:
-          type: integer
-          description: Event identifier for tracking
     Run:
       type: object
       description: A pipeline run representing a single execution of a YAML pipeline with its state, result, timing, resources, and parameters.
@@ -354,33 +381,6 @@ components:
             type: string
         _links:
           $ref: '#/components/schemas/ReferenceLinks'
-  parameters:
-    RunId:
-      name: runId
-      in: path
-      required: true
-      description: Numeric ID of the pipeline run
-      schema:
-        type: integer
-    PipelineId:
-      name: pipelineId
-      in: path
-      required: true
-      description: Numeric ID of the pipeline definition
-      schema:
-        type: integer
-    ApiVersion:
-      name: api-version
-      in: query
-      required: true
-      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
-      schema:
-        type: string
-        default: '7.1'
-        enum:
-        - '7.1'
-        - '7.0'
-        - '6.0'
   securitySchemes:
     bearerAuth:
       type: http

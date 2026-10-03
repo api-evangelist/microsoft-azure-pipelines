@@ -165,7 +165,68 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   schemas:
+    BuildDefinitionReference:
+      type: object
+      description: Reference to a build definition containing its identification, folder path, queue status, and type.
+      properties:
+        id:
+          type: integer
+          description: Build definition ID
+        name:
+          type: string
+          description: Build definition name
+        path:
+          type: string
+          description: Folder path of the definition
+        revision:
+          type: integer
+          description: Current revision number
+        type:
+          type: string
+          description: Definition type
+          enum:
+          - xaml
+          - build
+        queueStatus:
+          type: string
+          description: Whether builds can be queued against this definition
+          enum:
+          - enabled
+          - paused
+          - disabled
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the definition was created
+        project:
+          $ref: '#/components/schemas/TeamProjectReference'
+        uri:
+          type: string
+          description: Definition URI
+        url:
+          type: string
+          format: uri
+          description: REST API URL for this definition
     TeamProjectReference:
       type: object
       description: Shallow reference to a team project
@@ -224,67 +285,6 @@ components:
         eventId:
           type: integer
           description: Event identifier for tracking
-    BuildDefinitionReference:
-      type: object
-      description: Reference to a build definition containing its identification, folder path, queue status, and type.
-      properties:
-        id:
-          type: integer
-          description: Build definition ID
-        name:
-          type: string
-          description: Build definition name
-        path:
-          type: string
-          description: Folder path of the definition
-        revision:
-          type: integer
-          description: Current revision number
-        type:
-          type: string
-          description: Definition type
-          enum:
-          - xaml
-          - build
-        queueStatus:
-          type: string
-          description: Whether builds can be queued against this definition
-          enum:
-          - enabled
-          - paused
-          - disabled
-        createdDate:
-          type: string
-          format: date-time
-          description: Date the definition was created
-        project:
-          $ref: '#/components/schemas/TeamProjectReference'
-        uri:
-          type: string
-          description: Definition URI
-        url:
-          type: string
-          format: uri
-          description: REST API URL for this definition
-  responses:
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   parameters:
     ApiVersion:
       name: api-version

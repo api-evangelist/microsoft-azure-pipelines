@@ -73,13 +73,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    PipelineId:
-      name: pipelineId
-      in: path
-      required: true
-      description: Numeric ID of the pipeline definition
-      schema:
-        type: integer
     RunId:
       name: runId
       in: path
@@ -99,30 +92,33 @@ components:
         - '7.1'
         - '7.0'
         - '6.0'
+    PipelineId:
+      name: pipelineId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline definition
+      schema:
+        type: integer
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   schemas:
-    ApiError:
-      type: object
-      description: Error response from the Azure DevOps API
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique error instance identifier
-        message:
-          type: string
-          description: Human-readable error message
-        typeName:
-          type: string
-          description: Full type name of the error
-        typeKey:
-          type: string
-          description: Error type key
-        errorCode:
-          type: integer
-          description: Numeric error code
-        eventId:
-          type: integer
-          description: Event identifier for tracking
     PipelineArtifact:
       type: object
       description: An artifact produced by a pipeline run
@@ -146,25 +142,29 @@ components:
           type: string
           format: uri
           description: REST API URL for the artifact
-  responses:
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Forbidden:
-      description: Forbidden - insufficient permissions to perform this operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
   securitySchemes:
     bearerAuth:
       type: http

@@ -145,20 +145,14 @@ components:
         eventId:
           type: integer
           description: Event identifier for tracking
-  responses:
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
   parameters:
+    BuildId:
+      name: buildId
+      in: path
+      required: true
+      description: Numeric ID of the build
+      schema:
+        type: integer
     ApiVersion:
       name: api-version
       in: query
@@ -171,13 +165,19 @@ components:
         - '7.1'
         - '7.0'
         - '6.0'
-    BuildId:
-      name: buildId
-      in: path
-      required: true
-      description: Numeric ID of the build
-      schema:
-        type: integer
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   securitySchemes:
     bearerAuth:
       type: http
