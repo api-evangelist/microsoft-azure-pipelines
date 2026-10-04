@@ -297,6 +297,9 @@ apis:
   - type: YAML Schema
     url: https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/
 common:
+- type: CapabilityMap
+  url: capabilities/microsoft-azure-pipelines-capability-edges.yml
+  name: Azure Pipelines Business Capability Map
 - type: SecurityPolicy
   url: https://github.com/MicrosoftDocs/azure-devops-docs/blob/main/SECURITY.md
 - type: CodeOfConduct

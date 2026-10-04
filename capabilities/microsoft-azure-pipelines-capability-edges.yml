@@ -1,0 +1,82 @@
+slug: microsoft-azure-pipelines
+provider: Azure Pipelines
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Builds
+  spec_file: microsoft-azure-pipelines-builds-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.9
+  evidence: GET /build/builds  listBuilds — "queuing builds, and retrieving build results"
+  reason: Core CI build lifecycle operations (list, get, update, delete builds) are exactly Continuous
+    Integration Management.
+- tag: Pipelines
+  spec_file: microsoft-azure-pipelines-pipelines-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.9
+  evidence: POST /pipelines  createPipeline — "create, list, and retrieve YAML-based CI/CD pipeline definitions"
+  reason: Creation and retrieval of CI/CD pipeline definitions is squarely Continuous Integration Management
+    (build pipelines and pipeline policy).
+- tag: Artifacts
+  spec_file: microsoft-azure-pipelines-artifacts-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.85
+  evidence: GET /pipelines/{pipelineId}/runs/{runId}/artifacts  listRunArtifacts — "retrieve artifacts
+    produced by pipeline runs"
+  reason: Retrieval of build artefacts produced by CI/CD pipeline runs maps directly to Continuous Integration
+    Management (build pipelines, artefact production).
+- tag: Build Artifacts
+  spec_file: microsoft-azure-pipelines-build-artifacts-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.85
+  evidence: GET /build/builds/{buildId}/artifacts  listBuildArtifacts  Azure Pipelines List build artifacts
+  reason: Listing and downloading build artefacts from CI builds is artefact production/consumption within
+    continuous integration.
+- tag: Build Definitions
+  spec_file: microsoft-azure-pipelines-build-definitions-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.85
+  evidence: GET /build/definitions  listBuildDefinitions — "full lifecycle of continuous integration builds
+    including creating and updating build definitions"
+  reason: Build definitions are CI pipeline configurations; the description explicitly frames them as
+    continuous integration builds.
+- tag: Runs
+  spec_file: microsoft-azure-pipelines-runs-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.85
+  evidence: POST /pipelines/{pipelineId}/runs  runPipeline — "trigger and monitor pipeline runs with custom
+    variables and parameters"
+  reason: Triggering and monitoring CI/CD pipeline executions is build pipeline operation; Continuous
+    Integration Management is the closest fit though deployment orchestration could also be touched.
+- tag: Logs
+  spec_file: microsoft-azure-pipelines-logs-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.7
+  evidence: GET /pipelines/{pipelineId}/runs/{runId}/logs  listLogs  Azure Pipelines List pipeline run
+    logs
+  reason: Logs here are CI pipeline run logs "for debugging and auditing", part of the build pipeline
+    surface, not production service observability.
