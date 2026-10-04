@@ -276,8 +276,8 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    BadRequest:
-      description: Bad request - invalid parameters or request body
+    NotFound:
+      description: Not found - the requested resource does not exist
       content:
         application/json:
           schema:
@@ -294,13 +294,55 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Not found - the requested resource does not exist
+    BadRequest:
+      description: Bad request - invalid parameters or request body
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
   schemas:
+    BuildDefinitionReference:
+      type: object
+      description: Reference to a build definition containing its identification, folder path, queue status, and type.
+      properties:
+        id:
+          type: integer
+          description: Build definition ID
+        name:
+          type: string
+          description: Build definition name
+        path:
+          type: string
+          description: Folder path of the definition
+        revision:
+          type: integer
+          description: Current revision number
+        type:
+          type: string
+          description: Definition type
+          enum:
+          - xaml
+          - build
+        queueStatus:
+          type: string
+          description: Whether builds can be queued against this definition
+          enum:
+          - enabled
+          - paused
+          - disabled
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the definition was created
+        project:
+          $ref: '#/components/schemas/TeamProjectReference'
+        uri:
+          type: string
+          description: Definition URI
+        url:
+          type: string
+          format: uri
+          description: REST API URL for this definition
     BuildRepository:
       type: object
       description: Repository used by a build definition
@@ -348,48 +390,6 @@ components:
           type: string
           format: uri
           description: URL to the identity avatar image
-    BuildDefinitionReference:
-      type: object
-      description: Reference to a build definition containing its identification, folder path, queue status, and type.
-      properties:
-        id:
-          type: integer
-          description: Build definition ID
-        name:
-          type: string
-          description: Build definition name
-        path:
-          type: string
-          description: Folder path of the definition
-        revision:
-          type: integer
-          description: Current revision number
-        type:
-          type: string
-          description: Definition type
-          enum:
-          - xaml
-          - build
-        queueStatus:
-          type: string
-          description: Whether builds can be queued against this definition
-          enum:
-          - enabled
-          - paused
-          - disabled
-        createdDate:
-          type: string
-          format: date-time
-          description: Date the definition was created
-        project:
-          $ref: '#/components/schemas/TeamProjectReference'
-        uri:
-          type: string
-          description: Definition URI
-        url:
-          type: string
-          format: uri
-          description: REST API URL for this definition
     Build:
       type: object
       description: Data representation of a build execution in Azure DevOps including its status, result, timing, source information, and associated definition.
@@ -594,13 +594,6 @@ components:
           type: integer
           description: Event identifier for tracking
   parameters:
-    BuildId:
-      name: buildId
-      in: path
-      required: true
-      description: Numeric ID of the build
-      schema:
-        type: integer
     ApiVersion:
       name: api-version
       in: query
@@ -613,6 +606,13 @@ components:
         - '7.1'
         - '7.0'
         - '6.0'
+    BuildId:
+      name: buildId
+      in: path
+      required: true
+      description: Numeric ID of the build
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http
