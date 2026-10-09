@@ -212,3 +212,65 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
     url: https://azure.microsoft.com/services/devops/pipelines/
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - subscription
+  units:
+  - compute
+  - negotiated
+  plans:
+  - name: Free — Public Project
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - compute
+    - other
+    periods:
+    - month
+    - per-use
+  - name: Free — Private Project
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - compute
+    - other
+    periods:
+    - month
+  - name: Microsoft-hosted Parallel Jobs (Paid)
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Self-hosted Parallel Jobs (Paid)
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Legacy Per-Minute Plan (Grandfathered)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    periods:
+    - month
+  - name: Enterprise / Volume Licensing
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - month
