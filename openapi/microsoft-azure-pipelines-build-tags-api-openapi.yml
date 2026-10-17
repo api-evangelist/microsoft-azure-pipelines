@@ -121,6 +121,30 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  schemas:
+    ApiError:
+      type: object
+      description: Error response from the Azure DevOps API
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error instance identifier
+        message:
+          type: string
+          description: Human-readable error message
+        typeName:
+          type: string
+          description: Full type name of the error
+        typeKey:
+          type: string
+          description: Error type key
+        errorCode:
+          type: integer
+          description: Numeric error code
+        eventId:
+          type: integer
+          description: Event identifier for tracking
   responses:
     NotFound:
       description: Not found - the requested resource does not exist
@@ -154,30 +178,6 @@ components:
       description: Numeric ID of the build
       schema:
         type: integer
-  schemas:
-    ApiError:
-      type: object
-      description: Error response from the Azure DevOps API
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique error instance identifier
-        message:
-          type: string
-          description: Human-readable error message
-        typeName:
-          type: string
-          description: Full type name of the error
-        typeKey:
-          type: string
-          description: Error type key
-        errorCode:
-          type: integer
-          description: Numeric error code
-        eventId:
-          type: integer
-          description: Event identifier for tracking
   securitySchemes:
     bearerAuth:
       type: http

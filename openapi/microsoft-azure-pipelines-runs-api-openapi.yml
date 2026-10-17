@@ -141,90 +141,6 @@ components:
         eventId:
           type: integer
           description: Event identifier for tracking
-    ReferenceLinks:
-      type: object
-      description: HAL links for navigating to related resources
-      properties:
-        self:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
-        web:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
-        pipeline:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
-        pipeline.web:
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri
-    RunPipelineParameters:
-      type: object
-      description: Parameters for triggering a pipeline run with optional overrides for variables, template parameters, resources, and stage selections.
-      properties:
-        stagesToSkip:
-          type: array
-          description: List of stage names to skip in this run
-          items:
-            type: string
-        resources:
-          type: object
-          description: Resource version overrides for this run
-          properties:
-            repositories:
-              type: object
-              description: Repository resource versions keyed by repository alias
-              additionalProperties:
-                type: object
-                properties:
-                  refName:
-                    type: string
-                    description: Branch or tag reference to check out
-                  version:
-                    type: string
-                    description: Specific commit SHA to use
-            pipelines:
-              type: object
-              description: Pipeline resource versions keyed by pipeline alias
-              additionalProperties:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    description: Build number of the upstream pipeline run
-            builds:
-              type: object
-              description: Build resource versions keyed by resource alias
-              additionalProperties:
-                type: object
-        variables:
-          type: object
-          description: Variable overrides keyed by variable name
-          additionalProperties:
-            type: object
-            properties:
-              value:
-                type: string
-                description: Variable value override
-              isSecret:
-                type: boolean
-                description: Whether this variable value should be treated as secret
-        templateParameters:
-          type: object
-          description: Template parameter overrides for YAML pipeline parameters
-          additionalProperties:
-            type: string
     Run:
       type: object
       description: A pipeline run representing a single execution of a YAML pipeline with its state, result, timing, resources, and parameters.
@@ -329,42 +245,99 @@ components:
             type: string
         _links:
           $ref: '#/components/schemas/ReferenceLinks'
-  parameters:
-    RunId:
-      name: runId
-      in: path
-      required: true
-      description: Numeric ID of the pipeline run
-      schema:
-        type: integer
-    ApiVersion:
-      name: api-version
-      in: query
-      required: true
-      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
-      schema:
-        type: string
-        default: '7.1'
-        enum:
-        - '7.1'
-        - '7.0'
-        - '6.0'
-    PipelineId:
-      name: pipelineId
-      in: path
-      required: true
-      description: Numeric ID of the pipeline definition
-      schema:
-        type: integer
+    RunPipelineParameters:
+      type: object
+      description: Parameters for triggering a pipeline run with optional overrides for variables, template parameters, resources, and stage selections.
+      properties:
+        stagesToSkip:
+          type: array
+          description: List of stage names to skip in this run
+          items:
+            type: string
+        resources:
+          type: object
+          description: Resource version overrides for this run
+          properties:
+            repositories:
+              type: object
+              description: Repository resource versions keyed by repository alias
+              additionalProperties:
+                type: object
+                properties:
+                  refName:
+                    type: string
+                    description: Branch or tag reference to check out
+                  version:
+                    type: string
+                    description: Specific commit SHA to use
+            pipelines:
+              type: object
+              description: Pipeline resource versions keyed by pipeline alias
+              additionalProperties:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: Build number of the upstream pipeline run
+            builds:
+              type: object
+              description: Build resource versions keyed by resource alias
+              additionalProperties:
+                type: object
+        variables:
+          type: object
+          description: Variable overrides keyed by variable name
+          additionalProperties:
+            type: object
+            properties:
+              value:
+                type: string
+                description: Variable value override
+              isSecret:
+                type: boolean
+                description: Whether this variable value should be treated as secret
+        templateParameters:
+          type: object
+          description: Template parameter overrides for YAML pipeline parameters
+          additionalProperties:
+            type: string
+    ReferenceLinks:
+      type: object
+      description: HAL links for navigating to related resources
+      properties:
+        self:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
+        web:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
+        pipeline:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
+        pipeline.web:
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri
   responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions to perform this operation
+    NotFound:
+      description: Not found - the requested resource does not exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
-    NotFound:
-      description: Not found - the requested resource does not exist
+    Forbidden:
+      description: Forbidden - insufficient permissions to perform this operation
       content:
         application/json:
           schema:
@@ -381,6 +354,33 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiError'
+  parameters:
+    PipelineId:
+      name: pipelineId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline definition
+      schema:
+        type: integer
+    ApiVersion:
+      name: api-version
+      in: query
+      required: true
+      description: Azure DevOps REST API version. Use 7.1 for the latest stable version.
+      schema:
+        type: string
+        default: '7.1'
+        enum:
+        - '7.1'
+        - '7.0'
+        - '6.0'
+    RunId:
+      name: runId
+      in: path
+      required: true
+      description: Numeric ID of the pipeline run
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http
