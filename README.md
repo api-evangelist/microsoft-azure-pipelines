@@ -1,4 +1,4 @@
-# Azure Pipelines (microsoft-azure-pipelines)
+# Azure Pipelines
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,143 +66,151 @@
 
 Azure Pipelines is a cloud service that you can use to automatically build and test your code project and make it available to other users. It works with just about any language or project type.
 
-## Tags
+**Areas:** Automation · Builds · CI/CD · Deployment · DevOps · Pipelines
 
-- Automation
-- Build
-- CI/CD
-- Deployment
-- DevOps
-- Pipelines
+## Azure Pipelines on APIs.io
 
-## Timestamps
+Everything profiled for Azure Pipelines is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microsoft-azure-pipelines/](https://apis.io/providers/microsoft-azure-pipelines/)** — or go straight to one of the APIs or properties below.
 
-- **Created:** 2024
-- **Modified:** 2026-05-19
+### APIs (11)
 
-## APIs
+- [Azure Pipelines Build REST API](https://apis.io/apis/microsoft-azure-pipelines/azure-pipelines-build-rest-api/) — REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs. Supports the full lifecycle of continuous…
+- [Azure Pipelines Release REST API](https://apis.io/apis/microsoft-azure-pipelines/azure-pipelines-release-rest-api/) — REST API for managing release definitions, creating and tracking releases, and configuring deployment approvals. Enables programmatic control of the…
+- [Azure Pipelines Approvals and Checks REST API](https://apis.io/apis/microsoft-azure-pipelines/azure-pipelines-approvals-and-checks-rest-api/) — REST API for managing pipeline approvals and checks on resources such as environments, service connections, agent pools, variable groups, and secure files.…
+- [Azure Pipelines Artifacts API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-artifacts-api/) — Operations for listing and retrieving artifacts produced by pipeline runs including compiled outputs, test results, and published files.
+- [Azure Pipelines Build Artifacts API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-build-artifacts-api/) — Operations for listing and retrieving build artifacts including compiled binaries, test results, and other published output files.
+- [Azure Pipelines Build Definitions API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-build-definitions-api/) — Operations for creating, listing, retrieving, and updating build pipeline definitions that specify how builds are executed.
+- [Azure Pipelines Build Tags API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-build-tags-api/) — Operations for managing tags on builds for categorization, filtering, and retention policy purposes.
+- [Azure Pipelines Builds API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-builds-api/) — Operations for queuing, listing, retrieving, and updating builds including filtering by status, result, branch, and definition.
+- [Azure Pipelines Logs API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-logs-api/) — Operations for retrieving pipeline run execution logs for debugging, auditing, and monitoring purposes.
+- [Azure Pipelines API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-pipelines-api/) — Operations for managing YAML-based pipeline definitions including creating, listing, and retrieving pipeline configurations.
+- [Azure Pipelines Runs API](https://apis.io/apis/microsoft-azure-pipelines/microsoft-azure-pipelines-runs-api/) — Operations for triggering, monitoring, and retrieving pipeline run executions including run state, result, and parameters.
 
-### Azure Pipelines REST API
+### Published properties
 
-REST API for managing and interacting with Azure Pipelines including creating, listing, and getting pipelines, triggering and monitoring pipeline runs, and retrieving pipeline run logs. Provides programmatic access to the core CI/CD pipeline orchestration capabilities in Azure DevOps.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/](https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/)
-- **Base URL:** `https://dev.azure.com/{organization}/{project}/_apis`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- CI/CD
-- Pipelines
-- REST
+- [Microsoft Azure Pipelines Agentic Access](https://apis.io/agentic-access/microsoft-azure-pipelines/microsoft-azure-pipelines-agentic-access/)
 
-#### Properties
+#### Collections (18)
 
-- [Documentation](https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/)
-- [OpenAPI](https://dev.azure.com/{organization}/_apis/public/api) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance)
-- [Quickstart](https://learn.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline)
-- [Client  Libraries](https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries)
-- [Changelog](https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released)
-- [Y A M L  Schema](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/)
-- [Postman Collection](collections/azure-pipelines-build-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-build-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/azure-pipelines-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-### Azure Pipelines Build REST API
+- [Azure Pipelines Build REST API](https://apis.io/collections/microsoft-azure-pipelines/open-azure-pipelines-build-api/)
+- [Azure Pipelines REST API](https://apis.io/collections/microsoft-azure-pipelines/open-azure-pipelines-rest-api/)
+- [Azure Pipelines Build REST Artifacts API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-artifacts-api/)
+- [Azure Pipelines Build REST Artifacts Build Artifacts API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-build-artifacts-api/)
+- [Azure Pipelines Build REST Artifacts Build Definitions API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-build-definitions-api/)
+- [Azure Pipelines Build REST Artifacts Build Tags API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-build-tags-api/)
+- [Azure Pipelines Build REST Artifacts Builds API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-builds-api/)
+- [Azure Pipelines Build REST Artifacts Logs API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-logs-api/)
+- [Azure Build REST Artifacts Pipelines API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-pipelines-api/)
+- [Azure Pipelines Build REST Artifacts Runs API](https://apis.io/collections/microsoft-azure-pipelines/open-microsoft-azure-pipelines-runs-api/)
+- [Azure Pipelines Build REST Artifacts API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-artifacts-api/)
+- [Azure Pipelines Build REST Artifacts Build Artifacts API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-build-artifacts-api/)
+- [Azure Pipelines Build REST Artifacts Build Definitions API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-build-definitions-api/)
+- [Azure Pipelines Build REST Artifacts Build Tags API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-build-tags-api/)
+- [Azure Pipelines Build REST Artifacts Builds API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-builds-api/)
+- [Azure Pipelines Build REST Artifacts Logs API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-logs-api/)
+- [Azure Build REST Artifacts Pipelines API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-pipelines-api/)
+- [Azure Pipelines Build REST Artifacts Runs API](https://apis.io/collections/microsoft-azure-pipelines/postman-microsoft-azure-pipelines-runs-api/)
 
-REST API for managing build definitions, queuing builds, and retrieving build results, artifacts, tags, and logs. Supports the full lifecycle of continuous integration builds in Azure DevOps, including creating and updating build definitions from templates, listing and tagging builds, and downloading build artifacts.
+#### Security (2)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/azure/devops/build/](https://learn.microsoft.com/en-us/rest/api/azure/devops/build/)
-- **Base URL:** `https://dev.azure.com/{organization}/{project}/_apis/build`
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Microsoft Azure Pipelines Authentication](https://apis.io/security/microsoft-azure-pipelines/microsoft-azure-pipelines-authentication/)
+- [Microsoft Azure Pipelines Domain Security](https://apis.io/security/microsoft-azure-pipelines/microsoft-azure-pipelines-domain-security/)
 
-- Artifacts
-- Build
-- Continuous Integration
-- Definitions
+#### Plans and pricing (1)
 
-#### Properties
+Published plans, tiers and prices.
 
-- [Documentation](https://learn.microsoft.com/en-us/rest/api/azure/devops/build/)
-- [Authentication](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance)
-- [Postman Collection](collections/azure-pipelines-build-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-build-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/azure-pipelines-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Microsoft Azure Pipelines Plans Pricing](https://apis.io/plans/microsoft-azure-pipelines/microsoft-azure-pipelines-plans-pricing/)
 
-### Azure Pipelines Release REST API
+#### Rate limits (1)
 
-REST API for managing release definitions, creating and tracking releases, and configuring deployment approvals. Enables programmatic control of the continuous delivery process including defining release pipelines with multiple environments, triggering deployments, and managing approval workflows.
+Published request limits.
 
-- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/azure/devops/release/](https://learn.microsoft.com/en-us/rest/api/azure/devops/release/)
-- **Base URL:** `https://vsrm.dev.azure.com/{organization}/{project}/_apis/release`
+- [Microsoft Azure Pipelines Rate Limits](https://apis.io/rate-limits/microsoft-azure-pipelines/microsoft-azure-pipelines-rate-limits/)
 
-#### Tags
+#### FinOps (1)
 
-- Approvals
-- Continuous Delivery
-- Deployment
-- Release
+What the API costs to run, by operation.
 
-#### Properties
+- [Microsoft Azure Pipelines Finops](https://apis.io/finops/microsoft-azure-pipelines/microsoft-azure-pipelines-finops/)
 
-- [Documentation](https://learn.microsoft.com/en-us/rest/api/azure/devops/release/)
-- [Authentication](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance)
-- [Postman Collection](collections/azure-pipelines-build-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-build-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/azure-pipelines-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+## Where to find this API
 
-### Azure Pipelines Approvals and Checks REST API
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-REST API for managing pipeline approvals and checks on resources such as environments, service connections, agent pools, variable groups, and secure files. Provides the ability to create and modify check configurations, manage approval workflows, query check evaluation details, and control pipeline permissions for protected resources.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/azure/devops/approvalsandchecks/](https://learn.microsoft.com/en-us/rest/api/azure/devops/approvalsandchecks/)
-- **Base URL:** `https://dev.azure.com/{organization}/{project}/_apis/pipelines`
-
-#### Tags
-
-- Approvals
-- Checks
-- Governance
-- Security
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/rest/api/azure/devops/approvalsandchecks/)
-- [Authentication](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance)
-- [Postman Collection](collections/azure-pipelines-build-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-build-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/azure-pipelines-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-pipelines-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Getting Started](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines)
-- [Portal](https://dev.azure.com/)
-- [Pricing](https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/)
-- [Status Page](https://status.dev.azure.com/)
-- [Blog](https://devblogs.microsoft.com/devops/)
-- [Terms of Service](https://azure.microsoft.com/en-us/support/legal/)
-- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
-- [Documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/)
 - [Website](https://azure.microsoft.com/en-us/products/devops)
-- [Sign Up](https://azure.microsoft.com/en-us/products/devops)
-- [Login](https://dev.azure.com/)
+- [Documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/)
+- [Getting started](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines)
+- [Pricing](https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/)
 - [Support](https://azure.microsoft.com/en-us/support/devops/)
 - [Changelog](https://learn.microsoft.com/en-us/azure/devops/release-notes/features-timeline-released)
-- [Client  Libraries](https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries)
-- [Community](https://developercommunity.visualstudio.com/AzureDevOps)
-- [GitHub Organization](https://github.com/MicrosoftDocs)
-- [GitHub Repository](https://github.com/MicrosoftDocs/azure-devops-docs)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-devops)
-- [Marketplace](https://marketplace.visualstudio.com/azuredevops)
-- [C L I](https://github.com/Azure/azure-devops-cli-extension)
-- [Task  Reference](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/)
+- [Blog](https://devblogs.microsoft.com/devops/)
+- [Terms of service](https://azure.microsoft.com/en-us/support/legal/)
+- [Privacy policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [GitHub](https://github.com/MicrosoftDocs)
+- [Status](https://status.dev.azure.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 48.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 51.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 58.3 |
+| Access clarity | 52.6 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microsoft-azure-pipelines/](https://apis.io/providers/microsoft-azure-pipelines/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Azure Pipelines: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microsoft-azure-pipelines/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
